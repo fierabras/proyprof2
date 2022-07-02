@@ -1,7 +1,7 @@
 /*
  * Esta clase genera las fabricas que producen las ventanas de proveedores o materiales
  */
-package fabricaVentanas;
+package Ventanas;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
@@ -10,7 +10,7 @@ package fabricaVentanas;
 public class GeneradorFabricas {
 
     // el método getFabrica recibe como parametro un String que indica el tipo de fabrica a generar
-    public static IFabrica getFabrica(String param) {
+    public static InterfazFabrica getFabrica(String param) {
         if (param == "proveedores") {
             return new FabricaProveedor();
         }

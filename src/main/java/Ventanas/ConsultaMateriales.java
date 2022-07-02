@@ -4,22 +4,23 @@
  * Ofrece la posibilidad de agregar o modificar materiales en la base de datos
  * Cuenta con la funcion de actualizar la consulta en caso de modificaciones a la base
  */
-package fabricaVentanas;
+package Ventanas;
 
 import controlador.ControladorConsultaMateriales;
+import Ventanas.InterfazConsulta;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
-import modelo.ConexionSQL;
+import utilerias.ConexionSQL;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
- * Materia: Diseño de Intefases Docente: Ing.Mario Andres Cuevas Gutierrez
+
  */
-public class ConsultaMateriales extends javax.swing.JFrame implements IConsulta {
+public class ConsultaMateriales extends javax.swing.JFrame implements InterfazConsulta {
 
     // constructor
     public ConsultaMateriales() {
@@ -162,7 +163,7 @@ public class ConsultaMateriales extends javax.swing.JFrame implements IConsulta 
     // generada en la fabrica abstracta. Adicionalmente inicia un controlador (controladorConsultaMateriales)
     // para monitorear la accion sobre los botones de agregar y modificar material
     @Override
-    public void iniciar(IConsulta consultaM) {
+    public void iniciar(InterfazConsulta consultaM) {
         ConsultaMateriales consultaMateriales = (ConsultaMateriales) consultaM;
         consultaMateriales.setVisible(true);
         consultaMateriales.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);

@@ -2,21 +2,21 @@
  * implementación de la fabrica abstracta, es una clase concreta que genera vistas o consultas
  * para proveedores
  */
-package fabricaVentanas;
+package Ventanas;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
  * Materia: Diseño de Intefases Docente: Ing.Mario Andres Cuevas Gutierrez
  */
-public class FabricaProveedor implements IFabrica {
+public class FabricaProveedor implements InterfazFabrica {
 
     @Override
-    public IVista crearVista() {
-        return new VistaProveedor();
+    public InterfazVista crearVista() {
+        return new FormularioProveedor();
     }
 
     @Override
-    public IConsulta crearConsulta() {
+    public InterfazConsulta crearConsulta() {
         return new ConsultaProveedores();
     }
 

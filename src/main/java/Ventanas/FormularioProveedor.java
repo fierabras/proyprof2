@@ -1,11 +1,11 @@
 /*
  * Esta clase despliega una ventana para el registro o modificacion de un proveedor
  */
-package fabricaVentanas;
+package Ventanas;
 
+import utilerias.ConexionSQL;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import modelo.*;
 
 /**
  * Autor: Jesus Armando Mendoza Romero
@@ -15,10 +15,10 @@ import modelo.*;
  * Docente: Ing.Mario Andres Cuevas Gutierrez
  */
 
-public class VistaProveedor extends javax.swing.JFrame implements IVista {
+public class FormularioProveedor extends javax.swing.JFrame implements InterfazVista {
 
     //constructor
-    public VistaProveedor() {
+    public FormularioProveedor() {
         initComponents();
     }
 
@@ -168,6 +168,11 @@ public class VistaProveedor extends javax.swing.JFrame implements IVista {
     // Controlador de acciones del boton guardar, solicita la conexion a la base de datos
     // y envía la orden para la insercion del registro
     private void botonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarMouseClicked
+        this.guardar();
+        super.dispose();        
+    }//GEN-LAST:event_botonGuardarMouseClicked
+    
+    public void guardar(){
         if((txbNombre.getText().isEmpty())||(txbfolioId.getText().isEmpty())){
             JFrame frame = null;
             JOptionPane.showMessageDialog(frame, "Debes llenar todos los datos para continuar", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
@@ -178,9 +183,10 @@ public class VistaProveedor extends javax.swing.JFrame implements IVista {
         String cmd = "INSERT INTO PROVEEDORES (NOMBRE,TIPOID,FOLIOID) VALUES ('" + txbNombre.getText()
                 + "','" + comboTipoId.getSelectedItem() + "','" + txbfolioId.getText() + "')";
         conn.insert(cmd);
-        super.dispose();        
-    }//GEN-LAST:event_botonGuardarMouseClicked
-    // controlador del boton Cancelar, cierra la vista en pantalla
+    }
+
+
+// controlador del boton Cancelar, cierra la vista en pantalla
     private void botonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCancelarMouseClicked
         super.dispose();
     }//GEN-LAST:event_botonCancelarMouseClicked
@@ -188,7 +194,12 @@ public class VistaProveedor extends javax.swing.JFrame implements IVista {
     //controlador del boton guardar cambios, solicita la conexion a la base de datos
     // y ordena un update a la base
     private void botonGuardarCambioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarCambioMouseClicked
-        if((txbNombre.getText().isEmpty())||(txbfolioId.getText().isEmpty())){
+        this.guardarCambio();
+        super.dispose();
+    }//GEN-LAST:event_botonGuardarCambioMouseClicked
+    
+    public void guardarCambio(){
+        if((this.txbNombre.getText().isEmpty())||(this.txbfolioId.getText().isEmpty())){
             JFrame frame = null;
             JOptionPane.showMessageDialog(frame, "Debes llenar todos los datos para continuar", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             return;
@@ -198,29 +209,29 @@ public class VistaProveedor extends javax.swing.JFrame implements IVista {
                 + comboTipoId.getSelectedItem() + "', FOLIOID='" + txbfolioId.getText()
                 + "' WHERE CLAVEPROVEEDOR=" + txbClaveProveedor.getText();
         conn.update(cmd);
-        super.dispose();
-    }//GEN-LAST:event_botonGuardarCambioMouseClicked
-
-    // Metodo inciar: se implementa de la interface IVista, recibe la ventana generada por la fabrica
+    }
+    
+    
+    // Metodo inciar: se implementa de la interface InterfazVista, recibe la ventana generada por la fabrica
     // abstracta contenida en el controlador ControladorConsultaProveedores. Se conecta a la base de datos
     // para obtener la clave del ultimo registro en la tabla Proveedores para mostrar la clave del siguiente
     // material
     @Override
-    public void iniciar(IVista vistaP) {
-        VistaProveedor vistaProveedor = (VistaProveedor)vistaP;
+    public void iniciar(InterfazVista vistaP) {
+        FormularioProveedor vistaProveedor = (FormularioProveedor)vistaP;
         vistaProveedor.setVisible(true);
         int ClaveSiguienteProveedor = ConexionSQL.obtenerClave("SELECT MAX(CLAVEPROVEEDOR) FROM PROVEEDORES")+1;
         vistaProveedor.txbClaveProveedor.setText(String.valueOf(ClaveSiguienteProveedor));        
         vistaProveedor.botonGuardarCambio.setVisible(false);  
     }
     
-    // Metodo modificar: se implementa de la interface IVista, recibe la ventana generada por la fabrica
+    // Metodo modificar: se implementa de la interface InterfazVista, recibe la ventana generada por la fabrica
     // abstracta contenida en el controlador ControladorConsultaProveedores, la consulta de proveedores y
     // el indice del registro seleccionado dentro del Jtable1
     @Override
-    public void modificar(IConsulta consultaProveedores, IVista vProveedor, int row) {
+    public void modificar(InterfazConsulta consultaProveedores, InterfazVista vProveedor, int row) {
                 
-        VistaProveedor vistaProveedor = (VistaProveedor)vProveedor;        
+        FormularioProveedor vistaProveedor = (FormularioProveedor)vProveedor;        
         ConsultaProveedores consultaP = (ConsultaProveedores) consultaProveedores;
         
         if (consultaP.jTable1.getSelectedRow()<0){

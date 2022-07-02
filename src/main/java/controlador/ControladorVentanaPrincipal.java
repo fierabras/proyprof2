@@ -3,19 +3,16 @@
 */
 package controlador;
 
-import fabricaVentanas.GeneradorFabricas;
-import fabricaVentanas.IConsulta;
-import fabricaVentanas.IFabrica;
+import Ventanas.GeneradorFabricas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import vista.VentanaPrincipal;
+import Ventanas.VentanaPrincipal;
+import Ventanas.InterfazConsulta;
+import Ventanas.InterfazFabrica;
 
 /**
  * Autor: Jesus Armando Mendoza Romero
  * a171117
- * Ingenieria en Software Virtual
- * Materia: Diseño de Intefases
- * Docente: Ing.Mario Andres Cuevas Gutierrez
  */
 public class ControladorVentanaPrincipal implements ActionListener {
     
@@ -37,14 +34,14 @@ public class ControladorVentanaPrincipal implements ActionListener {
         
         if (ventanaPrincipal.botonProveedores.isFocusOwner()){                           
             // se implementa el modelo abstract factory para la generacion de consultas y vistas
-            IFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
-            IConsulta iConsultaP = iFabrica.crearConsulta();            
+            InterfazFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
+            InterfazConsulta iConsultaP = iFabrica.crearConsulta();            
             iConsultaP.iniciar(iConsultaP);            
         }
         if (ventanaPrincipal.botonMateriales.isFocusOwner()){                           
             // se implementa el modelo abstract factory para la generacion de consultas y vistas
-            IFabrica iFabrica = GeneradorFabricas.getFabrica("materiales");
-            IConsulta iConsultaM = iFabrica.crearConsulta();
+            InterfazFabrica iFabrica = GeneradorFabricas.getFabrica("materiales");
+            InterfazConsulta iConsultaM = iFabrica.crearConsulta();
             iConsultaM.iniciar(iConsultaM);
         }
     }

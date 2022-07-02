@@ -1,20 +1,20 @@
 /*
  * Esta clase despliega una ventana para el registro o modificacion de un material
  */
-package fabricaVentanas;
+package Ventanas;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import modelo.ConexionSQL;
+import utilerias.ConexionSQL;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
  * Materia: Diseño de Intefases Docente: Ing.Mario Andres Cuevas Gutierrez
  */
-public class VistaMaterial extends javax.swing.JFrame implements IVista {
+public class FormularioMaterial extends javax.swing.JFrame implements InterfazVista {
 
     //constructor
-    public VistaMaterial() {
+    public FormularioMaterial() {
         initComponents();
     }
 
@@ -152,6 +152,12 @@ public class VistaMaterial extends javax.swing.JFrame implements IVista {
     // Controlador de acciones del boton guardar, solicita la conexion a la base de datos
     // y envía la orden para la insercion del registro
     private void botonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarMouseClicked
+        this.guardar();
+        super.dispose();
+    }//GEN-LAST:event_botonGuardarMouseClicked
+
+    public void guardar(){
+        
         if((txbDescripcion.getText().isEmpty())||(txbPrecio.getText().isEmpty())){
             JFrame frame = null;
             JOptionPane.showMessageDialog(frame, "Debes llenar todos los datos para continuar", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
@@ -159,50 +165,54 @@ public class VistaMaterial extends javax.swing.JFrame implements IVista {
         }        
         ConexionSQL conn = ConexionSQL.getConexionSQL();
         String cmd = "INSERT INTO MATERIALES (DESCRIPCION,PRECIO) VALUES ('" + txbDescripcion.getText() + "','" + txbPrecio.getText() + "')";
-        conn.insert(cmd);
-        super.dispose();
-    }//GEN-LAST:event_botonGuardarMouseClicked
-
+        conn.insert(cmd);    
+        
+    }
     // controlador del boton Cancelar, cierra la vista en pantalla
     private void botonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCancelarMouseClicked
-        super.dispose();
+        this.dispose();
     }//GEN-LAST:event_botonCancelarMouseClicked
 
     //controlador del boton guardar cambios, solicita la conexion a la base de datos
     // y ordena un update a la base
     private void botonGuardarCambioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarCambioMouseClicked
-        if((txbDescripcion.getText().isEmpty())||(txbPrecio.getText().isEmpty())){
+        this.guardarCambio();
+        super.dispose();
+    }//GEN-LAST:event_botonGuardarCambioMouseClicked
+    
+    public void guardarCambio(){
+        if((this.txbDescripcion.getText().isEmpty())||(this.txbPrecio.getText().isEmpty())){
             JFrame frame = null;
             JOptionPane.showMessageDialog(frame, "Debes llenar todos los datos para continuar", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             return;
         }         
         ConexionSQL conn = ConexionSQL.getConexionSQL();
-        String cmd = "UPDATE MATERIALES SET DESCRIPCION='" + txbDescripcion.getText() + "',PRECIO='"
-                + txbPrecio.getText() + "' WHERE CLAVEMATERIAL=" + txbClaveMaterial.getText();
+        String cmd = "UPDATE MATERIALES SET DESCRIPCION='" + this.txbDescripcion.getText() + "',PRECIO='"
+                + this.txbPrecio.getText() + "' WHERE CLAVEMATERIAL=" + this.txbClaveMaterial.getText();
         conn.update(cmd);
-        super.dispose();
-    }//GEN-LAST:event_botonGuardarCambioMouseClicked
-
-    // Metodo inciar: se implementa de la interface IVista, recibe la ventana generada por la fabrica
+        
+    }
+    
+    // Metodo inciar: se implementa de la interface InterfazVista, recibe la ventana generada por la fabrica
     // abstracta contenida en el controlador ControladorConsultaMateriales. Se conecta a la base de datos
     // para obtener la clave del ultimo registro en la tabla Materiales para mostrar la clave del siguiente
     // material
     @Override
-    public void iniciar(IVista vistaM) {
-        VistaMaterial vistaMaterial = (VistaMaterial) vistaM;
+    public void iniciar(InterfazVista vistaM) {
+        FormularioMaterial vistaMaterial = (FormularioMaterial) vistaM;
         vistaMaterial.setVisible(true);
         int ClaveSiguienteProveedor = ConexionSQL.obtenerClave("SELECT MAX(CLAVEMATERIAL) FROM MATERIALES") + 1;
         vistaMaterial.txbClaveMaterial.setText(String.valueOf(ClaveSiguienteProveedor));
         vistaMaterial.botonGuardarCambio.setVisible(false);
     }
 
-    // Metodo modificar: se implementa de la interface IVista, recibe la ventana generada por la fabrica
+    // Metodo modificar: se implementa de la interface InterfazVista, recibe la ventana generada por la fabrica
     // abstracta contenida en el controlador ControladorConsultaMateriales, la consulta de materiales y
     // el indice del registro seleccionado dentro del Jtable1
     @Override
-    public void modificar(IConsulta consultaMateriales, IVista vMaterial, int row) {
+    public void modificar(InterfazConsulta consultaMateriales, InterfazVista vMaterial, int row) {
 
-        VistaMaterial vistaMaterial = (VistaMaterial) vMaterial;
+        FormularioMaterial vistaMaterial = (FormularioMaterial) vMaterial;
         ConsultaMateriales consultaM = (ConsultaMateriales) consultaMateriales;
 
         if (consultaM.jTable1.getSelectedRow() < 0) {

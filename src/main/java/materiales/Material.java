@@ -1,19 +1,16 @@
 /*
  * Esta clase representa un material reciclado
  */
-package modelo;
+package materiales;
 
 /**
  * Autor: Jesus Armando Mendoza Romero
- * a171117
- * Ingenieria en Software Virtual
- * Materia: Diseño de Intefases
- * Docente: Ing.Mario Andres Cuevas Gutierrez
+ * a171117 
  */
 public class Material {
     
-    private int claveMaterial;
-    private String descripcion;
-    private float precio;   
+    public int claveMaterial;
+    public String descripcion;
+    public double precio;   
     
 }

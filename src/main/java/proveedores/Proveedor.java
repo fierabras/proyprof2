@@ -1,20 +1,18 @@
 /*
  * Esta clase representa a un proveedor de materiales reciclados
  */
-package modelo;
+package proveedores;
 
 /**
  * Autor: Jesus Armando Mendoza Romero
  * a171117
- * Ingenieria en Software Virtual
- * Materia: Diseño de Intefases
- * Docente: Ing.Mario Andres Cuevas Gutierrez
+ *
  */
 public class Proveedor {
     
-    private int claveProvedor;
-    private String nombre;
-    private String tipoId;
-    private String foliId;  
+    public int claveProvedor;
+    public String nombre;
+    public String tipoId;
+    public String foliId;  
 
 }

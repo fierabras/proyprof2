@@ -1,7 +1,7 @@
 /*
- * Interface IConsulta se implementa en ConsultaMateriales y ConsultaProveedor
+ * Interface InterfazConsulta se implementa en ConsultaMateriales y ConsultaProveedor
  */
-package fabricaVentanas;
+package Ventanas;
 
 /**
  * Autor: Jesus Armando Mendoza Romero
@@ -10,8 +10,8 @@ package fabricaVentanas;
  * Materia: Diseño de Intefases
  * Docente: Ing.Mario Andres Cuevas Gutierrez
  */
-public interface IConsulta {
+public interface InterfazConsulta {
     
-    public void iniciar(IConsulta consulta);
+    public void iniciar(InterfazConsulta consulta);
     
 }

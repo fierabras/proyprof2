@@ -4,15 +4,15 @@
  */
 package controlador;
 
-import fabricaVentanas.ConsultaProveedores;
-import fabricaVentanas.GeneradorFabricas;
-import fabricaVentanas.IFabrica;
-import fabricaVentanas.IVista;
-import fabricaVentanas.VistaProveedor;
+import Ventanas.ConsultaProveedores;
+import Ventanas.GeneradorFabricas;
+import Ventanas.FormularioProveedor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import Ventanas.InterfazVista;
+import Ventanas.InterfazFabrica;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
@@ -41,20 +41,20 @@ public class ControladorConsultaProveedores implements ActionListener {
     }
 
     // Al presionar botonNuevoProveedor o botonModificarProveedor el sistema invoca a la fabrica
-    // abstracta y genera las ventanas correspondientes, en este caso, del tipo IVista 
+    // abstracta y genera las ventanas correspondientes, en este caso, del tipo InterfazVista 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (consultaProveedores.botonNuevoProveedor.isFocusOwner()) {
             // se implementa el modelo abstract factory para la generacion de consultas y vistas
-            IFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
-            IVista iVistaP = iFabrica.crearVista();
+            InterfazFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
+            InterfazVista iVistaP = iFabrica.crearVista();
             iVistaP.iniciar(iVistaP);
         }
         if (consultaProveedores.botonModificarProveedor.isFocusOwner()) {
             // se implementa el modelo abstract factory para la generacion de consultas y vistas
-            IFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
-            VistaProveedor vistaProveedor = (VistaProveedor) iFabrica.crearVista();
+            InterfazFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
+            FormularioProveedor vistaProveedor = (FormularioProveedor) iFabrica.crearVista();
             vistaProveedor.modificar(consultaProveedores, vistaProveedor, selectedRow);
         }
     }

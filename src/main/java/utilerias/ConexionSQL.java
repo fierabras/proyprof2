@@ -4,7 +4,7 @@
  * Se implementa el patron singleton sobre la clase principal (ConexionSQL) y sobre la instancia
  * de la conexion a la base datos (ConexionSQL.conexion)
  */
-package modelo;
+package utilerias;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
@@ -116,5 +117,22 @@ public class ConexionSQL {
         }
         return claveSiguiente;
     }
+    
+    
+    public static ResultSet obtenerRegistro(String sentencia){
+        ResultSet resultado=null;
+        
+        try (Connection conn = ConexionSQL.conectar();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sentencia)) {
+            
+            System.out.println("Se ha devuelto el resultSet rs");
+            return rs;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return resultado;
+    }   
 
 }

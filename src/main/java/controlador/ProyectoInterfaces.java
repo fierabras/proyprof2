@@ -4,11 +4,11 @@
  */
 package controlador;
 
-import vista.VentanaPrincipal;
+import Ventanas.VentanaPrincipal;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
- * Materia: Diseño de Intefases Docente: Ing.Mario Andres Cuevas Gutierrez
+ 
  */
 public class ProyectoInterfaces {
 

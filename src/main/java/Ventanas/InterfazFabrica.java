@@ -1,16 +1,16 @@
 /*
  * interface de la fabrica abstracta, se implementa en las clases FabricaProveedor y FabricaMaterial
  */
-package fabricaVentanas;
+package Ventanas;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
  * Materia: Diseño de Intefases Docente: Ing.Mario Andres Cuevas Gutierrez
  */
-public interface IFabrica {
+public interface InterfazFabrica {
 
-    public IVista crearVista();
+    public InterfazVista crearVista();
 
-    public IConsulta crearConsulta();
+    public InterfazConsulta crearConsulta();
 
 }
