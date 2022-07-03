@@ -1,0 +1,1810 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+	<link rel="profile" href="https://gmpg.org/xfn/11">
+			<link rel="pingback" href="https://www.ecodeup.com/xmlrpc.php">
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.2 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Patrones de diseño en Java: MVC, DAO y DTO</title>
+	<meta name="description" content="Esta vez voy hablar acerca de los patrones de diseño en Java, específicamente de los patrones MVC, DAO y DTO y su implementación con ejemplos sencillos.">
+	<link rel="canonical" href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/">
+	<meta property="og:locale" content="es_ES">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Patrones de diseño en Java: MVC, DAO y DTO">
+	<meta property="og:description" content="Esta vez voy hablar acerca de los patrones de diseño en Java, específicamente de los patrones MVC, DAO y DTO y su implementación con ejemplos sencillos.">
+	<meta property="og:url" content="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/">
+	<meta property="og:site_name" content="Tutoriales Java Web con Spring">
+	<meta property="article:author" content="http://www.facebook.com/elivarlargo">
+	<meta property="article:published_time" content="2016-11-21T03:32:18+00:00">
+	<meta property="article:modified_time" content="2021-07-16T15:50:31+00:00">
+	<meta property="og:image" content="https://ad.linksynergy.com/fs-bin/show?id=qAv3GT585FE&amp;bids=323058.1&amp;type=10">
+	<meta name="author" content="Elivar Largo">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:creator" content="@elivarl">
+	<meta name="twitter:label1" content="Escrito por">
+	<meta name="twitter:data1" content="Elivar Largo">
+	<meta name="twitter:label2" content="Tiempo de lectura">
+	<meta name="twitter:data2" content="11 minutos">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.ecodeup.com/#organization","name":"Ecodeup","url":"https://www.ecodeup.com/","sameAs":[],"logo":{"@type":"ImageObject","inLanguage":"es","@id":"https://www.ecodeup.com/#/schema/logo/image/","url":"https://www.ecodeup.com/wp-content/uploads/2016/07/logo-vista.png","contentUrl":"https://www.ecodeup.com/wp-content/uploads/2016/07/logo-vista.png","width":120,"height":115,"caption":"Ecodeup"},"image":{"@id":"https://www.ecodeup.com/#/schema/logo/image/"}},{"@type":"WebSite","@id":"https://www.ecodeup.com/#website","url":"https://www.ecodeup.com/","name":"Tutoriales Java Web con Spring","description":"Aprende a desarrollar aplicaciones Java Web con Spring y Angular","publisher":{"@id":"https://www.ecodeup.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://www.ecodeup.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"es"},{"@type":"ImageObject","inLanguage":"es","@id":"https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#primaryimage","url":"https://ad.linksynergy.com/fs-bin/show?id=qAv3GT585FE&amp;bids=323058.1&amp;type=10","contentUrl":"https://ad.linksynergy.com/fs-bin/show?id=qAv3GT585FE&amp;bids=323058.1&amp;type=10"},{"@type":"WebPage","@id":"https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#webpage","url":"https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/","name":"Patrones de diseño en Java: MVC, DAO y DTO","isPartOf":{"@id":"https://www.ecodeup.com/#website"},"primaryImageOfPage":{"@id":"https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#primaryimage"},"datePublished":"2016-11-21T03:32:18+00:00","dateModified":"2021-07-16T15:50:31+00:00","description":"Esta vez voy hablar acerca de los patrones de diseño en Java, específicamente de los patrones MVC, DAO y DTO y su implementación con ejemplos sencillos.","breadcrumb":{"@id":"https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#breadcrumb"},"inLanguage":"es","potentialAction":[{"@type":"ReadAction","target":["https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/"]}]},{"@type":"BreadcrumbList","@id":"https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Portada","item":"https://www.ecodeup.com/"},{"@type":"ListItem","position":2,"name":"Tutoriales","item":"https://www.ecodeup.com/blog/"},{"@type":"ListItem","position":3,"name":"Patrones de diseño en Java: MVC, DAO y DTO"}]},{"@type":"Article","@id":"https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#article","isPartOf":{"@id":"https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#webpage"},"author":{"name":"Elivar Largo","@id":"https://www.ecodeup.com/#/schema/person/154164a940ca6aff4e34f178969d22e2"},"headline":"Patrones de diseño en Java: MVC, DAO y DTO","datePublished":"2016-11-21T03:32:18+00:00","dateModified":"2021-07-16T15:50:31+00:00","mainEntityOfPage":{"@id":"https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#webpage"},"wordCount":1475,"commentCount":50,"publisher":{"@id":"https://www.ecodeup.com/#organization"},"image":{"@id":"https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#primaryimage"},"thumbnailUrl":"https://ad.linksynergy.com/fs-bin/show?id=qAv3GT585FE&amp;bids=323058.1&amp;type=10","keywords":["DAO","DTO","Modelo Vista Controlador","MVC","Patrones de diseño en Java"],"articleSection":["Programación Java SE"],"inLanguage":"es","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#respond"]}]},{"@type":"Person","@id":"https://www.ecodeup.com/#/schema/person/154164a940ca6aff4e34f178969d22e2","name":"Elivar Largo","image":{"@type":"ImageObject","inLanguage":"es","@id":"https://www.ecodeup.com/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/43fe52e691035424f6b415461c00cbb5?s=96&r=g","contentUrl":"https://secure.gravatar.com/avatar/43fe52e691035424f6b415461c00cbb5?s=96&r=g","caption":"Elivar Largo"},"description":"Mi nombre es Elivar Largo, Developer Full Stack, blogger y emprendedor. Trabajo y comparto conocimientos sobre las siguientes tecnologías: Spring Boot, Angular, Flutter. Contacto: elargor@gmail.com.","sameAs":["http://www.programacionfullstack.com","http://www.facebook.com/elivarlargo","https://ec.linkedin.com/in/elivar-largo-b4503997","https://twitter.com/elivarl","https://www.youtube.com/channel/UCViAh-P1qmZ2-5F-UTx9MlA"],"url":"https://www.ecodeup.com/author/elargo/"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel="dns-prefetch" href="https://www.googletagmanager.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com/">
+<link rel="alternate" type="application/rss+xml" title="Tutoriales Java Web con Spring » Feed" href="https://www.ecodeup.com/feed/">
+<link rel="alternate" type="application/rss+xml" title="Tutoriales Java Web con Spring » Feed de los comentarios" href="https://www.ecodeup.com/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="Tutoriales Java Web con Spring » Comentario Patrones de diseño en Java: MVC, DAO y DTO del feed" href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/feed/">
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.ecodeup.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9.3"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+</script><script src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/wp-emoji-release.min" type="text/javascript" defer="defer"></script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link data-optimized="1" rel="stylesheet" id="wp-block-library-css" href="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/35a66e527205f4e9a2e87872e592a00c.css" type="text/css" media="all">
+<link data-optimized="1" rel="stylesheet" id="otter-blocks-css" href="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/e0806999acada8395e84d14535790234.css" type="text/css" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--color--neve-link-color: var(--nv-primary-accent);--wp--preset--color--neve-link-hover-color: var(--nv-secondary-accent);--wp--preset--color--nv-site-bg: var(--nv-site-bg);--wp--preset--color--nv-light-bg: var(--nv-light-bg);--wp--preset--color--nv-dark-bg: var(--nv-dark-bg);--wp--preset--color--neve-text-color: var(--nv-text-color);--wp--preset--color--nv-text-dark-bg: var(--nv-text-dark-bg);--wp--preset--color--nv-c-1: var(--nv-c-1);--wp--preset--color--nv-c-2: var(--nv-c-2);--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link data-optimized="1" rel="stylesheet" id="c4wp-public-css" href="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/d7110b7dfd92ffab69bfd56e6fb99e72.css" type="text/css" media="all">
+<link data-optimized="1" rel="stylesheet" id="neve-style-css" href="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/fb94d533f907e409b2e8577bc889ea6f.css" type="text/css" media="all">
+<style id="neve-style-inline-css" type="text/css">
+.nv-meta-list li.meta:not(:last-child):after { content:"/" }.nv-meta-list .no-mobile{
+			display:none;
+		}.nv-meta-list li.last::after{
+			content: ""!important;
+		}@media (min-width: 769px) {
+			.nv-meta-list .no-mobile {
+				display: inline-block;
+			}
+			.nv-meta-list li.last:not(:last-child)::after {
+		 		content: "/" !important;
+			}
+		}
+ .container{ max-width: 748px; } .has-neve-button-color-color{ color: var(--nv-primary-accent)!important; } .has-neve-button-color-background-color{ background-color: var(--nv-primary-accent)!important; } .single-post-container .alignfull > [class*="__inner-container"], .single-post-container .alignwide > [class*="__inner-container"]{ max-width:718px } .button.button-primary, button, input[type=button], .btn, input[type="submit"], /* Buttons in navigation */ ul[id^="nv-primary-navigation"] li.button.button-primary > a, .menu li.button.button-primary > a, .wp-block-button.is-style-primary .wp-block-button__link, .wc-block-grid .wp-block-button .wp-block-button__link, form input[type="submit"], form button[type="submit"]{ background-color: var(--nv-primary-accent);color: #ffffff;border-radius:3px 3px 3px 3px;border:none;border-width:1px 1px 1px 1px; } .button.button-primary:hover, ul[id^="nv-primary-navigation"] li.button.button-primary > a:hover, .menu li.button.button-primary > a:hover, .wp-block-button.is-style-primary .wp-block-button__link:hover, .wc-block-grid .wp-block-button .wp-block-button__link:hover, form input[type="submit"]:hover, form button[type="submit"]:hover{ background-color: var(--nv-primary-accent);color: #ffffff; } .button.button-secondary:not(.secondary-default), .wp-block-button.is-style-secondary .wp-block-button__link{ background-color: var(--nv-primary-accent);color: #ffffff;border-radius:3px 3px 3px 3px;border:none;border-width:1px 1px 1px 1px; } .button.button-secondary.secondary-default{ background-color: var(--nv-primary-accent);color: #ffffff;border-radius:3px 3px 3px 3px;border:none;border-width:1px 1px 1px 1px; } .button.button-secondary:not(.secondary-default):hover, .wp-block-button.is-style-secondary .wp-block-button__link:hover{ background-color: var(--nv-primary-accent);color: #ffffff; } .button.button-secondary.secondary-default:hover{ background-color: var(--nv-primary-accent);color: #ffffff; } .button.button-secondary:not(.secondary-default), .wp-block-button.is-style-secondary .wp-block-button__link{ padding:8px 12px 8px 12px; } body, .site-title{ font-size: 15px; line-height: 1.6; letter-spacing: 0px; font-weight: 400; text-transform: none; font-family: Poppins, var(--nv-fallback-ff); } h1, .single h1.entry-title{ font-size: 50px; line-height: 1.2em; letter-spacing: 0px; font-weight: 800; text-transform: none; font-family: Poppins, var(--nv-fallback-ff); } h2{ font-size: 30px; line-height: 1.2em; letter-spacing: 0px; font-weight: 800; text-transform: none; font-family: Poppins, var(--nv-fallback-ff); } h3, .woocommerce-checkout h3{ font-size: 25px; line-height: 1.2em; letter-spacing: 0px; font-weight: 800; text-transform: none; font-family: Poppins, var(--nv-fallback-ff); } h4{ font-size: 20px; line-height: 1.2em; letter-spacing: 0px; font-weight: 800; text-transform: none; font-family: Poppins, var(--nv-fallback-ff); } h5{ font-size: 16px; line-height: 1.2em; letter-spacing: 0px; font-weight: 800; text-transform: none; font-family: Poppins, var(--nv-fallback-ff); } h6{ font-size: 14px; line-height: 1.2em; letter-spacing: 0px; font-weight: 800; text-transform: none; font-family: Poppins, var(--nv-fallback-ff); } form input:read-write, form textarea, form select, form select option, form.wp-block-search input.wp-block-search__input, .widget select{ color: var(--nv-text-color);padding-top:12px;padding-right:12px;padding-bottom:12px;padding-left:12px; font-family: Poppins, var(--nv-fallback-ff); } form.search-form input:read-write{ padding-right:45px !important; font-family: Poppins, var(--nv-fallback-ff); } .global-styled{ --bgcolor: var(--nv-site-bg); } .header-top-inner,.header-top-inner a:not(.button),.header-top-inner .navbar-toggle{ color: var(--nv-text-color); } .header-top-inner .nv-icon svg,.header-top-inner .nv-contact-list svg{ fill: var(--nv-text-color); } .header-top-inner .icon-bar{ background-color: var(--nv-text-color); } .hfg_header .header-top-inner .nav-ul .sub-menu{ background-color: #f0f0f0; } .hfg_header .header-top-inner{ background-color: #f0f0f0; } .header-main-inner,.header-main-inner a:not(.button),.header-main-inner .navbar-toggle{ color: var(--nv-text-color); } .header-main-inner .nv-icon svg,.header-main-inner .nv-contact-list svg{ fill: var(--nv-text-color); } .header-main-inner .icon-bar{ background-color: var(--nv-text-color); } .hfg_header .header-main-inner .nav-ul .sub-menu{ background-color: var(--nv-site-bg); } .hfg_header .header-main-inner{ background-color: var(--nv-site-bg); } .header-bottom-inner,.header-bottom-inner a:not(.button),.header-bottom-inner .navbar-toggle{ color: var(--nv-text-color); } .header-bottom-inner .nv-icon svg,.header-bottom-inner .nv-contact-list svg{ fill: var(--nv-text-color); } .header-bottom-inner .icon-bar{ background-color: var(--nv-text-color); } .hfg_header .header-bottom-inner .nav-ul .sub-menu{ background-color: #ffffff; } .hfg_header .header-bottom-inner{ background-color: #ffffff; } .header-menu-sidebar-bg{ --justify: flex-start; --textalign: left;--flexg: 1; } .header-menu-sidebar .header-menu-sidebar-bg,.header-menu-sidebar .header-menu-sidebar-bg a:not(.button),.header-menu-sidebar .header-menu-sidebar-bg .navbar-toggle{ color: var(--nv-text-color); } .header-menu-sidebar .header-menu-sidebar-bg .nv-icon svg,.header-menu-sidebar .header-menu-sidebar-bg .nv-contact-list svg{ fill: var(--nv-text-color); } .header-menu-sidebar .header-menu-sidebar-bg .icon-bar{ background-color: var(--nv-text-color); } .hfg_header .header-menu-sidebar .header-menu-sidebar-bg .nav-ul .sub-menu{ background-color: var(--nv-site-bg); } .hfg_header .header-menu-sidebar .header-menu-sidebar-bg{ background-color: var(--nv-site-bg); } .header-menu-sidebar{ width: 360px; } .builder-item--logo .site-logo img{ max-width: 120px; } .builder-item--logo .site-logo{ padding:10px 0px 10px 0px; } .builder-item--logo{ margin:0px 0px 0px 0px; } .builder-item--nav-icon .navbar-toggle, .header-menu-sidebar .close-sidebar-panel .navbar-toggle{ border-radius:3px;border:1px solid;border-width:1px; } .builder-item--nav-icon .navbar-toggle{ padding:10px 15px 10px 15px; } .builder-item--nav-icon{ margin:0px 0px 0px 0px; } .builder-item--primary-menu .nav-menu-primary > .nav-ul li:not(.woocommerce-mini-cart-item) > a,.builder-item--primary-menu .nav-menu-primary > .nav-ul .has-caret > a,.builder-item--primary-menu .nav-menu-primary > .nav-ul .neve-mm-heading span,.builder-item--primary-menu .nav-menu-primary > .nav-ul .has-caret{ color: var(--nv-text-color); } .builder-item--primary-menu .nav-menu-primary > .nav-ul li:not(.woocommerce-mini-cart-item) > a:after,.builder-item--primary-menu .nav-menu-primary > .nav-ul li > .has-caret > a:after{ background-color: var(--nv-secondary-accent); } .builder-item--primary-menu .nav-menu-primary > .nav-ul li:not(.woocommerce-mini-cart-item):hover > a,.builder-item--primary-menu .nav-menu-primary > .nav-ul li:hover > .has-caret > a,.builder-item--primary-menu .nav-menu-primary > .nav-ul li:hover > .has-caret{ color: var(--nv-secondary-accent); } .builder-item--primary-menu .nav-menu-primary > .nav-ul li:hover > .has-caret svg{ fill: var(--nv-secondary-accent); } .builder-item--primary-menu .nav-menu-primary > .nav-ul li.current-menu-item > a,.builder-item--primary-menu .nav-menu-primary > .nav-ul li.current_page_item > a,.builder-item--primary-menu .nav-menu-primary > .nav-ul li.current_page_item > .has-caret > a{ color: var(--nv-secondary-accent); } .builder-item--primary-menu .nav-menu-primary > .nav-ul li.current-menu-item > .has-caret svg{ fill: var(--nv-secondary-accent); } .builder-item--primary-menu .nav-ul > li:not(:last-of-type){ margin-right:20px; } .builder-item--primary-menu .style-full-height .nav-ul li:not(.menu-item-nav-search):not(.menu-item-nav-cart):hover > a:after{ width: calc(100% + 20px); } .builder-item--primary-menu .nav-ul li a, .builder-item--primary-menu .neve-mm-heading span{ min-height: 25px; } .builder-item--primary-menu{ font-size: 1em; line-height: 1.6em; letter-spacing: 0px; font-weight: 500; text-transform: none;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px; } .builder-item--primary-menu svg{ width: 1em;height: 1em; } .footer-top-inner .row{ grid-template-columns:1fr 1fr 1fr; --valign: flex-start; } .footer-top-inner{ background-color: #ffffff; } .footer-top-inner,.footer-top-inner a:not(.button),.footer-top-inner .navbar-toggle{ color: var(--nv-text-color); } .footer-top-inner .nv-icon svg,.footer-top-inner .nv-contact-list svg{ fill: var(--nv-text-color); } .footer-top-inner .icon-bar{ background-color: var(--nv-text-color); } .footer-top-inner .nav-ul .sub-menu{ background-color: #ffffff; } .footer-main-inner .row{ grid-template-columns:1fr 1fr 1fr; --valign: flex-start; } .footer-main-inner{ background-color: var(--nv-site-bg); } .footer-main-inner,.footer-main-inner a:not(.button),.footer-main-inner .navbar-toggle{ color: var(--nv-text-color); } .footer-main-inner .nv-icon svg,.footer-main-inner .nv-contact-list svg{ fill: var(--nv-text-color); } .footer-main-inner .icon-bar{ background-color: var(--nv-text-color); } .footer-main-inner .nav-ul .sub-menu{ background-color: var(--nv-site-bg); } .footer-bottom-inner .row{ grid-template-columns:1fr 1fr 1fr; --valign: flex-start; } .footer-bottom-inner{ background-color: var(--nv-dark-bg); } .footer-bottom-inner,.footer-bottom-inner a:not(.button),.footer-bottom-inner .navbar-toggle{ color: var(--nv-text-dark-bg); } .footer-bottom-inner .nv-icon svg,.footer-bottom-inner .nv-contact-list svg{ fill: var(--nv-text-dark-bg); } .footer-bottom-inner .icon-bar{ background-color: var(--nv-text-dark-bg); } .footer-bottom-inner .nav-ul .sub-menu{ background-color: var(--nv-dark-bg); } @media(min-width: 576px){ .container{ max-width: 992px; } .single-post-container .alignfull > [class*="__inner-container"], .single-post-container .alignwide > [class*="__inner-container"]{ max-width:962px } .button.button-secondary:not(.secondary-default), .wp-block-button.is-style-secondary .wp-block-button__link{ padding:8px 12px 8px 12px; } body, .site-title{ font-size: 16px; line-height: 1.6; letter-spacing: 0px; } h1, .single h1.entry-title{ font-size: 80px; line-height: 1.2em; letter-spacing: 0px; } h2{ font-size: 50px; line-height: 1.2em; letter-spacing: 0px; } h3, .woocommerce-checkout h3{ font-size: 25px; line-height: 1.2em; letter-spacing: 0px; } h4{ font-size: 20px; line-height: 1.2em; letter-spacing: 0px; } h5{ font-size: 16px; line-height: 1.2em; letter-spacing: 0px; } h6{ font-size: 14px; line-height: 1.2em; letter-spacing: 0px; } .header-menu-sidebar-bg{ --justify: flex-start; --textalign: left;--flexg: 1; } .header-menu-sidebar{ width: 360px; } .builder-item--logo .site-logo img{ max-width: 120px; } .builder-item--logo .site-logo{ padding:10px 0px 10px 0px; } .builder-item--logo{ margin:0px 0px 0px 0px; } .builder-item--nav-icon .navbar-toggle{ padding:10px 15px 10px 15px; } .builder-item--nav-icon{ margin:0px 0px 0px 0px; } .builder-item--primary-menu .nav-ul > li:not(:last-of-type){ margin-right:20px; } .builder-item--primary-menu .style-full-height .nav-ul li:not(.menu-item-nav-search):not(.menu-item-nav-cart):hover > a:after{ width: calc(100% + 20px); } .builder-item--primary-menu .nav-ul li a, .builder-item--primary-menu .neve-mm-heading span{ min-height: 25px; } .builder-item--primary-menu{ font-size: 1em; line-height: 1.6em; letter-spacing: 0px;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px; } .builder-item--primary-menu svg{ width: 1em;height: 1em; } }@media(min-width: 960px){ .container{ max-width: 1170px; } body:not(.single):not(.archive):not(.blog):not(.search):not(.error404) .neve-main > .container .col, body.post-type-archive-course .neve-main > .container .col, body.post-type-archive-llms_membership .neve-main > .container .col{ max-width: 70%; } body:not(.single):not(.archive):not(.blog):not(.search):not(.error404) .nv-sidebar-wrap, body.post-type-archive-course .nv-sidebar-wrap, body.post-type-archive-llms_membership .nv-sidebar-wrap{ max-width: 30%; } .neve-main > .archive-container .nv-index-posts.col{ max-width: 100%; } .neve-main > .archive-container .nv-sidebar-wrap{ max-width: 0%; } .neve-main > .single-post-container .nv-single-post-wrap.col{ max-width: 70%; } .single-post-container .alignfull > [class*="__inner-container"], .single-post-container .alignwide > [class*="__inner-container"]{ max-width:789px } .container-fluid.single-post-container .alignfull > [class*="__inner-container"], .container-fluid.single-post-container .alignwide > [class*="__inner-container"]{ max-width:calc(70% + 15px) } .neve-main > .single-post-container .nv-sidebar-wrap{ max-width: 30%; } .button.button-secondary:not(.secondary-default), .wp-block-button.is-style-secondary .wp-block-button__link{ padding:8px 12px 8px 12px; } body, .site-title{ font-size: 17px; line-height: 1.7; letter-spacing: 0px; } h1, .single h1.entry-title{ font-size: 100px; line-height: 1.2em; letter-spacing: 0px; } h2{ font-size: 60px; line-height: 1.2em; letter-spacing: 0px; } h3, .woocommerce-checkout h3{ font-size: 30px; line-height: 1.6em; letter-spacing: 0px; } h4{ font-size: 20px; line-height: 1.2em; letter-spacing: 0px; } h5{ font-size: 16px; line-height: 1.2em; letter-spacing: 0px; } h6{ font-size: 16px; line-height: 1.2em; letter-spacing: 0px; } .header-menu-sidebar-bg{ --justify: flex-start; --textalign: left;--flexg: 1; } .header-menu-sidebar{ width: 360px; } .builder-item--logo .site-logo img{ max-width: 120px; } .builder-item--logo .site-logo{ padding:10px 0px 10px 0px; } .builder-item--logo{ margin:0px 0px 0px 0px; } .builder-item--nav-icon .navbar-toggle{ padding:10px 15px 10px 15px; } .builder-item--nav-icon{ margin:0px 0px 0px 0px; } .builder-item--primary-menu .nav-ul > li:not(:last-of-type){ margin-right:20px; } .builder-item--primary-menu .style-full-height .nav-ul li:not(.menu-item-nav-search):not(.menu-item-nav-cart) > a:after{ left:-10px;right:-10px } .builder-item--primary-menu .style-full-height .nav-ul li:not(.menu-item-nav-search):not(.menu-item-nav-cart):hover > a:after{ width: calc(100% + 20px); } .builder-item--primary-menu .nav-ul li a, .builder-item--primary-menu .neve-mm-heading span{ min-height: 25px; } .builder-item--primary-menu{ font-size: 1em; line-height: 1.6em; letter-spacing: 0px;padding:0px 0px 0px 0px;margin:0px 0px 0px 0px; } .builder-item--primary-menu svg{ width: 1em;height: 1em; } }:root{--nv-primary-accent:#000000;--nv-secondary-accent:#4f4f4f;--nv-site-bg:#ffffff;--nv-light-bg:#ededed;--nv-dark-bg:#14171c;--nv-text-color:#000000;--nv-text-dark-bg:#ffffff;--nv-c-1:#77b978;--nv-c-2:#f37262;--nv-fallback-ff:Arial, Helvetica, sans-serif;}
+</style>
+<link rel="stylesheet" id="neve-google-font-poppins-css" href="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/css.css" type="text/css" media="all">
+<script type="text/javascript" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/jquery.min" id="jquery-core-js"></script>
+<script type="text/javascript" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/jquery-migrate.min" id="jquery-migrate-js"></script>
+<script type="text/javascript" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/c4wp-public" id="c4wp-public-js"></script>
+
+<!-- Fragmento de código de Google Analytics añadido por Site Kit -->
+<script type="text/javascript" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/js" id="google_gtagjs-js" async=""></script>
+<script type="text/javascript" id="google_gtagjs-js-after">
+window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}
+gtag('set', 'linker', {"domains":["www.ecodeup.com"]} );
+gtag("js", new Date());
+gtag("set", "developer_id.dZTNiMT", true);
+gtag("config", "UA-74882255-1", {"anonymize_ip":true});
+gtag("config", "G-WL5GVK4R40");
+</script>
+
+<!-- Final del fragmento de código de Google Analytics añadido por Site Kit -->
+<link rel="https://api.w.org/" href="https://www.ecodeup.com/wp-json/"><link rel="alternate" type="application/json" href="https://www.ecodeup.com/wp-json/wp/v2/posts/1913"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.ecodeup.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.ecodeup.com/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 5.9.3">
+<link rel="shortlink" href="https://www.ecodeup.com/?p=1913">
+<link rel="alternate" type="application/json+oembed" href="https://www.ecodeup.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.ecodeup.com%2Fpatrones-de-diseno-en-java-mvc-dao-y-dto%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://www.ecodeup.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.ecodeup.com%2Fpatrones-de-diseno-en-java-mvc-dao-y-dto%2F&amp;format=xml">
+<meta name="generator" content="Site Kit by Google 1.77.0"><!-- Introduce aquí tus scripts -->
+<!-- Fragmento de código de Google Adsense añadido por Site Kit -->
+<meta name="google-adsense-platform-account" content="ca-host-pub-2644536267352236">
+<meta name="google-adsense-platform-domain" content="sitekit.withgoogle.com">
+<!-- Final del fragmento de código de Google Adsense añadido por Site Kit -->
+
+<!-- Fragmento de código de Google Adsense añadido por Site Kit -->
+<script async="async" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/f.txt" crossorigin="anonymous" type="text/javascript"></script>
+
+<!-- Final del fragmento de código de Google Adsense añadido por Site Kit -->
+<link rel="icon" href="https://www.ecodeup.com/wp-content/uploads/2016/07/cropped-logo-vista-32x32.png" sizes="32x32">
+<link rel="icon" href="https://www.ecodeup.com/wp-content/uploads/2016/07/cropped-logo-vista-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://www.ecodeup.com/wp-content/uploads/2016/07/cropped-logo-vista-180x180.png">
+<meta name="msapplication-TileImage" content="https://www.ecodeup.com/wp-content/uploads/2016/07/cropped-logo-vista-270x270.png">
+
+	<style id="abu-collapse-styles" type="text/css"></style></head>
+
+<body data-rsssl="1" class="post-template-default single single-post postid-1913 single-format-standard  nv-sidebar-full-width menu_sidebar_slide_left" id="neve_body">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0.498039215686"></feFuncR><feFuncG type="table" tableValues="0 0.498039215686"></feFuncG><feFuncB type="table" tableValues="0 0.498039215686"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.549019607843 0.988235294118"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0.717647058824 0.254901960784"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 1"></feFuncR><feFuncG type="table" tableValues="0 0.278431372549"></feFuncG><feFuncB type="table" tableValues="0.592156862745 0.278431372549"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0 0"></feFuncR><feFuncG type="table" tableValues="0 0.647058823529"></feFuncG><feFuncB type="table" tableValues="0 1"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.780392156863 1"></feFuncR><feFuncG type="table" tableValues="0 0.949019607843"></feFuncG><feFuncB type="table" tableValues="0.352941176471 0.470588235294"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.650980392157 0.403921568627"></feFuncR><feFuncG type="table" tableValues="0 1"></feFuncG><feFuncB type="table" tableValues="0.447058823529 0.4"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;"><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 "></feColorMatrix><feComponentTransfer color-interpolation-filters="sRGB"><feFuncR type="table" tableValues="0.0980392156863 1"></feFuncR><feFuncG type="table" tableValues="0 0.662745098039"></feFuncG><feFuncB type="table" tableValues="0.847058823529 0.419607843137"></feFuncB><feFuncA type="table" tableValues="1 1"></feFuncA></feComponentTransfer><feComposite in2="SourceGraphic" operator="in"></feComposite></filter></defs></svg><div class="wrapper">
+	
+	<header class="header">
+		<a class="neve-skip-link show-on-focus" href="#content">
+			Saltar al contenido		</a>
+		<div id="header-grid" class="hfg_header site-header">
+	
+<nav class="header--row header-main hide-on-mobile hide-on-tablet layout-full-contained nv-navbar header--row" data-row-id="main" data-show-on="desktop">
+
+	<div class="header--row-inner header-main-inner">
+		<div class="container">
+			<div class="row row--wrapper" data-section="hfg_header_layout_main">
+				<div class="hfg-slot left"><div class="builder-item desktop-left"><div class="item--inner builder-item--logo" data-section="title_tagline" data-item-id="logo">
+	
+<div class="site-logo">
+	<a class="brand" href="https://www.ecodeup.com/" title="Tutoriales Java Web con Spring" aria-label="Tutoriales Java Web con Spring"><div class="nv-title-tagline-wrap"><p class="site-title">Tutoriales Java Web con Spring</p></div></a></div>
+
+	</div>
+
+</div></div><div class="hfg-slot right"><div class="builder-item has-nav desktop-right"><div class="item--inner builder-item--primary-menu has_menu" data-section="header_menu_primary" data-item-id="primary-menu">
+	<div class="nv-nav-wrap">
+	<div role="navigation" class="style-border-bottom nav-menu-primary" aria-label="Menú principal">
+
+		<ul id="nv-primary-navigation-main" class="primary-menu-ul nav-ul"><li id="menu-item-7196" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-7196"><a href="https://www.ecodeup.com/">Home</a></li>
+<li id="menu-item-7195" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-7195"><a href="https://www.ecodeup.com/blog/">Tutoriales</a></li>
+<li id="menu-item-5982" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5982"><a target="_blank" rel="noopener" href="https://programacionfullstack.com/">Java Full Stack Spring y Angular</a></li>
+<li id="menu-item-6467" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6467"><a target="_blank" rel="noopener" href="https://www.ecodeup.com/acerca/">Contacto</a></li>
+</ul>	</div>
+</div>
+
+	</div>
+
+</div></div>							</div>
+		</div>
+	</div>
+</nav>
+
+
+<nav class="header--row header-main hide-on-desktop layout-full-contained nv-navbar header--row" data-row-id="main" data-show-on="mobile">
+
+	<div class="header--row-inner header-main-inner">
+		<div class="container">
+			<div class="row row--wrapper" data-section="hfg_header_layout_main">
+				<div class="hfg-slot left"><div class="builder-item tablet-left mobile-left"><div class="item--inner builder-item--logo" data-section="title_tagline" data-item-id="logo">
+	
+<div class="site-logo">
+	<a class="brand" href="https://www.ecodeup.com/" title="Tutoriales Java Web con Spring" aria-label="Tutoriales Java Web con Spring"><div class="nv-title-tagline-wrap"><p class="site-title">Tutoriales Java Web con Spring</p></div></a></div>
+
+	</div>
+
+</div></div><div class="hfg-slot right"><div class="builder-item tablet-left mobile-left"><div class="item--inner builder-item--nav-icon" data-section="header_menu_icon" data-item-id="nav-icon">
+	<div class="menu-mobile-toggle item-button navbar-toggle-wrapper">
+	<button type="button" class=" navbar-toggle" value="Menú de navegación" aria-label="Menú de navegación ">
+					<span class="bars">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</span>
+					<span class="screen-reader-text">Menú de navegación</span>
+	</button>
+</div> <!--.navbar-toggle-wrapper-->
+
+
+	</div>
+
+</div></div>							</div>
+		</div>
+	</div>
+</nav>
+
+<div id="header-menu-sidebar" class="header-menu-sidebar menu-sidebar-panel slide_left" data-row-id="sidebar">
+	<div id="header-menu-sidebar-bg" class="header-menu-sidebar-bg">
+		<div class="close-sidebar-panel navbar-toggle-wrapper">
+			<button type="button" class="hamburger is-active  navbar-toggle active" value="Menú de navegación" aria-label="Menú de navegación ">
+									<span class="bars">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</span>
+									<span class="screen-reader-text">
+				Menú de navegación					</span>
+			</button>
+		</div>
+		<div id="header-menu-sidebar-inner" class="header-menu-sidebar-inner ">
+						<div class="builder-item has-nav desktop-right tablet-right mobile-right"><div class="item--inner builder-item--primary-menu has_menu" data-section="header_menu_primary" data-item-id="primary-menu">
+	<div class="nv-nav-wrap">
+	<div role="navigation" class="style-border-bottom nav-menu-primary" aria-label="Menú principal">
+
+		<ul id="nv-primary-navigation-sidebar" class="primary-menu-ul nav-ul"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-7196"><a href="https://www.ecodeup.com/">Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-7195"><a href="https://www.ecodeup.com/blog/">Tutoriales</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5982"><a target="_blank" rel="noopener" href="https://programacionfullstack.com/">Java Full Stack Spring y Angular</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6467"><a target="_blank" rel="noopener" href="https://www.ecodeup.com/acerca/">Contacto</a></li>
+</ul>	</div>
+</div>
+
+	</div>
+
+</div>					</div>
+	</div>
+</div>
+<div class="header-menu-sidebar-overlay hfg-ov"></div>
+</div>
+	</header>
+
+	
+
+	
+	<main id="content" class="neve-main">
+
+	<div class="container single-post-container">
+		<div class="row">
+						<article id="post-1913" class="nv-single-post-wrap col post-1913 post type-post status-publish format-standard hentry category-programacion-java tag-dao tag-dto tag-modelo-vista-controlador tag-mvc tag-patrones-de-diseno-en-java">
+				<div class="entry-header"><div class="nv-title-meta-wrap"><h1 class="title entry-title">Patrones de diseño en Java: MVC, DAO y DTO</h1><ul class="nv-meta-list"><li class="meta date posted-on "><time class="entry-date published" datetime="2016-11-20T22:32:18-05:00" content="2016-11-20">20 noviembre, 2016</time><time class="updated" datetime="2021-07-16T10:50:31-05:00">16 julio, 2021</time></li><li class="meta comments last"><a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comments">50 comentarios</a></li></ul></div></div><div class="nv-content-wrap entry-content"><p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Hola
+ que tal, esta vez voy hablar acerca de los patrones de diseño en Java, 
+específicamente de los patrones Modelo Vista Controlador (MVC), Data 
+Acces Object (DAO) y Data Transfer Object (DTO) y su implementación en 
+Java con ejemplos sencillos.</span></span></p>
+<p><span style="font-size: large;"><span style="font-weight: 400;"><span style="color: #ff6600;"><a style="color: #ff6600;" href="https://www.youtube.com/playlist?list=PL3vxkSlW2FvWzjf0NdxcivmyhrW6CdxhB" target="_blank" rel="noopener noreferrer">Aprende este y otros temas de Programación Java Web. <span style="text-decoration: underline;">Accede gratis al Curso de Java EE&nbsp;y suscribete al canal de Youtube.</span></a></span></span></span></p>
+<h2 style="text-align: justify;">Qué es un patrón de diseño?</h2>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Un
+ patrón de diseño es una solución probada que resuelve un tipo 
+específico de problema en el desarrollo de software referente al diseño.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Existen
+ una infinidad de patrones de diseño los mismos que se dividen en 
+categorías por ejemplo: de creación, estructurales, de comportamiento, 
+interacción etc.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Cada
+ uno se especializa en resolver un problema específico, si quieres 
+profundizar y revisar todas las categorías y ejemplos a detalle puedes 
+visitar <a style="color: #ff6600;" href="http://wiki.c2.com/?DesignPatternsBook" target="_blank" rel="noopener noreferrer">Design Patterns Book</a>.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">El
+ tema es bastante extenso, que no alcanzaría una sola entrada, pero esta
+ vez quiero hablar de los patrones MVC, DAO, DTO que en lo personal y en
+ la práctica considero los más utilizados al menos para el desarrollo en
+ Java.</span></span><img loading="lazy" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/show.gif" alt="icon" width="1" height="1"></p>
+<p><a href="https://www.youtube.com/channel/UCViAh-P1qmZ2-5F-UTx9MlA" target="_blank" rel="noopener noreferrer"><img loading="lazy" class="alignnone size-full wp-image-5537" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/Suscripcion-Youtube-compressor.jpg" alt="" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/Suscripcion-Youtube-compressor.jpg 1610w, Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/Suscripcion-Youtube-compressor-768x231.jpg 768w" sizes="(max-width: 1610px) 100vw, 1610px" width="1610" height="484"></a></p>
+<h2 style="text-align: justify;">Por qué utilizar un patrón de diseño?</h2>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Ahora, cuales son las ventajas?, bueno son algunas, entre las principales es que permiten tener el código bien </span><b>organizado,&nbsp;</b><b>legible y mantenible</b><span style="font-weight: 400;">, además te permite </span><b>reutilizar código</b><span style="font-weight: 400;"> y aumenta la </span><b>escalabilidad </b><span style="font-weight: 400;">en tu proyecto.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">En
+ sí proporcionan una terminología estándar y &nbsp;un conjunto de buenas
+ prácticas en cuanto a la solución en problemas de desarrollo de 
+software.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Sin más palabras voy ha empezar ha describirlos con sus respectivos ejemplos.</span></span></p>
+<h2 style="text-align: justify;"><b>El patrón Model View Controller o MVC</b></h2>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">En
+ español Modelo Vista Controlador, este patrón permite separar una 
+aplicación en 3 capas, una forma de organizar y de hacer escalable un 
+proyecto, a continuación una breve descripción de cada capa.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><b>Modelo:</b><span style="font-weight: 400;">
+ Esta capa representa todo lo que tiene que ver con el acceso a datos: 
+guardar, actualizar, obtener datos, además todo el código de la lógica 
+del negocio, básicamente son las clases Java y parte de la lógica de 
+negocio.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><b>Vista: </b><span style="font-weight: 400;">La
+ vista tiene que ver con la presentación de datos del modelo y lo que ve
+ el usuario, por lo general una vista es la representación visual de un 
+modelo (POJO o clase java).</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Por
+ ejemplo el modelo usuario que es una clase en Java y que tiene como 
+propiedades, nombre y apellido debe pertenecer a una vista en la que el 
+usuario vea esas propiedades.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><b>Controlador:</b><span style="font-weight: 400;">
+ El controlador es el encargado de conectar el modelo con las vistas, 
+funciona como un puente entre la vista y el modelo, el controlador 
+recibe eventos generados por el usuario desde las vistas y se encargar 
+de direccionar al modelo la petición respectiva.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Por
+ ejemplo el usuario quiere ver los clientes con apellido Álvarez, la 
+petición va al controlador y el se encarga de utilizar el modelo 
+adecuado y devolver ese modelo a la vista.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Si
+ te das cuenta en ningún momento interactúan directamente la vista con 
+el modelo, esto también mantiene la seguridad en una aplicación.</span></span></p>
+<p><span style="font-size: large;"><span style="font-weight: 400;"><span style="color: #ff6600;">Nota:</span> Si te interesa seguir el tema de programación Web con Java, puedes revisar mi <span style="color: #ff6600;"><a style="color: #ff6600;" href="https://programacionfullstack.com/" target="_blank" rel="noopener noreferrer">Curso de Programación Java Web</a></span>&nbsp;donde aprenderás paso a paso como desarrollar aplicaciones web con Java.</span></span></p>
+<h2 style="text-align: justify;"><b>Que ganó utilizando este patrón?</b></h2>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Lo
+ importante de este patrón es que permite dividir en partes, que de 
+alguna manera son independientes, con lo que si por ejemplo hago algún 
+cambio el modelo no afectaría a la vista o si hay algún cambio sería 
+mínimo.</span></span></p>
+<h2 style="text-align: justify;"><b>Pero, cómo implemento el modelo vista controlador?</b></h2>
+<p style="text-align: justify;"><img loading="lazy" class="size-full wp-image-1925 aligncenter" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/Patron-Modelo-vista-controlador.jpg" alt="patrones de diseño mvc y dao" width="238" height="197"></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Para usar este patrón de diseño en Java, primero creas el modelo, que es una clase en java y se llama <em><strong>Cliente.java</strong></em>, esta clase sólo contiene los atributos, constructor, getters y setters.</span></span></p>
+<pre class="lang:java decode:true " title="Modelo">package com.ecodeup.model;
+
+public class Cliente {
+	private int id;
+	private String nombre;
+	private String apellido;
+	
+	
+	public Cliente() {
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+}
+</pre>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Luego creas la vista, la clase <em><strong>ClienteView.java</strong></em>, que es un clase que va hacer de vista para el ejemplo y su función es presentar los datos del modelo.</span></span></p>
+<pre class="lang:java decode:true" title="Vista">package com.ecodeup.view;
+
+public class ClienteView {
+	public void imprimirDatosCliente(int id,String nombre, String apellido) {
+		System.out.println("**** DATOS CLIENTE ****");
+		System.out.println("Id: "+id);
+		System.out.println("Nombre: "+nombre);
+		System.out.println("Apellido: "+apellido);
+	}
+}
+</pre>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Esta clase lo único que va hacer es imprimir los datos del modelo que es la clase Cliente.java.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Ahora&nbsp;creas
+ el controlador, el controlador contiene 2 objetos el modelo, la vista 
+así como los getters y setters para llenar las propiedades del modelo y 
+un método(actualizarVista()) que llama a la vista que a su vez imprime 
+las propiedades del&nbsp;modelo cliente.</span></span></p>
+<pre class="lang:java decode:true " title="Controlador">package com.ecodeup.controller;
+
+import com.ecodeup.model.Cliente;
+import com.ecodeup.view.ClienteView;
+
+public class ClienteController {
+	//objetos vista y modelo
+	private ClienteView vista;
+	private Cliente modelo;
+
+	//constructor para inicializar el modelo y la vista
+	public ClienteController(Cliente modelo, ClienteView vista) {
+		this.modelo = modelo;
+		this.vista = vista;
+	}
+
+	//getters y setters para el modelo
+	public int getId() {
+		return modelo.getId();
+	}
+	public void setId(int id) {
+		this.modelo.setId(id);
+	}
+	public String getNombre() {
+		return modelo.getNombre();
+	}
+	public void setNombre(String nombre) {
+		this.modelo.setNombre(nombre); 
+	}
+	public String getApellido() {
+		return modelo.getApellido();
+	}
+	public void setApellido(String apellido) {
+		this.modelo.setApellido(apellido);
+	}
+	
+	//pasa el modelo a la vista para presentar los datos
+	public void actualizarVista() {
+		vista.imprimirDatosCliente(modelo.getId(),modelo.getNombre(), modelo.getApellido());
+	}
+}
+</pre>
+<p style="text-align: justify;"><span style="font-size: large;">Finalmente queda hacer un test para comprobar el patrón de diseño Modelo Vista Controlador funciona: </span></p>
+<pre class="lang:java decode:true " title="Comprobar patrón MVC">package com.ecodeup.mvc;
+
+import com.ecodeup.controller.ClienteController;
+import com.ecodeup.model.Cliente;
+import com.ecodeup.view.ClienteView;
+
+public class MvcDemo {
+	
+	public static void main (String [] args){
+		// objeto vista, y modelo creado con el método estático 
+		Cliente modelo= llenarDatosCliente();
+		ClienteView vista= new ClienteView();
+		
+		//se crea un objeto controlador y se le pasa el modelo y la vista
+		ClienteController controlador= new ClienteController(modelo, vista);
+		
+		// se muestra los datos del cliente
+		controlador.actualizarVista();
+		
+		// se actualiza un cliente y se muestra de nuevo los datos
+		controlador.setNombre("Luis");
+		controlador.actualizarVista();		
+	}
+	//método estático que retorna el cliente con sus datos
+	private static Cliente llenarDatosCliente() {
+		Cliente cliente = new Cliente();
+		cliente.setId(1);
+		cliente.setNombre("Elivar");
+		cliente.setApellido("Largo");
+		return cliente;
+	}
+}
+</pre>
+<h2 style="text-align: justify;"><b>El patrón Data Transfer Object &nbsp;(DTO/VO)</b></h2>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Va de la mano con el patrón de diseño DAO.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Se utiliza para transferir varios atributos entre el cliente y el servidor o viceversa, básicamente consta de 2 clases:</span></span></p>
+<ul>
+<li style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">La primera es una clase java conocida como <em><strong>Value Object</strong></em> que únicamente contiene sus atributos, constructor, getters y setters, esta clase no tiene comportamiento.</span></span></li>
+<li style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">La segunda es una&nbsp;clase del lado del servidor conocida como clase de negocio (<em><strong>en la implementación también se conoce como Business Object</strong></em>) es la que se encarga de obtener datos desde la base de datos y llenar la clase <em><strong>Value Object&nbsp;</strong></em>y
+ enviarla al cliente, o a su vez recibir la clase desde el cliente y 
+enviar los datos al servidor, por lo general tiene todos los métodos 
+CRUD (create, read, update y delete).</span></span></li>
+</ul>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Se implementa de la siguiente forma:</span></span></p>
+<p style="text-align: justify;"><img loading="lazy" class="size-full wp-image-1928 aligncenter" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/Patron-de-dise%C3%B1o-data-acces-object.jpg" alt="patrones de diseño en java" width="240" height="165"></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Se&nbsp;crea la clase <strong><em>ClienteVO.java</em> </strong>que será la clase también conocida como&nbsp;<em>Value Object:</em></span></span></p>
+<pre class="lang:java decode:true " title="Clase ClienteVO patrón DTO (Data transfer object)">package com.ecodeup.vo;
+
+public class ClienteVO {
+	private int id;
+	private String nombre;
+	private String apellido;
+	
+	
+	public ClienteVO(int id, String nombre, String apellido) {
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNombre()+" "+this.getApellido();
+	}
+}
+</pre>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Se crea la clase <em><strong>ClienteBO.java&nbsp;</strong></em>conocida también como la clase de negocio, que es la que contiene todos los métodos CRUD:</span></span></p>
+<pre class="lang:java decode:true " title="Clase ClienteBO patrón DTO (Data transfer object)">package com.ecodeup.bo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ecodeup.vo.ClienteVO;
+
+public class ClienteBO {
+	
+	//lista de tipo cliente
+	List&lt;ClienteVO&gt; clientes;
+	
+	
+	//constructor, se guarda en la lista 2 clientes
+	public ClienteBO() {
+		clientes = new ArrayList&lt;&gt;();
+		ClienteVO cliente1= new ClienteVO(0,"Elivar","Largo");
+		ClienteVO cliente2= new ClienteVO(1,"Priscila","Morocho");
+		clientes.add(cliente1);
+		clientes.add(cliente2);
+	}
+	
+	//elimina el cliente que se le pasa como paraámetro
+	public void eliminarCliente(ClienteVO cliente) {
+		clientes.remove(cliente.getId());
+		System.out.println("Cliente "+cliente.getId()+" eliminado satisfactoriamente");
+	}
+	
+	//obtiene toda la lista de clientes
+	public List&lt;ClienteVO&gt; obtenerClientes(){
+		return clientes;
+	}
+	
+	//obtiene un cliente de acuerdo al id pasado como parámetro
+	public ClienteVO obtenerCliente(int id) {
+		return clientes.get(id);
+	}
+	
+	// actualiza el cliente que se le pasa como parámetro
+	public void actualizarCliente(ClienteVO cliente) {
+		clientes.get(cliente.getId()).setNombre(cliente.getNombre());
+       clientes.get(cliente.getId()).setApellido(cliente.getApellido());
+		System.out.println("Cliente id: "+ cliente.getId()+" actualizado satisfactoriamente");		
+	}
+}</pre>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Finalmente probamos el patrón Data Transfer Object:</span></span></p>
+<pre class="lang:java decode:true" title="Clase DTODemo para probar el patrón DTO">package com.ecodeup.dto;
+
+import com.ecodeup.bo.ClienteBO;
+import com.ecodeup.vo.ClienteVO;
+
+public class DTODemo {
+	public static void main(String[] args) {
+		//objeto business object
+		ClienteBO clienteBusinessObject = new ClienteBO();
+		
+		//obtiene todos los clientes
+		clienteBusinessObject.obtenerClientes().forEach(System.out::println);
+		
+		// actualiza un cliente
+		System.out.println("****");
+		ClienteVO cliente = clienteBusinessObject.obtenerCliente(0);
+		cliente.setNombre("Luis");
+		clienteBusinessObject.actualizarCliente(cliente);
+		
+		// obtiene un cliente
+		System.out.println("****");
+		cliente=clienteBusinessObject.obtenerCliente(0);
+		System.out.println(cliente);
+		
+		//elimina un cliente
+		System.out.println("****");
+		cliente=clienteBusinessObject.obtenerCliente(0);
+		clienteBusinessObject.eliminarCliente(cliente);		
+	}
+}
+</pre>
+<h2 style="text-align: justify;"><b>El patrón Data Acces Object (DAO)</b></h2>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">El
+ problema que viene a resolver este patrón es netamente el acceso a los 
+datos, que básicamente tiene que ver con la gestión de diversas fuentes 
+de datos y además abstrae&nbsp;la forma de acceder a ellos.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Imagínate
+ que tienes un sistema montado en producción con una base de datos MySQL
+ y de pronto lo debes cambiar a PostgreSQL o a cualquier otro motor de 
+base de datos.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Eso puede ser un verdadero problema.</span></span><img loading="lazy" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/show.gif" alt="icon" width="1" height="1"></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">Y
+ precisamente esto lo que soluciona este patrón, tener una aplicación 
+que no esté ligada al acceso a datos, que si por ejemplo la parte de la 
+vista pide encontrar los clientes con compras mensuales mayores $ 200, 
+el <em><strong>DAO</strong></em> se encargue de traer esos datos independientemente si está en un archivo o en una base de datos.</span></span></p>
+<p style="text-align: justify;"><span style="font-size: large;"><span style="font-weight: 400;">La
+ capa DAO contiene todos los métodos CRUD (create, read, update, 
+delete), por lo general se tiene un DAO para cada tabla en la base de 
+datos, y bueno la implementación se la realiza de la siguiente manera.</span></span></p>
+<p style="text-align: justify;"><img loading="lazy" class="size-full wp-image-1942 aligncenter" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/Patron-de-dise%C3%B1o-data-acces-object-DAO.jpg" alt="patron-de-diseno-data-acces-object-dao" width="219" height="180"></p>
+<p style="text-align: justify;"><span style="font-size: large;">Se crea una clase <em><strong>Cliente.java</strong></em> únicamente con sus constructores, getters y setters.</span></p>
+<pre class="lang:java decode:true " title="Clase Cliente patrón DAO">package com.ecodeup.model;
+
+public class Cliente {
+	private int id;
+	private String nombre;
+	private String apellido;
+	
+		
+	public Cliente() {
+		super();
+	}
+	public Cliente(int id, String nombre, String apellido) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNombre()+" "+this.getApellido();
+	}
+}
+</pre>
+<p style="text-align: justify;"><span style="font-size: large;">Se crea el acceso a los datos a través de una interface <strong><em>IClienteDao.java</em></strong>, aquí se declara todos los métodos para acceder a los datos.</span></p>
+<pre class="lang:java decode:true" title="Interface IClienteDao patrón DAO">package com.ecodeup.idao;
+
+import java.util.List;
+
+import com.ecodeup.model.Cliente;
+
+public interface IClienteDao {
+	//declaración de métodos para acceder a la base de datos
+	public List&lt;Cliente&gt; obtenerClientes();
+	public Cliente obtenerCliente(int id);
+	public void actualizarCliente(Cliente cliente);
+	public void eliminarCliente(Cliente cliente);
+}
+</pre>
+<p style="text-align: justify;"><span style="font-size: large;">Se implementa en la clase <strong><em>ClienteDaoImpl.java&nbsp;</em></strong>haciendo un <em>implements</em> de la interface <em><strong>IClienteDao.java,&nbsp;</strong></em>lo que se hace aquí, no es más que implementar cada método de la interface.</span></p>
+<pre class="lang:java decode:true " title="Clase ClienteDaoImpl del patrón DAO">package com.ecodeup.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ecodeup.idao.*;
+import com.ecodeup.model.Cliente;
+
+public class ClienteDaoImpl implements IClienteDao {
+	
+	//lista de tipo cliente
+	List&lt;Cliente&gt; clientes;
+	
+	//inicializar los objetos cliente y añadirlos a la lista
+	public ClienteDaoImpl() {
+		clientes = new ArrayList&lt;&gt;();
+		Cliente cliente1 = new Cliente(0,"Javier", "Molina");
+		Cliente cliente2 = new Cliente(1,"Lillian","Álvarez");
+		clientes.add(cliente1);
+		clientes.add(cliente2);
+	}
+	
+	//obtener todos los clientes
+	@Override
+	public List&lt;Cliente&gt; obtenerClientes() {
+		return clientes;
+	}
+	
+	//obtener un cliente por el id
+	@Override
+	public Cliente obtenerCliente(int id) {
+		return clientes.get(id);
+	}
+	
+	//actualizar un cliente
+	@Override
+	public void actualizarCliente(Cliente cliente) {
+		clientes.get(cliente.getId()).setNombre(cliente.getNombre());
+		clientes.get(cliente.getId()).setApellido(cliente.getApellido());
+		System.out.println("Cliente con id: "+cliente.getId()+" actualizado satisfactoriamente");
+	}
+	
+	//eliminar un cliente por el id
+	@Override
+	public void eliminarCliente(Cliente cliente) {
+		clientes.remove(cliente.getId());
+		System.out.println("Cliente con id: "+cliente.getId()+" elimnado satisfactoriamente");
+	}
+}
+</pre>
+<p style="text-align: justify;"><span style="font-size: large;">Por último se prueba el patrón DAO a través de la clase&nbsp;DaoDemo.java</span></p>
+<pre class="lang:java decode:true " title="Clase DaoDemo patrón DAO">package com.ecodeup.daodemo;
+
+import com.ecodeup.dao.ClienteDaoImpl;
+import com.ecodeup.idao.IClienteDao;
+import com.ecodeup.model.Cliente;
+
+public class DaoDemo {
+
+	public static void main(String[] args) {
+		// objeto para manipular el dao
+		IClienteDao clienteDao = new ClienteDaoImpl();
+
+		// imprimir los clientes
+		clienteDao.obtenerClientes().forEach(System.out::println);
+
+		// obtner un cliente
+		Cliente cliente = clienteDao.obtenerCliente(0);
+		cliente.setApellido("Pardo");
+		//actualizar cliente
+		clienteDao.actualizarCliente(cliente);
+
+		// imprimir los clientes
+		System.out.println("*****");
+		clienteDao.obtenerClientes().forEach(System.out::println);
+	}
+}
+</pre>
+<p style="text-align: justify;"><span style="font-size: large;">Por lo 
+general en un proyecto se suele unir estos tres patrones, ya que no sólo
+ basta utilizar el MVC, puesto que la parte de acceso a datos queda un 
+poco suelta, entonces si tu pregunta es. Si se puede utilizar los tres 
+patrones en un proyecto? la respuesta es SI, y de echo se puede mezclar 
+con otra infinidad de patrones que existen.</span></p>
+<p style="text-align: justify;"><span style="font-size: large;">Todo dependerá del tipo de problema que quieras solucionar.</span></p>
+<p style="text-align: justify;"><span style="font-size: large;">Y por 
+último, tampoco se debe abusar con el uso de patrones, ya que 
+utilizarlos de forma desmedida y de brindar ayuda pueden llegar a ser 
+perjudicial para nuestro código .</span></p>
+<p style="text-align: justify;"><span style="font-size: large;"> Bueno espero le hayas sacado todo el provecho a esta entrada y más que todo que hayas aprendido.</span></p>
+<p style="text-align: justify;"><span style="font-size: large;">Un Saludo.</span></p>
+<p style="text-align: justify;"><em><strong><span style="font-size: large;">Y antes de irte coméntame&nbsp;que te pareció la entrada y que patrón utilizas para tus proyectos?</span></strong></em></p>
+<p><span style="font-size: large;"><span style="font-weight: 400;">Si te interesa seguir el tema de programación Web con Java, puedes revisar mi <span style="color: #ff6600;"><a style="color: #ff6600;" href="https://programacionfullstack.com/" target="_blank" rel="noopener noreferrer">Curso de Programación Java Web</a></span>&nbsp;donde aprenderás este y otros temas: </span></span></p>
+<ul>
+<li><span style="color: #ff6600;"><span style="color: #000000;">&nbsp;</span><a style="color: #ff6600;" href="https://programacionfullstack.com/" target="_blank" rel="noopener noreferrer">Curso de Programación Java Web</a></span></li>
+<li><span style="font-size: large;"><span style="font-weight: 400;"><span style="color: #ff6600;"><a style="color: #ff6600;" href="https://www.ecodeup.com/como-crear-un-dynamic-web-project-proyecto-web-con-maven-en-eclipse/" target="_blank" rel="noopener noreferrer">Cómo crear un Proyecto Web en Eclipse</a>,</span>&nbsp;</span></span></li>
+<li><span style="font-size: large;"><span style="font-weight: 400;"><span style="color: #ff6600;"><a style="color: #ff6600;" href="https://www.ecodeup.com/como-crear-un-crud-en-java-web-con-jsp-y-servlet/" target="_blank" rel="noopener noreferrer">CÓMO CREAR UN CRUD EN JAVA WEB CON JSP Y SERVLET</a>, </span></span></span></li>
+<li><span style="font-size: large;"><span style="font-weight: 400;"><span style="color: #ff6600;"><a style="color: #ff6600;" href="https://www.ecodeup.com/como-integrar-bootstrap-con-jsp-y-crear-un-proyecto-web-en-java8/" target="_blank" rel="noopener noreferrer">Integrar Bootstrap en un proyecto Java Web usando Java 8</a></span>.</span></span></li>
+</ul>
+<div id="author-bio-box" style="background: #f8f8f8; border-top: 2px solid #cccccc; border-bottom: 2px solid #cccccc; color: #333333"><h3><a style="color: #555555;" href="https://www.ecodeup.com/author/elargo/" title="Todas las entradas de Elivar Largo" rel="author">Elivar Largo</a></h3><div class="bio-gravatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_002.jpeg 2x" class="avatar avatar-70 photo" loading="lazy" width="70" height="70"></div><a target="_blank" rel="nofollow noopener noreferrer" href="http://www.programacionfullstack.com/" class="bio-icon bio-icon-website"></a><a target="_blank" rel="nofollow noopener noreferrer" href="http://www.facebook.com/elivarlargo" class="bio-icon bio-icon-facebook"></a><a target="_blank" rel="nofollow noopener noreferrer" href="http://elivarl/" class="bio-icon bio-icon-twitter"></a><a target="_blank" rel="nofollow noopener noreferrer" href="https://ec.linkedin.com/in/elivar-largo-b4503997" class="bio-icon bio-icon-linkedin"></a><a target="_blank" rel="nofollow noopener noreferrer" href="https://www.youtube.com/channel/UCViAh-P1qmZ2-5F-UTx9MlA" class="bio-icon bio-icon-youtube"></a><p class="bio-description">Mi
+ nombre es Elivar Largo, Developer Full Stack, blogger y emprendedor. 
+Trabajo y comparto conocimientos sobre las siguientes tecnologías: 
+Spring Boot, Angular, Flutter. Contacto: elargor@gmail.com.</p></div></div><div class="nv-tags-list"><span>Etiquetas:</span><a href="https://www.ecodeup.com/tag/dao/" title="DAO" class="dao" rel="tag">DAO</a><a href="https://www.ecodeup.com/tag/dto/" title="DTO" class="dto" rel="tag">DTO</a><a href="https://www.ecodeup.com/tag/modelo-vista-controlador/" title="Modelo Vista Controlador" class="modelo-vista-controlador" rel="tag">Modelo Vista Controlador</a><a href="https://www.ecodeup.com/tag/mvc/" title="MVC" class="mvc" rel="tag">MVC</a><a href="https://www.ecodeup.com/tag/patrones-de-diseno-en-java/" title="Patrones de diseño en Java" class="patrones-de-diseno-en-java" rel="tag">Patrones de diseño en Java</a> </div> 
+<div id="comments" class="comments-area">
+				<div class="nv-comments-wrap">
+
+				<div class="nv-comments-title-wrap">
+					<h2 class="comments-title">50 comentarios en «Patrones de diseño en Java: MVC, DAO y DTO»</h2>				</div>
+
+				<ol class="nv-comments-list">
+									<li class="comment even thread-even depth-1" id="comment-item-15">
+					<article id="comment-15" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/3b3f99e32b88062b933b998115d3dbbe.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/3b3f99e32b88062b933b998115d3dbbe_002.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">rafael</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-15">
+									<time class="entry-date published" datetime="2016-11-22T23:51:34-05:00" content="2016-11-22">
+										el 22 noviembre, 2016 a las 11:51 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>gracias por tu blog, solo una consulta, habria una posibilidad
+ que pudieras hacer un tutorial sobre como hacer reportes java con 
+jaspereport.</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-15" data-commentid="15" data-postid="1913" data-belowelement="comment-15" data-respondelement="respond" data-replyto="Responder a rafael" aria-label="Responder a rafael">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor odd alt depth-2" id="comment-item-16">
+					<article id="comment-16" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Elivar Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-16">
+									<time class="entry-date published" datetime="2016-11-23T08:21:33-05:00" content="2016-11-23">
+										el 23 noviembre, 2016 a las 8:21 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Hola Rafael, claro que si, espera los próximos post que publicaré sobre el tema. Un saludo</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-16" data-commentid="16" data-postid="1913" data-belowelement="comment-16" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+								<li class="comment byuser comment-author-elargo bypostauthor even depth-2" id="comment-item-21">
+					<article id="comment-21" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Elivar Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-21">
+									<time class="entry-date published" datetime="2016-12-04T10:49:20-05:00" content="2016-12-04">
+										el 4 diciembre, 2016 a las 10:49 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>CÓMO CREAR REPORTES EN JAVA CON JASPERREPORTS Y JASPERSOFT STUDIO: <a href="https://www.ecodeup.com/como-crear-reportes-en-java-con-jasperreports/" rel="nofollow ugc">https://www.ecodeup.com/como-crear-reportes-en-java-con-jasperreports/</a></p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-21" data-commentid="21" data-postid="1913" data-belowelement="comment-21" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-item-273">
+					<article id="comment-273" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/2d5696c5787fca0727b207639ce2de00.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/2d5696c5787fca0727b207639ce2de00_002.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Juan Carlo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-273">
+									<time class="entry-date published" datetime="2017-02-26T01:37:59-05:00" content="2017-02-26">
+										el 26 febrero, 2017 a las 1:37 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Muy claro, gracias Elivar</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-273" data-commentid="273" data-postid="1913" data-belowelement="comment-273" data-respondelement="respond" data-replyto="Responder a Juan Carlo" aria-label="Responder a Juan Carlo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor even depth-2" id="comment-item-276">
+					<article id="comment-276" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Elivar Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-276">
+									<time class="entry-date published" datetime="2017-02-26T08:20:50-05:00" content="2017-02-26">
+										el 26 febrero, 2017 a las 8:20 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Gracias a ti por leerme, un saludo!!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-276" data-commentid="276" data-postid="1913" data-belowelement="comment-276" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment odd alt thread-even depth-1" id="comment-item-1381">
+					<article id="comment-1381" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/09cd1475590cf151b19039f1be93454d_002.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/09cd1475590cf151b19039f1be93454d.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Livio</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1381">
+									<time class="entry-date published" datetime="2017-05-31T21:39:44-05:00" content="2017-05-31">
+										el 31 mayo, 2017 a las 9:39 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Que tal, he desarrollado en Java Se7 (swing), no he usado 
+ningún framework,  ahora me  gustaría pasarme a JavaFx, ¿Que  framework 
+me recomiendas?</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1381" data-commentid="1381" data-postid="1913" data-belowelement="comment-1381" data-respondelement="respond" data-replyto="Responder a Livio" aria-label="Responder a Livio">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor even depth-2" id="comment-item-1382">
+					<article id="comment-1382" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Elivar Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1382">
+									<time class="entry-date published" datetime="2017-05-31T23:15:09-05:00" content="2017-05-31">
+										el 31 mayo, 2017 a las 11:15 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Todo bien Livio, no tengo experiencia con JavaFx, así que no 
+podría decirte ni recomendarte algún framework, si de pronto te interesa
+ programar con Java para la Web, podrías empezar usando Servlet y Jsp, 
+aplicando algún patrón como por ejemplo MVC junto con DAO, ya que 
+adquieras un poco de experiencia, podrías usar Spring. Espero haberte 
+ayudado en algo. Saludos!!!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1382" data-commentid="1382" data-postid="1913" data-belowelement="comment-1382" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-item-1458">
+					<article id="comment-1458" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/399b1fe735bc88dae523556fe8b3d9f5_002.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/399b1fe735bc88dae523556fe8b3d9f5.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">krz</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1458">
+									<time class="entry-date published" datetime="2017-06-05T12:52:53-05:00" content="2017-06-05">
+										el 5 junio, 2017 a las 12:52 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Exquisito post nada que decir <img draggable="false" role="img" class="emoji" alt="😀" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/1f600.svg"></p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1458" data-commentid="1458" data-postid="1913" data-belowelement="comment-1458" data-respondelement="respond" data-replyto="Responder a krz" aria-label="Responder a krz">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor even depth-2" id="comment-item-1461">
+					<article id="comment-1461" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Elivar Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1461">
+									<time class="entry-date published" datetime="2017-06-05T14:08:14-05:00" content="2017-06-05">
+										el 5 junio, 2017 a las 2:08 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Me alegro que te haya gustado. Saludos!!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1461" data-commentid="1461" data-postid="1913" data-belowelement="comment-1461" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment odd alt thread-even depth-1" id="comment-item-1473">
+					<article id="comment-1473" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/c92c31407aba877767cca7c1638e63b8_002.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/c92c31407aba877767cca7c1638e63b8.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author"><a href="https://web.facebook.com/Dnniz.El.Shido/" rel="external nofollow ugc" class="url">Dennis</a></span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1473">
+									<time class="entry-date published" datetime="2017-06-06T17:46:06-05:00" content="2017-06-06">
+										el 6 junio, 2017 a las 5:46 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Hola! Excelente explicación, me has quitado muchas dudas.<br>
+Gracias.</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1473" data-commentid="1473" data-postid="1913" data-belowelement="comment-1473" data-respondelement="respond" data-replyto="Responder a Dennis" aria-label="Responder a Dennis">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor even depth-2" id="comment-item-1476">
+					<article id="comment-1476" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Elivar Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1476">
+									<time class="entry-date published" datetime="2017-06-06T20:23:22-05:00" content="2017-06-06">
+										el 6 junio, 2017 a las 8:23 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Hola Dennis, gracias a ti por tu comentario. Un saludo!!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1476" data-commentid="1476" data-postid="1913" data-belowelement="comment-1476" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-item-1483">
+					<article id="comment-1483" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/1851a7857da07d370c6133cb3a48d196.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/1851a7857da07d370c6133cb3a48d196_002.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Ignacio</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1483">
+									<time class="entry-date published" datetime="2017-06-08T18:17:45-05:00" content="2017-06-08">
+										el 8 junio, 2017 a las 6:17 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Muy bueno el tuto Elivar! muy claro y util.  Saludoss</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1483" data-commentid="1483" data-postid="1913" data-belowelement="comment-1483" data-respondelement="respond" data-replyto="Responder a Ignacio" aria-label="Responder a Ignacio">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor even depth-2" id="comment-item-1486">
+					<article id="comment-1486" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Elivar Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1486">
+									<time class="entry-date published" datetime="2017-06-08T21:31:43-05:00" content="2017-06-08">
+										el 8 junio, 2017 a las 9:31 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Gracias por tu comentario Ignacio.. También un saludo!!!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1486" data-commentid="1486" data-postid="1913" data-belowelement="comment-1486" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment odd alt thread-even depth-1" id="comment-item-1551">
+					<article id="comment-1551" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/112693f93b68b285c642a6bcf2a6bc3f.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/112693f93b68b285c642a6bcf2a6bc3f_002.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">jose</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1551">
+									<time class="entry-date published" datetime="2017-06-20T16:14:08-05:00" content="2017-06-20">
+										el 20 junio, 2017 a las 4:14 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Para usar el patrón (DAO) es necesario utilizar el patrón MVC?</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1551" data-commentid="1551" data-postid="1913" data-belowelement="comment-1551" data-respondelement="respond" data-replyto="Responder a jose" aria-label="Responder a jose">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor even depth-2" id="comment-item-1552">
+					<article id="comment-1552" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Elivar Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1552">
+									<time class="entry-date published" datetime="2017-06-20T16:24:12-05:00" content="2017-06-20">
+										el 20 junio, 2017 a las 4:24 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>No para nada, son dos patrones diferentes: DAO tiene que ver 
+con el acceso a datos, mientras que MVC digamos que estructura el 
+proyecto en 3 capas.<br>
+Desde mi punto de vista DAO extiende a la capa del Modelo en MVC. Saludos..</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1552" data-commentid="1552" data-postid="1913" data-belowelement="comment-1552" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-item-1581">
+					<article id="comment-1581" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/b1e6ff997ff166b40ffa586bdcb1a360_002.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/b1e6ff997ff166b40ffa586bdcb1a360.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Antonio</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1581">
+									<time class="entry-date published" datetime="2017-06-23T02:29:09-05:00" content="2017-06-23">
+										el 23 junio, 2017 a las 2:29 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>¿Tienes el codigo en algún repositorio para descargar?</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1581" data-commentid="1581" data-postid="1913" data-belowelement="comment-1581" data-respondelement="respond" data-replyto="Responder a Antonio" aria-label="Responder a Antonio">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor even depth-2" id="comment-item-1774">
+					<article id="comment-1774" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Elivar Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1774">
+									<time class="entry-date published" datetime="2017-07-07T13:51:29-05:00" content="2017-07-07">
+										el 7 julio, 2017 a las 1:51 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>De momento no. Para los próximos tutoriales espero crear un repositorio.</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1774" data-commentid="1774" data-postid="1913" data-belowelement="comment-1774" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment odd alt thread-even depth-1" id="comment-item-1711">
+					<article id="comment-1711" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/5d02fc30d649ddc30dd9f2db33f92963.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/5d02fc30d649ddc30dd9f2db33f92963_002.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Andres</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1711">
+									<time class="entry-date published" datetime="2017-07-02T05:46:57-05:00" content="2017-07-02">
+										el 2 julio, 2017 a las 5:46 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Hola. </p>
+<p>Como aporte me gustaría dejar claro que el MVC no es un patrón de 
+diseño, es un patrón arquitectónico, siempre ha existido esa confucion 
+en cuanto al MVC.</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1711" data-commentid="1711" data-postid="1913" data-belowelement="comment-1711" data-respondelement="respond" data-replyto="Responder a Andres" aria-label="Responder a Andres">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor even depth-2" id="comment-item-1726">
+					<article id="comment-1726" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Elivar Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1726">
+									<time class="entry-date published" datetime="2017-07-03T12:23:43-05:00" content="2017-07-03">
+										el 3 julio, 2017 a las 12:23 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Hola Andres, gracias por tu aporte. Un saludo</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1726" data-commentid="1726" data-postid="1913" data-belowelement="comment-1726" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-item-1905">
+					<article id="comment-1905" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/69fcc2a3a4366aca311deee7774a3d0a_002.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/69fcc2a3a4366aca311deee7774a3d0a.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Sebastian Fernandez</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1905">
+									<time class="entry-date published" datetime="2017-07-21T13:02:17-05:00" content="2017-07-21">
+										el 21 julio, 2017 a las 1:02 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Genio! Muy buenos los tuto.<br>
+Podras hacer alguno de java web services ??</p>
+<p>Saludos!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1905" data-commentid="1905" data-postid="1913" data-belowelement="comment-1905" data-respondelement="respond" data-replyto="Responder a Sebastian Fernandez" aria-label="Responder a Sebastian Fernandez">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor even depth-2" id="comment-item-1907">
+					<article id="comment-1907" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Elivar Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-1907">
+									<time class="entry-date published" datetime="2017-07-21T22:49:32-05:00" content="2017-07-21">
+										el 21 julio, 2017 a las 10:49 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Lo tomaré en cuenta para los próximos tutoriales. Un saludo</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-1907" data-commentid="1907" data-postid="1913" data-belowelement="comment-1907" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment odd alt depth-3" id="comment-item-5299">
+					<article id="comment-5299" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/1fa53d4a232bfdefb8896f6e5b54b0ba.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/1fa53d4a232bfdefb8896f6e5b54b0ba_002.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">HolaMundo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-5299">
+									<time class="entry-date published" datetime="2018-01-30T10:25:38-05:00" content="2018-01-30">
+										el 30 enero, 2018 a las 10:25 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Gracias por quitarle faena a mi profesora.</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-5299" data-commentid="5299" data-postid="1913" data-belowelement="comment-5299" data-respondelement="respond" data-replyto="Responder a HolaMundo" aria-label="Responder a HolaMundo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment even thread-even depth-1" id="comment-item-2125">
+					<article id="comment-2125" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/d933d9f542578bb7c9d8607c73928e51.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/d933d9f542578bb7c9d8607c73928e51_002.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Compartelo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-2125">
+									<time class="entry-date published" datetime="2017-08-05T08:52:38-05:00" content="2017-08-05">
+										el 5 agosto, 2017 a las 8:52 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Muchas gracias, muy bien explicado</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-2125" data-commentid="2125" data-postid="1913" data-belowelement="comment-2125" data-respondelement="respond" data-replyto="Responder a Compartelo" aria-label="Responder a Compartelo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+								<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-item-2289">
+					<article id="comment-2289" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/a049622ac7126706d24a5e69fadf75bb.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/a049622ac7126706d24a5e69fadf75bb_002.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Maoly</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-2289">
+									<time class="entry-date published" datetime="2017-08-14T13:38:00-05:00" content="2017-08-14">
+										el 14 agosto, 2017 a las 1:38 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Buen tutorial. Recomendación: Debes cuidar la ortografía</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-2289" data-commentid="2289" data-postid="1913" data-belowelement="comment-2289" data-respondelement="respond" data-replyto="Responder a Maoly" aria-label="Responder a Maoly">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor even depth-2" id="comment-item-2292">
+					<article id="comment-2292" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Elivar Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-2292">
+									<time class="entry-date published" datetime="2017-08-14T15:21:26-05:00" content="2017-08-14">
+										el 14 agosto, 2017 a las 3:21 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Lo tomaré cuenta</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-2292" data-commentid="2292" data-postid="1913" data-belowelement="comment-2292" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment odd alt thread-even depth-1" id="comment-item-2493">
+					<article id="comment-2493" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/cef9de0c95c2734f15e0d95165d6a21b_002.png" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/cef9de0c95c2734f15e0d95165d6a21b.png 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">angel</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-2493">
+									<time class="entry-date published" datetime="2017-08-24T00:33:08-05:00" content="2017-08-24">
+										el 24 agosto, 2017 a las 12:33 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>ERES EL PUTO AMO</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-2493" data-commentid="2493" data-postid="1913" data-belowelement="comment-2493" data-respondelement="respond" data-replyto="Responder a angel" aria-label="Responder a angel">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+								<li class="comment even thread-odd thread-alt depth-1" id="comment-item-2745">
+					<article id="comment-2745" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/bb1a42f71f6c8e36fd311693aa83db84.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/bb1a42f71f6c8e36fd311693aa83db84_002.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Jhonatan</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-2745">
+									<time class="entry-date published" datetime="2017-09-07T14:55:53-05:00" content="2017-09-07">
+										el 7 septiembre, 2017 a las 2:55 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Excelente información, recibe mis agradecimientos <img draggable="false" role="img" class="emoji" alt="🙂" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/1f642.svg"></p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-2745" data-commentid="2745" data-postid="1913" data-belowelement="comment-2745" data-respondelement="respond" data-replyto="Responder a Jhonatan" aria-label="Responder a Jhonatan">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+								<li class="comment odd alt thread-even depth-1" id="comment-item-3159">
+					<article id="comment-3159" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/e7456fbfe813eb2399d3a97d9a180047_002.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/e7456fbfe813eb2399d3a97d9a180047.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Alfonso</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-3159">
+									<time class="entry-date published" datetime="2017-09-29T10:29:03-05:00" content="2017-09-29">
+										el 29 septiembre, 2017 a las 10:29 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Gracias, Explicas muy bién. Había mirado otros manuales que 
+usaban muchos tecnicismos y  se volvían muy complejos. En cambio este 
+manual, explica bien, de forma concisa y sin enrredos.</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-3159" data-commentid="3159" data-postid="1913" data-belowelement="comment-3159" data-respondelement="respond" data-replyto="Responder a Alfonso" aria-label="Responder a Alfonso">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor even depth-2" id="comment-item-3161">
+					<article id="comment-3161" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Elivar Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-3161">
+									<time class="entry-date published" datetime="2017-09-29T14:37:46-05:00" content="2017-09-29">
+										el 29 septiembre, 2017 a las 2:37 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Me alegro mucho que te haya sido fácil de entender.<br>
+Saludos!!!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-3161" data-commentid="3161" data-postid="1913" data-belowelement="comment-3161" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-item-4504">
+					<article id="comment-4504" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/225bd7fb557569fda3e43f0e029b56e2.png" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/225bd7fb557569fda3e43f0e029b56e2_002.png 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author"><a href="http://recursosformacion.com/" rel="external nofollow ugc" class="url">Miguel Garcia</a></span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-4504">
+									<time class="entry-date published" datetime="2017-12-10T07:01:47-05:00" content="2017-12-10">
+										el 10 diciembre, 2017 a las 7:01 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Hola, Elivar:<br>
+Me ha encantado el planteamiento, y ahora me gustaria plantearte una 
+duda. Para cumplir con la encapsulación, el modelo no debería contener 
+los filtros para garantizar los datos (casos de máximo, mínimo,  
+alfabético, numérico,…), y si no es asi, donde podriamos ubicar esos 
+filtros y como los relacionamos con el modelo?</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-4504" data-commentid="4504" data-postid="1913" data-belowelement="comment-4504" data-respondelement="respond" data-replyto="Responder a Miguel Garcia" aria-label="Responder a Miguel Garcia">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor even depth-2" id="comment-item-4527">
+					<article id="comment-4527" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Elivar Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-4527">
+									<time class="entry-date published" datetime="2017-12-11T14:25:45-05:00" content="2017-12-11">
+										el 11 diciembre, 2017 a las 2:25 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Hola Miguel que tal.<br>
+No precisamente, recordemos que la encapsulación es una característica 
+de la programación orientada a objetos, lo que consiste en la ocultación
+ de las propiedades de la clase simplemente con los modificadores de 
+acceso. Aunque en Frameworks como por ejemplo MVC4 de Visual Studio de 
+Microsofot, es posible hacerlo desde el modelo (es decir desde las 
+clases).<br>
+Por lo general esto es tipo de validaciones que mencionas, al menos 
+desde mi punto de vista es mejor hacerlas desde el cliente, de manera 
+que no recargues con peticiones al servidor.<br>
+Si tienes una aplicación Web con Java, puedes usar algún Framework como 
+por ejemplo JSF para la parte de la vista lo que te ayuda a validar las 
+propiedades de cada bean de manera simple, desde la vista (no desde la 
+clase). Adicionalmente si estás trabajando por ejemplo con JSP y 
+servlet, puedes usar la librería apache validator, en este caso si 
+deberías poner las restricciones dentro de los atributos de la clase.<br>
+Saludos..</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-4527" data-commentid="4527" data-postid="1913" data-belowelement="comment-4527" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment odd alt thread-even depth-1" id="comment-item-5734">
+					<article id="comment-5734" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/709d0a476fd0b2dd4b141546a725ed9d_002.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/709d0a476fd0b2dd4b141546a725ed9d.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">UG</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-5734">
+									<time class="entry-date published" datetime="2018-02-28T23:48:32-05:00" content="2018-02-28">
+										el 28 febrero, 2018 a las 11:48 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Excelente, gracias por la tutoria</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-5734" data-commentid="5734" data-postid="1913" data-belowelement="comment-5734" data-respondelement="respond" data-replyto="Responder a UG" aria-label="Responder a UG">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+								<li class="comment even thread-odd thread-alt depth-1" id="comment-item-8653">
+					<article id="comment-8653" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/2e0ef9a0e0f31d86f7bdf96376c6b074.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/2e0ef9a0e0f31d86f7bdf96376c6b074_002.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Martin</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-8653">
+									<time class="entry-date published" datetime="2018-07-27T10:54:06-05:00" content="2018-07-27">
+										el 27 julio, 2018 a las 10:54 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Excelente explicación. No entendía nada y ahora si! Gracias!<br>
+Hay alguno de spring o hibernate?<br>
+Gracias nuevamente!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-8653" data-commentid="8653" data-postid="1913" data-belowelement="comment-8653" data-respondelement="respond" data-replyto="Responder a Martin" aria-label="Responder a Martin">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor odd alt depth-2" id="comment-item-8796">
+					<article id="comment-8796" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author"><a href="http://www.programacionfullstack.com/" rel="external nofollow ugc" class="url">Elivar Largo</a></span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-8796">
+									<time class="entry-date published" datetime="2018-08-07T14:36:46-05:00" content="2018-08-07">
+										el 7 agosto, 2018 a las 2:36 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Hola Martin, puedes revisar los siguientes enlaces que son parte introductorio a Spring: <a href="https://www.ecodeup.com/descargar-y-configurar-spring-tools-suit-sts-para-desarrollar-proyectos-web/" rel="nofollow ugc">https://www.ecodeup.com/descargar-y-configurar-spring-tools-suit-sts-para-desarrollar-proyectos-web/</a>, <a href="https://youtu.be/5ALsG1MjIps" rel="nofollow">Cómo crear un aplicación MVC con Spring Tool Suit</a>, <a href="https://youtu.be/g2jC_c-AT9Y" rel="nofollow">Cómo crear un servicio web restfull en Spring</a></p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-8796" data-commentid="8796" data-postid="1913" data-belowelement="comment-8796" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment even thread-even depth-1" id="comment-item-14097">
+					<article id="comment-14097" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/171a49795599feda8f226d7d9f9a854a_002.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/171a49795599feda8f226d7d9f9a854a.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">SergioS</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14097">
+									<time class="entry-date published" datetime="2019-08-30T12:07:59-05:00" content="2019-08-30">
+										el 30 agosto, 2019 a las 12:07 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Buen aporte. Saludos</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14097" data-commentid="14097" data-postid="1913" data-belowelement="comment-14097" data-respondelement="respond" data-replyto="Responder a SergioS" aria-label="Responder a SergioS">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor odd alt depth-2" id="comment-item-14369">
+					<article id="comment-14369" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author"><a href="http://www.programacionfullstack.com/" rel="external nofollow ugc" class="url">Elivar Largo</a></span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14369">
+									<time class="entry-date published" datetime="2019-10-28T15:53:02-05:00" content="2019-10-28">
+										el 28 octubre, 2019 a las 3:53 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Gracias, saludos!!!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14369" data-commentid="14369" data-postid="1913" data-belowelement="comment-14369" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment even thread-odd thread-alt depth-1" id="comment-item-14124">
+					<article id="comment-14124" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/52814b40704f58969448a33b8cfcc673.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/52814b40704f58969448a33b8cfcc673_002.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Jorge Sanchez</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14124">
+									<time class="entry-date published" datetime="2019-09-06T15:37:45-05:00" content="2019-09-06">
+										el 6 septiembre, 2019 a las 3:37 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Muy buen artículo me quedo bien claro</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14124" data-commentid="14124" data-postid="1913" data-belowelement="comment-14124" data-respondelement="respond" data-replyto="Responder a Jorge Sanchez" aria-label="Responder a Jorge Sanchez">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor odd alt depth-2" id="comment-item-14368">
+					<article id="comment-14368" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author"><a href="http://www.programacionfullstack.com/" rel="external nofollow ugc" class="url">Elivar Largo</a></span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14368">
+									<time class="entry-date published" datetime="2019-10-28T15:52:40-05:00" content="2019-10-28">
+										el 28 octubre, 2019 a las 3:52 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Gracias. Saludos!!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14368" data-commentid="14368" data-postid="1913" data-belowelement="comment-14368" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment even thread-even depth-1" id="comment-item-14230">
+					<article id="comment-14230" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/265a48036feecbced4881cd6b12de18e_002.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/265a48036feecbced4881cd6b12de18e.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Mehdi</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14230">
+									<time class="entry-date published" datetime="2019-09-29T05:06:28-05:00" content="2019-09-29">
+										el 29 septiembre, 2019 a las 5:06 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Muy buen post, bien explicado y muy claro !!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14230" data-commentid="14230" data-postid="1913" data-belowelement="comment-14230" data-respondelement="respond" data-replyto="Responder a Mehdi" aria-label="Responder a Mehdi">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor odd alt depth-2" id="comment-item-14360">
+					<article id="comment-14360" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author"><a href="http://www.programacionfullstack.com/" rel="external nofollow ugc" class="url">Elivar Largo</a></span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14360">
+									<time class="entry-date published" datetime="2019-10-28T15:42:29-05:00" content="2019-10-28">
+										el 28 octubre, 2019 a las 3:42 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Gracias. Saludos!!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14360" data-commentid="14360" data-postid="1913" data-belowelement="comment-14360" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment even thread-odd thread-alt depth-1" id="comment-item-14373">
+					<article id="comment-14373" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/70b03db954aa45fc2559e85f5d5bd13e.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/70b03db954aa45fc2559e85f5d5bd13e_002.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">WebService</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14373">
+									<time class="entry-date published" datetime="2019-10-29T23:43:11-05:00" content="2019-10-29">
+										el 29 octubre, 2019 a las 11:43 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Gracias por la aportación Elivar,<br>
+Consulta, se puede utilizar DTO y DAO en el mismo proyecto?<br>
+Para un servicio REST.</p>
+<p>Slds.</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14373" data-commentid="14373" data-postid="1913" data-belowelement="comment-14373" data-respondelement="respond" data-replyto="Responder a WebService" aria-label="Responder a WebService">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor odd alt depth-2" id="comment-item-14374">
+					<article id="comment-14374" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author"><a href="http://www.programacionfullstack.com/" rel="external nofollow ugc" class="url">Elivar Largo</a></span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14374">
+									<time class="entry-date published" datetime="2019-10-30T11:42:57-05:00" content="2019-10-30">
+										el 30 octubre, 2019 a las 11:42 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Hola, actualmente es mejor usar sólo DTO, se puede inyectar al
+ DTO donde se lo va usar como un EJB y ya no habría problema. Saludos!!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14374" data-commentid="14374" data-postid="1913" data-belowelement="comment-14374" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment even thread-even depth-1" id="comment-item-14415">
+					<article id="comment-14415" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/1bf72f4ddaa0a291e0928ea0cdb20a65.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/1bf72f4ddaa0a291e0928ea0cdb20a65_002.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Eduardo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14415">
+									<time class="entry-date published" datetime="2019-12-02T20:45:56-05:00" content="2019-12-02">
+										el 2 diciembre, 2019 a las 8:45 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Mañana tengo entrevista de trabajo y esta combinación de patrones no la tenia muy clara. </p>
+<p>¡¡Gracias!!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14415" data-commentid="14415" data-postid="1913" data-belowelement="comment-14415" data-respondelement="respond" data-replyto="Responder a Eduardo" aria-label="Responder a Eduardo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-ismael_administrador_ecodeup odd alt depth-2" id="comment-item-14442">
+					<article id="comment-14442" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/4efc2b98b5f2bba960f8997da61b02cf.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/4efc2b98b5f2bba960f8997da61b02cf_002.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Ismael Largo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14442">
+									<time class="entry-date published" datetime="2019-12-12T14:33:55-05:00" content="2019-12-12">
+										el 12 diciembre, 2019 a las 2:33 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Espero que te haya muy bien. Un saludo!!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14442" data-commentid="14442" data-postid="1913" data-belowelement="comment-14442" data-respondelement="respond" data-replyto="Responder a Ismael Largo" aria-label="Responder a Ismael Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment even thread-odd thread-alt depth-1" id="comment-item-14451">
+					<article id="comment-14451" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/18be96cfdd7a114b210410cace451f20.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/18be96cfdd7a114b210410cace451f20_002.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">JLC000</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14451">
+									<time class="entry-date published" datetime="2019-12-19T21:56:43-05:00" content="2019-12-19">
+										el 19 diciembre, 2019 a las 9:56 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Hola, excelente explicación del patron DAO.<br>
+Disculpa mi humilde corrección pero el MCV no es un patrón de diseño, si no un patrón arquitectónico.<br>
+Existen muchas biografías que hablan de esta diferencia, como por ejemplo «INGENIERÍA DE SOFTWARE 9ed – IAN SOMMERVILLE».<br>
+Saludos.</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14451" data-commentid="14451" data-postid="1913" data-belowelement="comment-14451" data-respondelement="respond" data-replyto="Responder a JLC000" aria-label="Responder a JLC000">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor odd alt depth-2" id="comment-item-14559">
+					<article id="comment-14559" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author"><a href="http://www.programacionfullstack.com/" rel="external nofollow ugc" class="url">Elivar Largo</a></span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14559">
+									<time class="entry-date published" datetime="2020-02-26T10:10:09-05:00" content="2020-02-26">
+										el 26 febrero, 2020 a las 10:10 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Al estar junto al resto DAO, DTO, se me olvidó especificar. Gracias tu corrección. Saludos</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14559" data-commentid="14559" data-postid="1913" data-belowelement="comment-14559" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment even thread-even depth-1" id="comment-item-14631">
+					<article id="comment-14631" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/ad6b03fcb491a00db4c47690a4a18f61_002.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/ad6b03fcb491a00db4c47690a4a18f61.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Alfredo</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14631">
+									<time class="entry-date published" datetime="2020-04-25T17:18:54-05:00" content="2020-04-25">
+										el 25 abril, 2020 a las 5:18 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Muchas gracias, este es uno de los post mas completos y 
+entendibles que he encontrado por el simple de dejar de lado mucho 
+codigo innesesario en la vista…</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14631" data-commentid="14631" data-postid="1913" data-belowelement="comment-14631" data-respondelement="respond" data-replyto="Responder a Alfredo" aria-label="Responder a Alfredo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+								<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-item-14650">
+					<article id="comment-14650" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/973828975d3b57a5c6b471efba52fb65.jpg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/973828975d3b57a5c6b471efba52fb65_002.jpg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">FRR16</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14650">
+									<time class="entry-date published" datetime="2020-05-09T05:50:56-05:00" content="2020-05-09">
+										el 9 mayo, 2020 a las 5:50 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Muy buen tutorial, me ha quedado muy claro, estoy volviendolo a ver despues de unos meses.<br>
+Mi duda es la siguiente. Un profesor mio me dijo que no ve correcto 
+instanciar la capa DAO desde el Modelo(ya que estabamos usando MVC). Me 
+gustaria saber tu opinión sobre este comentario ya que a mi no me quedó 
+muy claro.<br>
+Un saludo.</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14650" data-commentid="14650" data-postid="1913" data-belowelement="comment-14650" data-respondelement="respond" data-replyto="Responder a FRR16" aria-label="Responder a FRR16">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				<li class="children" role="listitem"><ol>				<li class="comment byuser comment-author-elargo bypostauthor even depth-2" id="comment-item-14692">
+					<article id="comment-14692" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_004.jpeg" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/43fe52e691035424f6b415461c00cbb5_003.jpeg 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author"><a href="http://www.programacionfullstack.com/" rel="external nofollow ugc" class="url">Elivar Largo</a></span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-14692">
+									<time class="entry-date published" datetime="2020-06-09T12:49:39-05:00" content="2020-06-09">
+										el 9 junio, 2020 a las 12:49 pm									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Hola, es correcto lo que dice tu profesor, puedes instanciar 
+al modelo desde el DAO ya que por medio del modelo vas ha realizar la 
+persistencia de tus objetos a las tablas de base datos. Saludos!!</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-14692" data-commentid="14692" data-postid="1913" data-belowelement="comment-14692" data-respondelement="respond" data-replyto="Responder a Elivar Largo" aria-label="Responder a Elivar Largo">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+				</ol></li><!-- close children li -->				<li class="comment odd alt thread-even depth-1" id="comment-item-17891">
+					<article id="comment-17891" class="nv-comment-article">
+												<div class="nv-comment-header">
+							<div class="nv-comment-avatar"><img alt="" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/a15a064188b4bf25939118d1131397a5_002.png" srcset="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/a15a064188b4bf25939118d1131397a5.png 2x" class="avatar avatar-50 photo" loading="lazy" width="50" height="50"></div>							<div class="comment-author vcard">
+								<span class="fn author">Jorge</span>
+								<a href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#comment-17891">
+									<time class="entry-date published" datetime="2021-11-05T11:03:25-05:00" content="2021-11-05">
+										el 5 noviembre, 2021 a las 11:03 am									</time>
+								</a>
+							</div>
+													</div>
+						<div class="nv-comment-content comment nv-content-wrap">
+							<p>Gracias por compartir este tipo de información que contribuye con nuestro trabajo</p>
+									<div class="edit-reply">
+						<span class="nv-reply-link"><a rel="nofollow" class="comment-reply-link" href="#comment-17891" data-commentid="17891" data-postid="1913" data-belowelement="comment-17891" data-respondelement="respond" data-replyto="Responder a Jorge" aria-label="Responder a Jorge">Responder</a></span>		</div>
+															</div>
+											</article>
+				</li>
+								</ol>
+
+			</li></ol></div>
+
+				<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Deja una respuesta <small><a rel="nofollow" id="cancel-comment-reply-link" href="https://www.ecodeup.com/patrones-de-diseno-en-java-mvc-dao-y-dto/#respond" style="display:none;">Cancelar la respuesta</a></small></h3><form action="https://www.ecodeup.com/wp-comments-post.php" method="post" id="commentform" class="comment-form"><p class="comment-notes"><span id="email-notes">Tu dirección de correo electrónico no será publicada.</span> <span class="required-field-message" aria-hidden="true">Los campos obligatorios están marcados con <span class="required" aria-hidden="true">*</span></span></p><p class="comment-form-comment"><label for="comment">Comentario <span class="required" aria-hidden="true">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Nombre <span class="required" aria-hidden="true">*</span></label> <input id="author" name="author" type="text" size="30" maxlength="245" required="required"></p>
+<p class="comment-form-email"><label for="email">Correo electrónico <span class="required" aria-hidden="true">*</span></label> <input id="email" name="email" type="text" size="30" maxlength="100" aria-describedby="email-notes" required="required"></p>
+<p class="comment-form-url"><label for="url">Web</label> <input id="url" name="url" type="text" size="30" maxlength="200"></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"> <label for="wp-comment-cookies-consent">Guarda mi nombre, correo electrónico y web en este navegador para la próxima vez que comente.</label></p>
+<p class="c4wp-display-captcha-form"><label for="Solve Captcha*">Solve Captcha*</label>3&nbsp;&nbsp;+&nbsp;&nbsp;3&nbsp;&nbsp;=&nbsp;&nbsp;<input id="c4wp_user_input_captcha" name="c4wp_user_input_captcha" class="c4wp_user_input_captcha" type="text" style="width: 45px;" autocomplete="off"><input type="hidden" name="c4wp_random_input_captcha" value="Gw8="></p><p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Publicar el comentario"> <input type="hidden" name="comment_post_ID" value="1913" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="efa351fbe2"></p><p style="display: none !important;"><label>Δ<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="1656867290224"><script>document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p></form>	</div><!-- #respond -->
+	<p class="akismet_comment_form_privacy_notice">Este sitio usa Akismet para reducir el spam. <a href="https://akismet.com/privacy/" target="_blank" rel="nofollow noopener">Aprende cómo se procesan los datos de tus comentarios</a>.</p></div>
+			</article>
+					</div>
+	</div>
+
+</main><!--/.neve-main-->
+
+<footer class="site-footer" id="site-footer">
+	<div class="hfg_footer">
+		<div class="footer--row footer-bottom layout-full-contained" id="cb-row--footer-bottom" data-row-id="bottom" data-show-on="desktop">
+	<div class="footer--row-inner footer-bottom-inner footer-content-wrap">
+		<div class="container">
+			<div class="hfg-grid nv-footer-content hfg-grid-bottom row--wrapper row " data-section="hfg_footer_layout_bottom">
+				<div class="hfg-slot left"><div class="builder-item"><div class="item--inner"><div class="component-wrap"><div><p><a href="https://themeisle.com/themes/neve/" rel="nofollow">Neve</a> | Funciona gracias a <a href="http://wordpress.org/" rel="nofollow">WordPress</a></p></div></div></div></div></div><div class="hfg-slot c-left"></div><div class="hfg-slot center"></div>							</div>
+		</div>
+	</div>
+</div>
+
+	</div>
+</footer>
+
+</div><!--/.wrapper-->
+<!-- Introduce aquí tus scripts --><link data-optimized="1" rel="stylesheet" id="author-bio-box-styles-css" href="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/40b325706e3eee1cda4f5136768413ab.css" type="text/css" media="all">
+<script type="text/javascript" id="neve-script-js-extra">
+/* <![CDATA[ */
+var NeveProperties = {"ajaxurl":"https:\/\/www.ecodeup.com\/wp-admin\/admin-ajax.php","nonce":"eda76e8b14","isRTL":"","isCustomize":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/frontend" id="neve-script-js" async=""></script>
+<script type="text/javascript" id="neve-script-js-after">
+	var html = document.documentElement;
+	var theme = html.getAttribute('data-neve-theme') || 'light';
+	var variants = {"logo":{"light":{"src":false,"srcset":false,"sizes":false},"dark":{"src":false,"srcset":false,"sizes":false},"same":true}};
+
+	function setCurrentTheme( theme ) {
+		var pictures = document.getElementsByClassName( 'neve-site-logo' );
+		for(var i = 0; i<pictures.length; i++) {
+			var picture = pictures.item(i);
+			if( ! picture ) {
+				continue;
+			};
+			var fileExt = picture.src.slice((Math.max(0, picture.src.lastIndexOf(".")) || Infinity) + 1);
+			if ( fileExt === 'svg' ) {
+				picture.removeAttribute('width');
+				picture.removeAttribute('height');
+				picture.style = 'width: var(--maxwidth)';
+			}
+			var compId = picture.getAttribute('data-variant');
+			if ( compId && variants[compId] ) {
+				var isConditional = variants[compId]['same'];
+				if ( theme === 'light' || isConditional || variants[compId]['dark']['src'] === false ) {
+					picture.src = variants[compId]['light']['src'];
+					picture.srcset = variants[compId]['light']['srcset'] || '';
+					picture.sizes = variants[compId]['light']['sizes'];
+					continue;
+				};
+				picture.src = variants[compId]['dark']['src'];
+				picture.srcset = variants[compId]['dark']['srcset'] || '';
+				picture.sizes = variants[compId]['dark']['sizes'];
+			};
+		};
+	};
+
+	var observer = new MutationObserver(function(mutations) {
+		mutations.forEach(function(mutation) {
+			if (mutation.type == 'attributes') {
+				theme = html.getAttribute('data-neve-theme');
+				setCurrentTheme(theme);
+			};
+		});
+	});
+
+	observer.observe(html, {
+		attributes: true
+	});
+</script>
+<script type="text/javascript" src="Patrones%20de%20dise%C3%B1o%20en%20Java%20MVC,%20DAO%20y%20DTO%20Archivos/comment-reply.min" id="comment-reply-js"></script>
+
+
+
+
+</body></html>
+<!-- Page generated by LiteSpeed Cache 4.6 on 2022-06-28 17:26:22 -->

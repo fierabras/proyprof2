@@ -9,8 +9,8 @@ package fabrica;
  */
 public interface Fabrica {
 
-    public VentanaFormulario crearVista();
+    public VistaFormulario crearVista();
 
-    public VentanaConsulta crearConsulta();
+    public VistaConsulta crearConsulta();
 
 }

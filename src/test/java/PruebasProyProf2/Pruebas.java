@@ -1,6 +1,8 @@
 package PruebasProyProf2;
 
-import Ventanas.*;
+import fabrica.GeneradorFabricas;
+import proveedor.VistaProveedor;
+import material.VistaMaterial;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -8,6 +10,7 @@ import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import utilerias.ConexionSQL;
+import fabrica.Fabrica;
 
 
 
@@ -21,8 +24,8 @@ public class Pruebas {
        
        String entrada = "materiales";
        
-       InterfazFabrica iFabrica = GeneradorFabricas.getFabrica(entrada);
-       FormularioMaterial vistaMaterial = (FormularioMaterial) iFabrica.crearVista();
+       Fabrica iFabrica = GeneradorFabricas.getFabrica(entrada);
+       VistaMaterial vistaMaterial = (VistaMaterial) iFabrica.crearVista();
        
        assertNotNull(vistaMaterial);      
     }
@@ -31,8 +34,8 @@ public class Pruebas {
        
        String entrada = "proveedores";
        
-       InterfazFabrica iFabrica = GeneradorFabricas.getFabrica(entrada);
-       FormularioProveedor vistaProveedor = (FormularioProveedor) iFabrica.crearVista();
+       Fabrica iFabrica = GeneradorFabricas.getFabrica(entrada);
+       VistaProveedor vistaProveedor = (VistaProveedor) iFabrica.crearVista();
        
        assertNotNull(vistaProveedor);      
     }
@@ -40,7 +43,7 @@ public class Pruebas {
     @Test
     public void CP3(){
         
-        FormularioProveedor formulario1 = new FormularioProveedor();        
+        VistaProveedor formulario1 = new VistaProveedor();        
         formulario1.iniciar(formulario1);
         int clave1 = Integer.parseInt(formulario1.txbClaveProveedor.getText());
         formulario1.txbNombre.setText("Proveedor Prueba");
@@ -48,7 +51,7 @@ public class Pruebas {
         formulario1.guardar();        
         formulario1.dispose();
                 
-        FormularioProveedor formulario2 = new FormularioProveedor();     
+        VistaProveedor formulario2 = new VistaProveedor();     
         formulario2.iniciar(formulario2);
         int clave2 = Integer.parseInt(formulario2.txbClaveProveedor.getText());
         
@@ -59,7 +62,7 @@ public class Pruebas {
     @Test
     public void CP4(){
         
-        FormularioMaterial formulario1 = new FormularioMaterial();        
+        VistaMaterial formulario1 = new VistaMaterial();        
         formulario1.iniciar(formulario1);
         int clave1 = Integer.parseInt(formulario1.txbClaveMaterial.getText());
         formulario1.txbDescripcion.setText("Material Prueba");
@@ -67,7 +70,7 @@ public class Pruebas {
         formulario1.guardar();        
         formulario1.dispose();
                 
-        FormularioMaterial formulario2 = new FormularioMaterial();     
+        VistaMaterial formulario2 = new VistaMaterial();     
         formulario2.iniciar(formulario2);
         int clave2 = Integer.parseInt(formulario2.txbClaveMaterial.getText());
         
@@ -78,7 +81,7 @@ public class Pruebas {
     @Test
     public void CP5(){
         
-        FormularioProveedor formulario1 = new FormularioProveedor();        
+        VistaProveedor formulario1 = new VistaProveedor();        
         formulario1.iniciar(formulario1);
         int clave = Integer.parseInt(formulario1.txbClaveProveedor.getText());
         formulario1.txbNombre.setText("Proveedor Prueba");
