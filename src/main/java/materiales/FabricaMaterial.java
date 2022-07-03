@@ -2,21 +2,24 @@
  * implementación de la fabrica abstracta, es una clase concreta que genera vistas o consultas
  * para materiales
  */
-package Ventanas;
+package materiales;
+
+import fabricaVentanas.IVentanaConsulta;
+import fabricaVentanas.IFabrica;
+import fabricaVentanas.IVentanaFormulario;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
- * Materia: Diseño de Intefases Docente: Ing.Mario Andres Cuevas Gutierrez
  */
-public class FabricaMaterial implements InterfazFabrica {
+public class FabricaMaterial implements IFabrica {
 
     @Override
-    public InterfazVista crearVista() {
+    public IVentanaFormulario crearVista() {
         return new FormularioMaterial();
     }
 
     @Override
-    public InterfazConsulta crearConsulta() {
+    public IVentanaConsulta crearConsulta() {
         return new ConsultaMateriales();
     }
 

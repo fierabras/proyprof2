@@ -1,17 +1,19 @@
 /*
  * Esta clase despliega una ventana para el registro o modificacion de un material
  */
-package Ventanas;
+package materiales;
 
+import materiales.ConsultaMateriales;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import utilerias.ConexionSQL;
+import fabricaVentanas.IVentanaConsulta;
+import fabricaVentanas.IVentanaFormulario;
 
 /**
- * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
- * Materia: Diseño de Intefases Docente: Ing.Mario Andres Cuevas Gutierrez
+ * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual 
  */
-public class FormularioMaterial extends javax.swing.JFrame implements InterfazVista {
+public class FormularioMaterial extends javax.swing.JFrame implements IVentanaFormulario {
 
     //constructor
     public FormularioMaterial() {
@@ -188,29 +190,29 @@ public class FormularioMaterial extends javax.swing.JFrame implements InterfazVi
         }         
         ConexionSQL conn = ConexionSQL.getConexionSQL();
         String cmd = "UPDATE MATERIALES SET DESCRIPCION='" + this.txbDescripcion.getText() + "',PRECIO='"
-                + this.txbPrecio.getText() + "' WHERE CLAVEMATERIAL=" + this.txbClaveMaterial.getText();
+                + this.txbPrecio.getText() + "' WHERE CLAVE_MATERIAL=" + this.txbClaveMaterial.getText();
         conn.update(cmd);
         
     }
     
-    // Metodo inciar: se implementa de la interface InterfazVista, recibe la ventana generada por la fabrica
+    // Metodo inciar: se implementa de la interface IVentanaFormulario, recibe la ventana generada por la fabrica
     // abstracta contenida en el controlador ControladorConsultaMateriales. Se conecta a la base de datos
     // para obtener la clave del ultimo registro en la tabla Materiales para mostrar la clave del siguiente
     // material
     @Override
-    public void iniciar(InterfazVista vistaM) {
+    public void iniciar(IVentanaFormulario vistaM) {
         FormularioMaterial vistaMaterial = (FormularioMaterial) vistaM;
         vistaMaterial.setVisible(true);
-        int ClaveSiguienteProveedor = ConexionSQL.obtenerClave("SELECT MAX(CLAVEMATERIAL) FROM MATERIALES") + 1;
+        int ClaveSiguienteProveedor = ConexionSQL.obtenerClave("SELECT MAX(CLAVE_MATERIAL) FROM MATERIALES") + 1;
         vistaMaterial.txbClaveMaterial.setText(String.valueOf(ClaveSiguienteProveedor));
         vistaMaterial.botonGuardarCambio.setVisible(false);
     }
 
-    // Metodo modificar: se implementa de la interface InterfazVista, recibe la ventana generada por la fabrica
+    // Metodo modificar: se implementa de la interface IVentanaFormulario, recibe la ventana generada por la fabrica
     // abstracta contenida en el controlador ControladorConsultaMateriales, la consulta de materiales y
     // el indice del registro seleccionado dentro del Jtable1
     @Override
-    public void modificar(InterfazConsulta consultaMateriales, InterfazVista vMaterial, int row) {
+    public void modificar(IVentanaConsulta consultaMateriales, IVentanaFormulario vMaterial, int row) {
 
         FormularioMaterial vistaMaterial = (FormularioMaterial) vMaterial;
         ConsultaMateriales consultaM = (ConsultaMateriales) consultaMateriales;

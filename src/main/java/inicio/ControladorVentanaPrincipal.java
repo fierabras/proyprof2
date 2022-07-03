@@ -1,14 +1,14 @@
 /*
 * Este controlador implementa un ActionListener sobre los botones de la vista.VentanaPrincipal
 */
-package controlador;
+package inicio;
 
-import Ventanas.GeneradorFabricas;
+import fabricaVentanas.GeneradorFabricas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import Ventanas.VentanaPrincipal;
-import Ventanas.InterfazConsulta;
-import Ventanas.InterfazFabrica;
+import fabricaVentanas.VentanaPrincipal;
+import fabricaVentanas.IVentanaConsulta;
+import fabricaVentanas.IFabrica;
 
 /**
  * Autor: Jesus Armando Mendoza Romero
@@ -34,14 +34,14 @@ public class ControladorVentanaPrincipal implements ActionListener {
         
         if (ventanaPrincipal.botonProveedores.isFocusOwner()){                           
             // se implementa el modelo abstract factory para la generacion de consultas y vistas
-            InterfazFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
-            InterfazConsulta iConsultaP = iFabrica.crearConsulta();            
+            IFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
+            IVentanaConsulta iConsultaP = iFabrica.crearConsulta();            
             iConsultaP.iniciar(iConsultaP);            
         }
         if (ventanaPrincipal.botonMateriales.isFocusOwner()){                           
             // se implementa el modelo abstract factory para la generacion de consultas y vistas
-            InterfazFabrica iFabrica = GeneradorFabricas.getFabrica("materiales");
-            InterfazConsulta iConsultaM = iFabrica.crearConsulta();
+            IFabrica iFabrica = GeneradorFabricas.getFabrica("materiales");
+            IVentanaConsulta iConsultaM = iFabrica.crearConsulta();
             iConsultaM.iniciar(iConsultaM);
         }
     }

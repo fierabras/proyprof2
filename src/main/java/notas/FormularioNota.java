@@ -1,12 +1,12 @@
-package Ventanas;
+package notas;
 
-import controlador.Fecha;
+import utilerias.Fecha;
 import java.awt.Component;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-import materiales.Material;
+import materiales.MaterialVO;
 import notas.*;
 
 /**
@@ -412,8 +412,8 @@ public class FormularioNota extends javax.swing.JFrame {
             return;
         }
 
-        Partida partida = new Partida();
-        Material material = new Material();
+        PartidaVO partida = new PartidaVO();
+        MaterialVO material = new MaterialVO();
 
         material.claveMaterial = Integer.parseInt(this.campoClaveMaterial.getText());
         material.descripcion = this.etiquetaDescripcionMaterial.getText();
@@ -514,7 +514,7 @@ public class FormularioNota extends javax.swing.JFrame {
     }
     
     
-    Notas Nota = new Notas();
+    NotaBO Nota = new NotaBO();
     String columnas[] = {"Cantidad", "Descripción", "Precio", "Subtotal"};
     DefaultTableModel tablaModelo = new DefaultTableModel(columnas, 0);
 

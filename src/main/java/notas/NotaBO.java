@@ -1,21 +1,20 @@
 
 package notas;
 
-import Ventanas.FormularioNota;
 import java.util.List;
 import utilerias.ConexionSQL;
 
 
-public class Notas  {
+public class NotaBO  {
 
     
     ListaPartidas listaPartidas = new ListaPartidas();
         
-    public Notas(){
+    public NotaBO(){
         
     }
     
-    public void agregarPartida(Partida partida){
+    public void agregarPartida(PartidaVO partida){
         this.listaPartidas.agregarPartida(partida);        
     }
     
@@ -23,7 +22,7 @@ public class Notas  {
         this.listaPartidas.eliminarPartida(numeroPartida);
     }
     
-    public List<Partida> obtenerPartidas(){
+    public List<PartidaVO> obtenerPartidas(){
         return this.listaPartidas.obtenerListaPartidas();
     }
     

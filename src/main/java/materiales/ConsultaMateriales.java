@@ -4,10 +4,8 @@
  * Ofrece la posibilidad de agregar o modificar materiales en la base de datos
  * Cuenta con la funcion de actualizar la consulta en caso de modificaciones a la base
  */
-package Ventanas;
+package materiales;
 
-import controlador.ControladorConsultaMateriales;
-import Ventanas.InterfazConsulta;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,12 +13,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
 import utilerias.ConexionSQL;
+import fabricaVentanas.IVentanaConsulta;
+import fabricaVentanas.IVentanaConsulta;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
 
  */
-public class ConsultaMateriales extends javax.swing.JFrame implements InterfazConsulta {
+public class ConsultaMateriales extends javax.swing.JFrame implements IVentanaConsulta {
 
     // constructor
     public ConsultaMateriales() {
@@ -163,7 +163,7 @@ public class ConsultaMateriales extends javax.swing.JFrame implements InterfazCo
     // generada en la fabrica abstracta. Adicionalmente inicia un controlador (controladorConsultaMateriales)
     // para monitorear la accion sobre los botones de agregar y modificar material
     @Override
-    public void iniciar(InterfazConsulta consultaM) {
+    public void iniciar(IVentanaConsulta consultaM) {
         ConsultaMateriales consultaMateriales = (ConsultaMateriales) consultaM;
         consultaMateriales.setVisible(true);
         consultaMateriales.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
@@ -179,7 +179,7 @@ public class ConsultaMateriales extends javax.swing.JFrame implements InterfazCo
         model.setRowCount(0);
 
         // Conectar a la base
-        String sql = "SELECT * FROM MATERIALES WHERE CLAVEMATERIAL LIKE '%" + txbBuscar.getText() + "%' OR DESCRIPCION LIKE '%" + txbBuscar.getText()
+        String sql = "SELECT * FROM MATERIALES WHERE CLAVE_MATERIAL LIKE '%" + txbBuscar.getText() + "%' OR DESCRIPCION LIKE '%" + txbBuscar.getText()
                 + "%' OR PRECIO LIKE '%" + txbBuscar.getText() + "%'";
 
         try (Connection conn = ConexionSQL.getConexion();

@@ -6,9 +6,9 @@ import java.util.List;
 
 public class ListaPartidas {
     
-    private List<Partida> lista = new ArrayList();
+    private List<PartidaVO> lista = new ArrayList();
     
-    public void agregarPartida(Partida partida){
+    public void agregarPartida(PartidaVO partida){
         lista.add(partida);
     }
     
@@ -16,7 +16,7 @@ public class ListaPartidas {
         lista.remove(numeroPartida);
     }
     
-    public List<Partida> obtenerListaPartidas(){
+    public List<PartidaVO> obtenerListaPartidas(){
         return lista;
     }
     

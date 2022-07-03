@@ -19,7 +19,6 @@ import javax.swing.*;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
- * Materia: Diseño de Intefases Docente: Ing.Mario Andres Cuevas Gutierrez
  */
 public class ConexionSQL {
 
@@ -59,7 +58,7 @@ public class ConexionSQL {
     // es privado por lo cual no se puede acceder a el desde otras clases
     private static Connection conectar() {
         // ruta de la base de datos, se utiliza el driver jdbc de SQLite para la conexion
-        String url = "jdbc:sqlite:database/proyectoInterfaces.db";
+        String url = "jdbc:sqlite:database/DATOS_RECICLADORA.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);

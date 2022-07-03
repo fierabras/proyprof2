@@ -1,21 +1,21 @@
 /*
  * Esta clase despliega una ventana para el registro o modificacion de un proveedor
  */
-package Ventanas;
+package proveedores;
 
+import proveedores.ConsultaProveedores;
 import utilerias.ConexionSQL;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import fabricaVentanas.IVentanaConsulta;
+import fabricaVentanas.IVentanaFormulario;
 
 /**
  * Autor: Jesus Armando Mendoza Romero
  * a171117
- * Ingenieria en Software Virtual
- * Materia: Diseño de Intefases
- * Docente: Ing.Mario Andres Cuevas Gutierrez
- */
+  */
 
-public class FormularioProveedor extends javax.swing.JFrame implements InterfazVista {
+public class FormularioProveedor extends javax.swing.JFrame implements IVentanaFormulario {
 
     //constructor
     public FormularioProveedor() {
@@ -207,29 +207,29 @@ public class FormularioProveedor extends javax.swing.JFrame implements InterfazV
         ConexionSQL conn = ConexionSQL.getConexionSQL();
         String cmd = "UPDATE PROVEEDORES SET NOMBRE='" + txbNombre.getText() + "',TIPOID='"
                 + comboTipoId.getSelectedItem() + "', FOLIOID='" + txbfolioId.getText()
-                + "' WHERE CLAVEPROVEEDOR=" + txbClaveProveedor.getText();
+                + "' WHERE CLAVE_PROVEEDOR=" + txbClaveProveedor.getText();
         conn.update(cmd);
     }
     
     
-    // Metodo inciar: se implementa de la interface InterfazVista, recibe la ventana generada por la fabrica
+    // Metodo inciar: se implementa de la interface IVentanaFormulario, recibe la ventana generada por la fabrica
     // abstracta contenida en el controlador ControladorConsultaProveedores. Se conecta a la base de datos
     // para obtener la clave del ultimo registro en la tabla Proveedores para mostrar la clave del siguiente
     // material
     @Override
-    public void iniciar(InterfazVista vistaP) {
+    public void iniciar(IVentanaFormulario vistaP) {
         FormularioProveedor vistaProveedor = (FormularioProveedor)vistaP;
         vistaProveedor.setVisible(true);
-        int ClaveSiguienteProveedor = ConexionSQL.obtenerClave("SELECT MAX(CLAVEPROVEEDOR) FROM PROVEEDORES")+1;
+        int ClaveSiguienteProveedor = ConexionSQL.obtenerClave("SELECT MAX(CLAVE_PROVEEDOR) FROM PROVEEDORES")+1;
         vistaProveedor.txbClaveProveedor.setText(String.valueOf(ClaveSiguienteProveedor));        
         vistaProveedor.botonGuardarCambio.setVisible(false);  
     }
     
-    // Metodo modificar: se implementa de la interface InterfazVista, recibe la ventana generada por la fabrica
+    // Metodo modificar: se implementa de la interface IVentanaFormulario, recibe la ventana generada por la fabrica
     // abstracta contenida en el controlador ControladorConsultaProveedores, la consulta de proveedores y
     // el indice del registro seleccionado dentro del Jtable1
     @Override
-    public void modificar(InterfazConsulta consultaProveedores, InterfazVista vProveedor, int row) {
+    public void modificar(IVentanaConsulta consultaProveedores, IVentanaFormulario vProveedor, int row) {
                 
         FormularioProveedor vistaProveedor = (FormularioProveedor)vProveedor;        
         ConsultaProveedores consultaP = (ConsultaProveedores) consultaProveedores;

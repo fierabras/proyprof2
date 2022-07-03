@@ -2,21 +2,20 @@
  * Este controlador monitorea las acciones sobre los botones botonNuevoProveedor, botonModificarProveedor,
  * la tabla jTable1 de la instancia fabricaVentanas.ConsultaProveedores
  */
-package controlador;
+package proveedores;
 
-import Ventanas.ConsultaProveedores;
-import Ventanas.GeneradorFabricas;
-import Ventanas.FormularioProveedor;
+import proveedores.ConsultaProveedores;
+import fabricaVentanas.GeneradorFabricas;
+import proveedores.FormularioProveedor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import Ventanas.InterfazVista;
-import Ventanas.InterfazFabrica;
+import fabricaVentanas.IFabrica;
+import fabricaVentanas.IVentanaFormulario;
 
 /**
- * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
- * Materia: Diseño de Intefases Docente: Ing.Mario Andres Cuevas Gutierrez
+ * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual 
  */
 public class ControladorConsultaProveedores implements ActionListener {
 
@@ -41,19 +40,19 @@ public class ControladorConsultaProveedores implements ActionListener {
     }
 
     // Al presionar botonNuevoProveedor o botonModificarProveedor el sistema invoca a la fabrica
-    // abstracta y genera las ventanas correspondientes, en este caso, del tipo InterfazVista 
+    // abstracta y genera las ventanas correspondientes, en este caso, del tipo IVentanaFormulario 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (consultaProveedores.botonNuevoProveedor.isFocusOwner()) {
             // se implementa el modelo abstract factory para la generacion de consultas y vistas
-            InterfazFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
-            InterfazVista iVistaP = iFabrica.crearVista();
+            IFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
+            IVentanaFormulario iVistaP = iFabrica.crearVista();
             iVistaP.iniciar(iVistaP);
         }
         if (consultaProveedores.botonModificarProveedor.isFocusOwner()) {
             // se implementa el modelo abstract factory para la generacion de consultas y vistas
-            InterfazFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
+            IFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
             FormularioProveedor vistaProveedor = (FormularioProveedor) iFabrica.crearVista();
             vistaProveedor.modificar(consultaProveedores, vistaProveedor, selectedRow);
         }

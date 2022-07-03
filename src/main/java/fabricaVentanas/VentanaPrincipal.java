@@ -2,7 +2,9 @@
  * Esta es la ventana Principal de la aplicacion representada en un JFrame, 
  * las acciones sobre los botones son manejados por el controlador.ControladorVentanaPrincipal
  */
-package Ventanas;
+package fabricaVentanas;
+
+import notas.ConsultaNotas;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
