@@ -5,14 +5,14 @@
 package proveedores;
 
 import proveedores.ConsultaProveedores;
-import fabricaVentanas.GeneradorFabricas;
+import fabrica.GeneradorFabricas;
 import proveedores.FormularioProveedor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import fabricaVentanas.IFabrica;
-import fabricaVentanas.IVentanaFormulario;
+import fabrica.Fabrica;
+import fabrica.VentanaFormulario;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual 
@@ -40,19 +40,19 @@ public class ControladorConsultaProveedores implements ActionListener {
     }
 
     // Al presionar botonNuevoProveedor o botonModificarProveedor el sistema invoca a la fabrica
-    // abstracta y genera las ventanas correspondientes, en este caso, del tipo IVentanaFormulario 
+    // abstracta y genera las ventanas correspondientes, en este caso, del tipo VentanaFormulario 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (consultaProveedores.botonNuevoProveedor.isFocusOwner()) {
             // se implementa el modelo abstract factory para la generacion de consultas y vistas
-            IFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
-            IVentanaFormulario iVistaP = iFabrica.crearVista();
+            Fabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
+            VentanaFormulario iVistaP = iFabrica.crearVista();
             iVistaP.iniciar(iVistaP);
         }
         if (consultaProveedores.botonModificarProveedor.isFocusOwner()) {
             // se implementa el modelo abstract factory para la generacion de consultas y vistas
-            IFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
+            Fabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
             FormularioProveedor vistaProveedor = (FormularioProveedor) iFabrica.crearVista();
             vistaProveedor.modificar(consultaProveedores, vistaProveedor, selectedRow);
         }

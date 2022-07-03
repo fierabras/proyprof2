@@ -4,22 +4,22 @@
  */
 package materiales;
 
-import fabricaVentanas.IVentanaConsulta;
-import fabricaVentanas.IFabrica;
-import fabricaVentanas.IVentanaFormulario;
+import fabrica.Fabrica;
+import fabrica.VentanaConsulta;
+import fabrica.VentanaFormulario;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
  */
-public class FabricaMaterial implements IFabrica {
+public class FabricaMaterial implements Fabrica {
 
     @Override
-    public IVentanaFormulario crearVista() {
+    public VentanaFormulario crearVista() {
         return new FormularioMaterial();
     }
 
     @Override
-    public IVentanaConsulta crearConsulta() {
+    public VentanaConsulta crearConsulta() {
         return new ConsultaMateriales();
     }
 

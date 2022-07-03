@@ -7,13 +7,13 @@ import materiales.ConsultaMateriales;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import utilerias.ConexionSQL;
-import fabricaVentanas.IVentanaConsulta;
-import fabricaVentanas.IVentanaFormulario;
+import fabrica.VentanaConsulta;
+import fabrica.VentanaFormulario;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual 
  */
-public class FormularioMaterial extends javax.swing.JFrame implements IVentanaFormulario {
+public class FormularioMaterial extends javax.swing.JFrame implements VentanaFormulario {
 
     //constructor
     public FormularioMaterial() {
@@ -195,12 +195,12 @@ public class FormularioMaterial extends javax.swing.JFrame implements IVentanaFo
         
     }
     
-    // Metodo inciar: se implementa de la interface IVentanaFormulario, recibe la ventana generada por la fabrica
+    // Metodo inciar: se implementa de la interface VentanaFormulario, recibe la ventana generada por la fabrica
     // abstracta contenida en el controlador ControladorConsultaMateriales. Se conecta a la base de datos
     // para obtener la clave del ultimo registro en la tabla Materiales para mostrar la clave del siguiente
     // material
     @Override
-    public void iniciar(IVentanaFormulario vistaM) {
+    public void iniciar(VentanaFormulario vistaM) {
         FormularioMaterial vistaMaterial = (FormularioMaterial) vistaM;
         vistaMaterial.setVisible(true);
         int ClaveSiguienteProveedor = ConexionSQL.obtenerClave("SELECT MAX(CLAVE_MATERIAL) FROM MATERIALES") + 1;
@@ -208,11 +208,11 @@ public class FormularioMaterial extends javax.swing.JFrame implements IVentanaFo
         vistaMaterial.botonGuardarCambio.setVisible(false);
     }
 
-    // Metodo modificar: se implementa de la interface IVentanaFormulario, recibe la ventana generada por la fabrica
+    // Metodo modificar: se implementa de la interface VentanaFormulario, recibe la ventana generada por la fabrica
     // abstracta contenida en el controlador ControladorConsultaMateriales, la consulta de materiales y
     // el indice del registro seleccionado dentro del Jtable1
     @Override
-    public void modificar(IVentanaConsulta consultaMateriales, IVentanaFormulario vMaterial, int row) {
+    public void modificar(VentanaConsulta consultaMateriales, VentanaFormulario vMaterial, int row) {
 
         FormularioMaterial vistaMaterial = (FormularioMaterial) vMaterial;
         ConsultaMateriales consultaM = (ConsultaMateriales) consultaMateriales;

@@ -13,12 +13,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.table.DefaultTableModel;
 import utilerias.ConexionSQL;
-import fabricaVentanas.IVentanaConsulta;
+import fabrica.VentanaConsulta;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
  */
-public class ConsultaProveedores extends javax.swing.JFrame implements IVentanaConsulta {
+public class ConsultaProveedores extends javax.swing.JFrame implements VentanaConsulta {
 
     // constructor
     public ConsultaProveedores() {
@@ -159,7 +159,7 @@ public class ConsultaProveedores extends javax.swing.JFrame implements IVentanaC
     // generada en la fabrica abstracta. Adicionalmente inicia un controlador (controladorConsultaProveedores)
     // para monitorear la accion sobre los botones de agregar y modificar proveedor
     @Override
-    public void iniciar(IVentanaConsulta consultaP) {
+    public void iniciar(VentanaConsulta consultaP) {
         ConsultaProveedores consultaProveedores = (ConsultaProveedores) consultaP;
         consultaProveedores.setVisible(true);
         consultaProveedores.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);

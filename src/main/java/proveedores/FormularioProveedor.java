@@ -7,15 +7,15 @@ import proveedores.ConsultaProveedores;
 import utilerias.ConexionSQL;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import fabricaVentanas.IVentanaConsulta;
-import fabricaVentanas.IVentanaFormulario;
+import fabrica.VentanaConsulta;
+import fabrica.VentanaFormulario;
 
 /**
  * Autor: Jesus Armando Mendoza Romero
  * a171117
   */
 
-public class FormularioProveedor extends javax.swing.JFrame implements IVentanaFormulario {
+public class FormularioProveedor extends javax.swing.JFrame implements VentanaFormulario {
 
     //constructor
     public FormularioProveedor() {
@@ -212,12 +212,12 @@ public class FormularioProveedor extends javax.swing.JFrame implements IVentanaF
     }
     
     
-    // Metodo inciar: se implementa de la interface IVentanaFormulario, recibe la ventana generada por la fabrica
+    // Metodo inciar: se implementa de la interface VentanaFormulario, recibe la ventana generada por la fabrica
     // abstracta contenida en el controlador ControladorConsultaProveedores. Se conecta a la base de datos
     // para obtener la clave del ultimo registro en la tabla Proveedores para mostrar la clave del siguiente
     // material
     @Override
-    public void iniciar(IVentanaFormulario vistaP) {
+    public void iniciar(VentanaFormulario vistaP) {
         FormularioProveedor vistaProveedor = (FormularioProveedor)vistaP;
         vistaProveedor.setVisible(true);
         int ClaveSiguienteProveedor = ConexionSQL.obtenerClave("SELECT MAX(CLAVE_PROVEEDOR) FROM PROVEEDORES")+1;
@@ -225,11 +225,11 @@ public class FormularioProveedor extends javax.swing.JFrame implements IVentanaF
         vistaProveedor.botonGuardarCambio.setVisible(false);  
     }
     
-    // Metodo modificar: se implementa de la interface IVentanaFormulario, recibe la ventana generada por la fabrica
+    // Metodo modificar: se implementa de la interface VentanaFormulario, recibe la ventana generada por la fabrica
     // abstracta contenida en el controlador ControladorConsultaProveedores, la consulta de proveedores y
     // el indice del registro seleccionado dentro del Jtable1
     @Override
-    public void modificar(IVentanaConsulta consultaProveedores, IVentanaFormulario vProveedor, int row) {
+    public void modificar(VentanaConsulta consultaProveedores, VentanaFormulario vProveedor, int row) {
                 
         FormularioProveedor vistaProveedor = (FormularioProveedor)vProveedor;        
         ConsultaProveedores consultaP = (ConsultaProveedores) consultaProveedores;

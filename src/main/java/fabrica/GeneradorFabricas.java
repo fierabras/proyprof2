@@ -1,7 +1,7 @@
 /*
  * Esta clase genera las fabricas que producen las ventanas de proveedores o materiales
  */
-package fabricaVentanas;
+package fabrica;
 
 import proveedores.FabricaProveedor;
 import materiales.FabricaMaterial;
@@ -12,7 +12,7 @@ import materiales.FabricaMaterial;
 public class GeneradorFabricas {
 
     // el método getFabrica recibe como parametro un String que indica el tipo de fabrica a generar
-    public static IFabrica getFabrica(String param) {
+    public static Fabrica getFabrica(String param) {
         if (param == "proveedores") {
             return new FabricaProveedor();
         }

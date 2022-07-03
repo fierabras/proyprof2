@@ -3,12 +3,12 @@
 */
 package inicio;
 
-import fabricaVentanas.GeneradorFabricas;
+import fabrica.GeneradorFabricas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import fabricaVentanas.VentanaPrincipal;
-import fabricaVentanas.IVentanaConsulta;
-import fabricaVentanas.IFabrica;
+import fabrica.VentanaPrincipal;
+import fabrica.Fabrica;
+import fabrica.VentanaConsulta;
 
 /**
  * Autor: Jesus Armando Mendoza Romero
@@ -34,14 +34,14 @@ public class ControladorVentanaPrincipal implements ActionListener {
         
         if (ventanaPrincipal.botonProveedores.isFocusOwner()){                           
             // se implementa el modelo abstract factory para la generacion de consultas y vistas
-            IFabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
-            IVentanaConsulta iConsultaP = iFabrica.crearConsulta();            
+            Fabrica iFabrica = GeneradorFabricas.getFabrica("proveedores");
+            VentanaConsulta iConsultaP = iFabrica.crearConsulta();            
             iConsultaP.iniciar(iConsultaP);            
         }
         if (ventanaPrincipal.botonMateriales.isFocusOwner()){                           
             // se implementa el modelo abstract factory para la generacion de consultas y vistas
-            IFabrica iFabrica = GeneradorFabricas.getFabrica("materiales");
-            IVentanaConsulta iConsultaM = iFabrica.crearConsulta();
+            Fabrica iFabrica = GeneradorFabricas.getFabrica("materiales");
+            VentanaConsulta iConsultaM = iFabrica.crearConsulta();
             iConsultaM.iniciar(iConsultaM);
         }
     }

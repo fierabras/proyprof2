@@ -4,7 +4,7 @@
  */
 package inicio;
 
-import fabricaVentanas.VentanaPrincipal;
+import fabrica.VentanaPrincipal;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual

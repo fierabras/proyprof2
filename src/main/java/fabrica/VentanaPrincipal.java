@@ -2,7 +2,7 @@
  * Esta es la ventana Principal de la aplicacion representada en un JFrame, 
  * las acciones sobre los botones son manejados por el controlador.ControladorVentanaPrincipal
  */
-package fabricaVentanas;
+package fabrica;
 
 import notas.ConsultaNotas;
 
