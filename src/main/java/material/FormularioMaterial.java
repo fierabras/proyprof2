@@ -1,26 +1,22 @@
-/*
- * Esta clase despliega una ventana para el registro o modificacion de un material
- */
 package material;
 
-import material.VistaConsultaMateriales;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import utilerias.ConexionSQL;
+import utilerias.ConexionBD;
 import fabrica.VistaConsulta;
 import fabrica.VistaFormulario;
 
 /**
- * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual 
+ * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
  */
-public class VistaMaterial extends javax.swing.JFrame implements VistaFormulario {
+public class FormularioMaterial extends javax.swing.JFrame implements VistaFormulario {
 
-    //constructor
-    public VistaMaterial() {
+    MaterialBO materialBO = new MaterialBO();
+
+    public FormularioMaterial() {
         initComponents();
     }
 
-    //codigo autogenerado
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -151,89 +147,62 @@ public class VistaMaterial extends javax.swing.JFrame implements VistaFormulario
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // Controlador de acciones del boton guardar, solicita la conexion a la base de datos
-    // y envía la orden para la insercion del registro
-    private void botonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarMouseClicked
-        this.guardar();
-        super.dispose();
-    }//GEN-LAST:event_botonGuardarMouseClicked
 
-    public void guardar(){
-        
-        if((txbDescripcion.getText().isEmpty())||(txbPrecio.getText().isEmpty())){
+    private void botonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarMouseClicked
+        if ((txbDescripcion.getText().isEmpty()) || (txbPrecio.getText().isEmpty())) {
             JFrame frame = null;
             JOptionPane.showMessageDialog(frame, "Debes llenar todos los datos para continuar", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             return;
-        }        
-        ConexionSQL conn = ConexionSQL.getConexionSQL();
-        String cmd = "INSERT INTO MATERIALES (DESCRIPCION,PRECIO) VALUES ('" + txbDescripcion.getText() + "','" + txbPrecio.getText() + "')";
-        conn.insert(cmd);    
-        
-    }
-    // controlador del boton Cancelar, cierra la vista en pantalla
+        }
+        materialBO.guardarMaterial(txbDescripcion.getText(), txbPrecio.getText());
+        super.dispose();
+    }//GEN-LAST:event_botonGuardarMouseClicked
+
     private void botonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCancelarMouseClicked
         this.dispose();
     }//GEN-LAST:event_botonCancelarMouseClicked
 
-    //controlador del boton guardar cambios, solicita la conexion a la base de datos
-    // y ordena un update a la base
     private void botonGuardarCambioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarCambioMouseClicked
-        this.guardarCambio();
-        super.dispose();
-    }//GEN-LAST:event_botonGuardarCambioMouseClicked
-    
-    public void guardarCambio(){
-        if((this.txbDescripcion.getText().isEmpty())||(this.txbPrecio.getText().isEmpty())){
+        if ((this.txbDescripcion.getText().isEmpty()) || (this.txbPrecio.getText().isEmpty())) {
             JFrame frame = null;
             JOptionPane.showMessageDialog(frame, "Debes llenar todos los datos para continuar", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             return;
-        }         
-        ConexionSQL conn = ConexionSQL.getConexionSQL();
-        String cmd = "UPDATE MATERIALES SET DESCRIPCION='" + this.txbDescripcion.getText() + "',PRECIO='"
-                + this.txbPrecio.getText() + "' WHERE CLAVE_MATERIAL=" + this.txbClaveMaterial.getText();
-        conn.update(cmd);
-        
-    }
-    
-    // Metodo inciar: se implementa de la interface VistaFormulario, recibe la ventana generada por la fabrica
-    // abstracta contenida en el controlador ControladorConsultaMateriales. Se conecta a la base de datos
-    // para obtener la clave del ultimo registro en la tabla Materiales para mostrar la clave del siguiente
-    // material
+        }
+        materialBO.actualizarMaterial(txbClaveMaterial.getText(), txbDescripcion.getText(), txbPrecio.getText());
+        super.dispose();
+    }//GEN-LAST:event_botonGuardarCambioMouseClicked
+
     @Override
-    public void iniciar(VistaFormulario vistaM) {
-        VistaMaterial vistaMaterial = (VistaMaterial) vistaM;
-        vistaMaterial.setVisible(true);
-        int ClaveSiguienteProveedor = ConexionSQL.obtenerClave("SELECT MAX(CLAVE_MATERIAL) FROM MATERIALES") + 1;
-        vistaMaterial.txbClaveMaterial.setText(String.valueOf(ClaveSiguienteProveedor));
-        vistaMaterial.botonGuardarCambio.setVisible(false);
+    public void iniciar() {
+        this.setVisible(true);
+        int ClaveSiguienteProveedor = ConexionBD.obtenerClave("SELECT MAX(CLAVE_MATERIAL) FROM MATERIALES") + 1;
+        this.txbClaveMaterial.setText(String.valueOf(ClaveSiguienteProveedor));
+        this.botonGuardarCambio.setVisible(false);
     }
 
-    // Metodo modificar: se implementa de la interface VistaFormulario, recibe la ventana generada por la fabrica
-    // abstracta contenida en el controlador ControladorConsultaMateriales, la consulta de materiales y
-    // el indice del registro seleccionado dentro del Jtable1
     @Override
     public void modificar(VistaConsulta consultaMateriales, VistaFormulario vMaterial, int row) {
 
-        VistaMaterial vistaMaterial = (VistaMaterial) vMaterial;
+        FormularioMaterial formularioMaterial = (FormularioMaterial) vMaterial;
         VistaConsultaMateriales consultaM = (VistaConsultaMateriales) consultaMateriales;
 
         if (consultaM.tablaMateriales.getSelectedRow() < 0) {
             JFrame frame = null;
             JOptionPane.showMessageDialog(frame, "Debes seleccionar un material de la lista para modificarlo", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-            vistaMaterial.dispose();
+            formularioMaterial.dispose();
             return;
         }
 
-        vistaMaterial.setVisible(true);        
+        formularioMaterial.setVisible(true);
         String claveMaterial = consultaM.tablaMateriales.getValueAt(row, 0).toString();
         String descripcion = consultaM.tablaMateriales.getValueAt(row, 1).toString();
         String precio = consultaM.tablaMateriales.getValueAt(row, 2).toString();
 
-        vistaMaterial.txbClaveMaterial.setText(claveMaterial);
-        vistaMaterial.txbDescripcion.setText(descripcion);
-        vistaMaterial.txbPrecio.setText(precio);
+        formularioMaterial.txbClaveMaterial.setText(claveMaterial);
+        formularioMaterial.txbDescripcion.setText(descripcion);
+        formularioMaterial.txbPrecio.setText(precio);
 
-        vistaMaterial.botonGuardar.setVisible(false);
+        formularioMaterial.botonGuardar.setVisible(false);
 
         consultaM.tablaMateriales.clearSelection();
     }

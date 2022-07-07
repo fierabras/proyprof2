@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
 
         VistaPrincipal ventanaPrincipal = new VistaPrincipal();
-        ventanaPrincipal.setVisible(true);
+        ventanaPrincipal.setVisible(true);     
         ControladorVentanaPrincipal controlVentanaPrincipal = new ControladorVentanaPrincipal(ventanaPrincipal);
     }
 

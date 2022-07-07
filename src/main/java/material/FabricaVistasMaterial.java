@@ -15,7 +15,7 @@ public class FabricaVistasMaterial implements Fabrica {
 
     @Override
     public VistaFormulario crearVista() {
-        return new VistaMaterial();
+        return new FormularioMaterial();
     }
 
     @Override

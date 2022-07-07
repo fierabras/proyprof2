@@ -1,12 +1,6 @@
 package material;
 
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.table.DefaultTableModel;
-import utilerias.ConexionSQL;
 import fabrica.VistaConsulta;
 
 /**
@@ -14,6 +8,9 @@ import fabrica.VistaConsulta;
  */
 public class VistaConsultaMateriales extends javax.swing.JFrame implements VistaConsulta {
 
+    private int selectedRow;
+    MaterialBO materialBO = new MaterialBO();
+    
     public VistaConsultaMateriales() {
         initComponents();
     }
@@ -134,59 +131,26 @@ public class VistaConsultaMateriales extends javax.swing.JFrame implements Vista
 
 
     private void botonBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarMouseClicked
-        consultarTabla();
-
+        materialBO.cargarTabla(this.tablaMateriales, this.txbBuscar.getText());
     }//GEN-LAST:event_botonBuscarMouseClicked
 
     private void txbBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txbBuscarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            consultarTabla();
+            materialBO.cargarTabla(this.tablaMateriales, this.txbBuscar.getText());
         }
     }//GEN-LAST:event_txbBuscarKeyPressed
 
     private void botonActualizarConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarConsultaMouseClicked
-        consultarTabla();
+        materialBO.cargarTabla(this.tablaMateriales, this.txbBuscar.getText());
     }//GEN-LAST:event_botonActualizarConsultaMouseClicked
 
     @Override
-    public void iniciar(VistaConsulta consultaM) {
-        VistaConsultaMateriales consultaMateriales = (VistaConsultaMateriales) consultaM;
-        consultaMateriales.setVisible(true);
-        consultaMateriales.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
-        ControladorMaterial controladorMaterial = new ControladorMaterial(consultaMateriales);
-        
-        MaterialBO materialBO = new MaterialBO();
-        materialBO.cargarTabla(this.tablaMateriales,this.txbBuscar.getText());
-
-        //consultaMateriales.consultarTabla();
+    public void iniciar() {
+        this.setVisible(true);
+        this.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+        ControladorMaterial controladorMaterial = new ControladorMaterial(this);
+        materialBO.cargarTabla(this.tablaMateriales, this.txbBuscar.getText());  
     }
-
-    public void consultarTabla() {
-
-        DefaultTableModel model = (DefaultTableModel) tablaMateriales.getModel();
-        model.setRowCount(0);
-
-        String sql = "SELECT * FROM MATERIALES WHERE CLAVE_MATERIAL LIKE '%" + txbBuscar.getText() + "%' OR DESCRIPCION LIKE '%" + txbBuscar.getText()
-                + "%' OR PRECIO LIKE '%" + txbBuscar.getText() + "%'";
-
-        try ( Connection conn = ConexionSQL.getConexion();  Statement stmt = conn.createStatement();  ResultSet rs = stmt.executeQuery(sql)) {
-
-            while (rs.next()) {
-                String claveMaterial = String.valueOf(rs.getInt("claveMaterial"));
-                String descripcion = rs.getString("descripcion");
-                String precio = String.valueOf(rs.getString("precio"));
-
-                String tbData[] = {claveMaterial, descripcion, precio};
-                DefaultTableModel tblModel = (DefaultTableModel) tablaMateriales.getModel();
-
-                tblModel.addRow(tbData);
-
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton botonActualizarConsulta;

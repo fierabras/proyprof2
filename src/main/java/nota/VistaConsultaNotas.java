@@ -161,7 +161,7 @@ public class VistaConsultaNotas extends javax.swing.JFrame {
     }//GEN-LAST:event_botonActualizarConsultaMouseClicked
 
     private void botonNuevaNotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonNuevaNotaMouseClicked
-        VistaNota formularioNota = new VistaNota();
+        FormularioNota formularioNota = new FormularioNota();
         formularioNota.setVisible(true);
         formularioNota.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_botonNuevaNotaMouseClicked

@@ -1,28 +1,24 @@
-/*
- * Esta clase despliega una ventana para el registro o modificacion de un proveedor
- */
+
 package proveedor;
 
-import proveedor.VistaConsultaProveedores;
-import utilerias.ConexionSQL;
+import utilerias.ConexionBD;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import fabrica.VistaConsulta;
 import fabrica.VistaFormulario;
 
 /**
- * Autor: Jesus Armando Mendoza Romero
- * a171117
-  */
+ * Autor: Jesus Armando Mendoza Romero a171117
+ */
 
-public class VistaProveedor extends javax.swing.JFrame implements VistaFormulario {
+public class FormularioProveedor extends javax.swing.JFrame implements VistaFormulario {
 
-    //constructor
-    public VistaProveedor() {
+
+    public FormularioProveedor() {
         initComponents();
     }
 
-    // codigo autogenerado
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -165,8 +161,7 @@ public class VistaProveedor extends javax.swing.JFrame implements VistaFormulari
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // Controlador de acciones del boton guardar, solicita la conexion a la base de datos
-    // y envía la orden para la insercion del registro
+
     private void botonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarMouseClicked
         this.guardar();
         super.dispose();        
@@ -179,20 +174,19 @@ public class VistaProveedor extends javax.swing.JFrame implements VistaFormulari
             return;
         } 
         
-        ConexionSQL conn = ConexionSQL.getConexionSQL();
-        String cmd = "INSERT INTO PROVEEDORES (NOMBRE,TIPOID,FOLIOID) VALUES ('" + txbNombre.getText()
+        ConexionBD conn = ConexionBD.getConexionSQL();
+        String cmd = "INSERT INTO PROVEEDORES (NOMBRE,TIPO_IDENTIFICACION,NUMERO_IDENTIFICACION) VALUES ('" + txbNombre.getText()
                 + "','" + comboTipoId.getSelectedItem() + "','" + txbfolioId.getText() + "')";
         conn.insert(cmd);
     }
 
 
-// controlador del boton Cancelar, cierra la vista en pantalla
+
     private void botonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCancelarMouseClicked
         super.dispose();
     }//GEN-LAST:event_botonCancelarMouseClicked
 
-    //controlador del boton guardar cambios, solicita la conexion a la base de datos
-    // y ordena un update a la base
+
     private void botonGuardarCambioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarCambioMouseClicked
         this.guardarCambio();
         super.dispose();
@@ -204,37 +198,28 @@ public class VistaProveedor extends javax.swing.JFrame implements VistaFormulari
             JOptionPane.showMessageDialog(frame, "Debes llenar todos los datos para continuar", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             return;
         } 
-        ConexionSQL conn = ConexionSQL.getConexionSQL();
-        String cmd = "UPDATE PROVEEDORES SET NOMBRE='" + txbNombre.getText() + "',TIPOID='"
-                + comboTipoId.getSelectedItem() + "', FOLIOID='" + txbfolioId.getText()
+        ConexionBD conn = ConexionBD.getConexionSQL();
+        String cmd = "UPDATE PROVEEDORES SET NOMBRE='" + txbNombre.getText() + "',TIPO_IDENTIFICACION='"
+                + comboTipoId.getSelectedItem() + "', NUMERO_IDENTIFICACION='" + txbfolioId.getText()
                 + "' WHERE CLAVE_PROVEEDOR=" + txbClaveProveedor.getText();
         conn.update(cmd);
     }
-    
-    
-    // Metodo inciar: se implementa de la interface VistaFormulario, recibe la ventana generada por la fabrica
-    // abstracta contenida en el controlador ControladorConsultaProveedores. Se conecta a la base de datos
-    // para obtener la clave del ultimo registro en la tabla Proveedores para mostrar la clave del siguiente
-    // material
+       
     @Override
-    public void iniciar(VistaFormulario vistaP) {
-        VistaProveedor vistaProveedor = (VistaProveedor)vistaP;
-        vistaProveedor.setVisible(true);
-        int ClaveSiguienteProveedor = ConexionSQL.obtenerClave("SELECT MAX(CLAVE_PROVEEDOR) FROM PROVEEDORES")+1;
-        vistaProveedor.txbClaveProveedor.setText(String.valueOf(ClaveSiguienteProveedor));        
-        vistaProveedor.botonGuardarCambio.setVisible(false);  
-    }
+    public void iniciar() {
+        this.setVisible(true);
+        int ClaveSiguienteProveedor = ConexionBD.obtenerClave("SELECT MAX(CLAVE_PROVEEDOR) FROM PROVEEDORES")+1;
+        this.txbClaveProveedor.setText(String.valueOf(ClaveSiguienteProveedor));        
+        this.botonGuardarCambio.setVisible(false);  
+    }    
     
-    // Metodo modificar: se implementa de la interface VistaFormulario, recibe la ventana generada por la fabrica
-    // abstracta contenida en el controlador ControladorConsultaProveedores, la consulta de proveedores y
-    // el indice del registro seleccionado dentro del Jtable1
     @Override
     public void modificar(VistaConsulta consultaProveedores, VistaFormulario vProveedor, int row) {
                 
-        VistaProveedor vistaProveedor = (VistaProveedor)vProveedor;        
+        FormularioProveedor vistaProveedor = (FormularioProveedor)vProveedor;        
         VistaConsultaProveedores consultaP = (VistaConsultaProveedores) consultaProveedores;
         
-        if (consultaP.jTable1.getSelectedRow()<0){
+        if (consultaP.tablaProveedores.getSelectedRow()<0){
             JFrame frame=null;
             JOptionPane.showMessageDialog(frame, "Debes seleccionar un proveedor de la lista para modificarlo", "Mensaje", JOptionPane.INFORMATION_MESSAGE);            
             vistaProveedor.dispose();
@@ -243,19 +228,18 @@ public class VistaProveedor extends javax.swing.JFrame implements VistaFormulari
         
         vistaProveedor.setVisible(true);
 
-        String claveProveedor = consultaP.jTable1.getValueAt(row, 0).toString();
-        String nombre = consultaP.jTable1.getValueAt(row, 1).toString();
-        String tipoId = consultaP.jTable1.getValueAt(row, 2).toString();
-        String folioId = consultaP.jTable1.getValueAt(row, 3).toString();
+        String claveProveedor = consultaP.tablaProveedores.getValueAt(row, 0).toString();
+        String nombre = consultaP.tablaProveedores.getValueAt(row, 1).toString();
+        String tipoId = consultaP.tablaProveedores.getValueAt(row, 2).toString();
+        String folioId = consultaP.tablaProveedores.getValueAt(row, 3).toString();
 
         vistaProveedor.txbClaveProveedor.setText(claveProveedor);
         vistaProveedor.txbNombre.setText(nombre);
         vistaProveedor.comboTipoId.setSelectedItem(tipoId);
         vistaProveedor.txbfolioId.setText(folioId);
-        vistaProveedor.botonGuardar.setVisible(false);
+        vistaProveedor.botonGuardar.setVisible(false);        
         
-        
-        consultaP.jTable1.clearSelection();
+        consultaP.tablaProveedores.clearSelection();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

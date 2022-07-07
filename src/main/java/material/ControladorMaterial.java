@@ -4,9 +4,7 @@
  */
 package material;
 
-import material.VistaConsultaMateriales;
 import fabrica.GeneradorFabricas;
-import material.VistaMaterial;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -36,20 +34,18 @@ public class ControladorMaterial implements ActionListener {
         });
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (consultaMateriales.botonNuevoMaterial.isFocusOwner()) {        
-            Fabrica iFabrica = GeneradorFabricas.getFabrica("materiales");
+            Fabrica iFabrica = GeneradorFabricas.obtenerFabrica("materiales");
             VistaFormulario iVistaM = iFabrica.crearVista();
-            iVistaM.iniciar(iVistaM);
+            iVistaM.iniciar();
         }
 
         if (consultaMateriales.botonModificarMaterial.isFocusOwner()) {
-            // se implementa el modelo abstract factory para la generacion de consultas y vistas
-            Fabrica iFabrica = GeneradorFabricas.getFabrica("materiales");
-            VistaMaterial vistaMaterial = (VistaMaterial) iFabrica.crearVista();
+            Fabrica iFabrica = GeneradorFabricas.obtenerFabrica("materiales");
+            FormularioMaterial vistaMaterial = (FormularioMaterial) iFabrica.crearVista();
             vistaMaterial.modificar(consultaMateriales, vistaMaterial, selectedRow);
         }
     }

@@ -151,6 +151,9 @@
               <Font name="Segoe UI" size="16" style="1"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="campoClaveMaterialFocusLost"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="etiquetaDescripcionMaterial">
           <Properties>
@@ -242,6 +245,9 @@
               <Image iconType="3" name="/icons/zoom.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botonBuscarMaterialMouseClicked"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel1">
           <Properties>
@@ -385,6 +391,9 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="campoClaveProveedor">
+                  <Events>
+                    <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="campoClaveProveedorFocusLost"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="botonBuscarProveedor">
                   <Properties>
@@ -395,6 +404,9 @@
                       <Image iconType="3" name="/icons/zoom.png"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botonBuscarProveedorMouseClicked"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="etiquetaProveedorDato">
                   <Properties>
@@ -626,6 +638,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="GUARDAR"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botonGuardarMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

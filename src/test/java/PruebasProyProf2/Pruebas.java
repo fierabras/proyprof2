@@ -1,125 +1,106 @@
 package PruebasProyProf2;
 
 import fabrica.GeneradorFabricas;
-import proveedor.VistaProveedor;
-import material.VistaMaterial;
+import proveedor.FormularioProveedor;
+import material.FormularioMaterial;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import utilerias.ConexionSQL;
+import utilerias.ConexionBD;
 import fabrica.Fabrica;
-
-
+import java.util.List;
+import java.util.Map;
 
 public class Pruebas {
-    
+
     public Pruebas() {
     }
-    
-     @Test
+
+    @Test
     public void CP1() {
-       
-       String entrada = "materiales";
-       
-       Fabrica iFabrica = GeneradorFabricas.getFabrica(entrada);
-       VistaMaterial vistaMaterial = (VistaMaterial) iFabrica.crearVista();
-       
-       assertNotNull(vistaMaterial);      
+
+        String entrada = "materiales";
+
+        Fabrica iFabrica = GeneradorFabricas.obtenerFabrica(entrada);
+        FormularioMaterial vistaMaterial = (FormularioMaterial) iFabrica.crearVista();
+
+        assertNotNull(vistaMaterial);
     }
+
     @Test
     public void CP2() {
-       
-       String entrada = "proveedores";
-       
-       Fabrica iFabrica = GeneradorFabricas.getFabrica(entrada);
-       VistaProveedor vistaProveedor = (VistaProveedor) iFabrica.crearVista();
-       
-       assertNotNull(vistaProveedor);      
+
+        String entrada = "proveedores";
+
+        Fabrica iFabrica = GeneradorFabricas.obtenerFabrica(entrada);
+        FormularioProveedor vistaProveedor = (FormularioProveedor) iFabrica.crearVista();
+
+        assertNotNull(vistaProveedor);
     }
-    
+
     @Test
-    public void CP3(){
-        
-        VistaProveedor formulario1 = new VistaProveedor();        
-        formulario1.iniciar(formulario1);
+    public void CP3() {
+
+        FormularioProveedor formulario1 = new FormularioProveedor();
+        formulario1.iniciar();
         int clave1 = Integer.parseInt(formulario1.txbClaveProveedor.getText());
         formulario1.txbNombre.setText("Proveedor Prueba");
         formulario1.txbfolioId.setText("00000000");
-        formulario1.guardar();        
+        formulario1.guardar();
         formulario1.dispose();
-                
-        VistaProveedor formulario2 = new VistaProveedor();     
-        formulario2.iniciar(formulario2);
+
+        FormularioProveedor formulario2 = new FormularioProveedor();
+        formulario2.iniciar();
         int clave2 = Integer.parseInt(formulario2.txbClaveProveedor.getText());
-        
-        assertTrue((clave1+1)==clave2);           
-  
+
+        assertTrue((clave1 + 1) == clave2);
+
     }
-    
+
     @Test
-    public void CP4(){
-        
-        VistaMaterial formulario1 = new VistaMaterial();        
-        formulario1.iniciar(formulario1);
+    public void CP4() {
+
+        FormularioMaterial formulario1 = new FormularioMaterial();
+        formulario1.iniciar();
         int clave1 = Integer.parseInt(formulario1.txbClaveMaterial.getText());
         formulario1.txbDescripcion.setText("Material Prueba");
         formulario1.txbPrecio.setText("0.00");
-        formulario1.guardar();        
+        //formulario1.guardar();        
         formulario1.dispose();
-                
-        VistaMaterial formulario2 = new VistaMaterial();     
-        formulario2.iniciar(formulario2);
+
+        FormularioMaterial formulario2 = new FormularioMaterial();
+        formulario2.iniciar();
         int clave2 = Integer.parseInt(formulario2.txbClaveMaterial.getText());
-        
-        assertTrue((clave1+1)==clave2);           
-  
+
+        assertTrue((clave1 + 1) == clave2);
+
     }
-    
+
     @Test
-    public void CP5(){
-        
-        VistaProveedor formulario1 = new VistaProveedor();        
-        formulario1.iniciar(formulario1);
+    public void CP5() {
+
+        FormularioProveedor formulario1 = new FormularioProveedor();
+        formulario1.iniciar();
         int clave = Integer.parseInt(formulario1.txbClaveProveedor.getText());
         formulario1.txbNombre.setText("Proveedor Prueba");
         formulario1.txbfolioId.setText("00000000");
-        formulario1.guardar();        
+        formulario1.guardar();
         formulario1.dispose();
+
+        String consultaSql = "SELECT * FROM PROVEEDORES WHERE CLAVEPROVEEDOR=" + clave;
+        List<Map<String, Object>> consulta = ConexionBD.consultaSql(consultaSql);
         
-        String sentencia = "SELECT * FROM PROVEEDORES WHERE CLAVEPROVEEDOR="+clave;
-        ResultSet rs = ConexionSQL.obtenerRegistro(sentencia);
-        
-   
-        
-        try {
-            int claveBD = rs.getInt(1);
-            assertTrue(clave==claveBD);
-        } catch (SQLException ex) {
-            Logger.getLogger(Pruebas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            String nombre = rs.getString(2);
-            assertTrue(formulario1.txbNombre.getText()==nombre);
-        } catch (SQLException ex) {
-            Logger.getLogger(Pruebas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            String numId = rs.getString(4);
-            assertTrue(formulario1.txbfolioId.getText()==numId);
-        } catch (SQLException ex) {
-            Logger.getLogger(Pruebas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-  
+        int claveBD = Integer.parseInt(consulta.get(0).get("CLAVE_PROVEEDOR").toString());
+        assertTrue(clave == claveBD);
+
+        String nombre = consulta.get(0).get("NOMBRE").toString();
+        assertTrue(formulario1.txbNombre.getText() == nombre);
+
+        String numId = consulta.get(0).get("NUMERO_IDENTIFICACION").toString();
+        assertTrue(formulario1.txbfolioId.getText() == numId);
     }
-    
-    
-    
-    
-    
-    
-    
+
 }

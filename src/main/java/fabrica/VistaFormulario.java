@@ -11,8 +11,7 @@ package fabrica;
  */
 public interface VistaFormulario {
 
-    public void iniciar(VistaFormulario vista);
-
+    public void iniciar();
     public void modificar(VistaConsulta consulta, VistaFormulario vista, int row);
 
 }

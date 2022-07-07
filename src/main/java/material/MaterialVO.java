@@ -1,17 +1,13 @@
-/*
- * Esta clase representa un material reciclado
- */
 package material;
 
 /**
- * Autor: Jesus Armando Mendoza Romero
- * a171117 
+ * @author: Jesus Armando Mendoza Romero a171117
  */
 public class MaterialVO {
-    
+
     private int claveMaterial;
     private String descripcion;
-    private double precio;   
+    private double precio;
 
     public int getClaveMaterial() {
         return claveMaterial;
@@ -36,5 +32,5 @@ public class MaterialVO {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-    
+
 }

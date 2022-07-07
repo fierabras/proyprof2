@@ -5,17 +5,28 @@ import java.awt.Component;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import material.MaterialBO;
 import material.MaterialVO;
+import material.VistaConsultaMateriales;
+import proveedor.ProveedorBO;
+import proveedor.ProveedorVO;
+import proveedor.VistaConsultaProveedores;
 
 /**
- *
  * @author Jesus Armando Mendoza Romero
  */
-public class VistaNota extends javax.swing.JFrame {
+public class FormularioNota extends javax.swing.JFrame {
 
-    public VistaNota() {
+    NotaVO notaVO = new NotaVO();
+    NotaBO notaBO = new NotaBO();
+    ProveedorBO proveedorBO = new ProveedorBO();
+    MaterialBO materialBO = new MaterialBO();
+    String columnas[] = {"Cantidad", "Descripción", "Precio", "Subtotal"};
+    DefaultTableModel tablaModelo = new DefaultTableModel(columnas, 0);
+
+    public FormularioNota() {
         initComponents();
+        this.setTitle("CAPTURA DE NOTAS DE VENTA");
         tablaPartidas.setModel(tablaModelo);
         this.mostrarSubtotal();
     }
@@ -67,6 +78,11 @@ public class VistaNota extends javax.swing.JFrame {
         etiquetaCodigoMaterial.setText("Clave Material");
 
         campoClaveMaterial.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        campoClaveMaterial.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoClaveMaterialFocusLost(evt);
+            }
+        });
 
         etiquetaDescripcionMaterial.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         etiquetaDescripcionMaterial.setForeground(new java.awt.Color(51, 51, 51));
@@ -112,6 +128,11 @@ public class VistaNota extends javax.swing.JFrame {
 
         botonBuscarMaterial.setForeground(new java.awt.Color(51, 51, 51));
         botonBuscarMaterial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/zoom.png"))); // NOI18N
+        botonBuscarMaterial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonBuscarMaterialMouseClicked(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
 
@@ -138,8 +159,19 @@ public class VistaNota extends javax.swing.JFrame {
         etiquetaProveedor.setForeground(new java.awt.Color(0, 0, 0));
         etiquetaProveedor.setText("Proveedor");
 
+        campoClaveProveedor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoClaveProveedorFocusLost(evt);
+            }
+        });
+
         botonBuscarProveedor.setForeground(new java.awt.Color(102, 102, 102));
         botonBuscarProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/zoom.png"))); // NOI18N
+        botonBuscarProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonBuscarProveedorMouseClicked(evt);
+            }
+        });
 
         etiquetaProveedorDato.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         etiquetaProveedorDato.setForeground(new java.awt.Color(0, 0, 0));
@@ -338,6 +370,11 @@ public class VistaNota extends javax.swing.JFrame {
         botonGuardar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         botonGuardar.setForeground(new java.awt.Color(255, 255, 255));
         botonGuardar.setText("GUARDAR");
+        botonGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonGuardarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelTotalesLayout = new javax.swing.GroupLayout(panelTotales);
         panelTotales.setLayout(panelTotalesLayout);
@@ -404,27 +441,24 @@ public class VistaNota extends javax.swing.JFrame {
 
         if (this.campoClaveMaterial.getText().equals("")) {
             Component frame = new JFrame();
-            JOptionPane.showMessageDialog(frame,
-                    "Debe capturar la clave del material",
-                    "Aviso",
-                    JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "Debe capturar la clave del material", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        PartidaVO partida = new PartidaVO();
-        MaterialVO material = new MaterialVO();
+        MaterialVO materialVO = new MaterialVO();
+        PartidaVO partidaVO = new PartidaVO();
 
-        material.setClaveMaterial(Integer.parseInt(this.campoClaveMaterial.getText()));
-        material.setDescripcion(this.etiquetaDescripcionMaterial.getText());
-        material.setPrecio(Double.valueOf(this.campoPrecio.getText()));
+        materialVO.setClaveMaterial(Integer.parseInt(this.campoClaveMaterial.getText()));
+        materialVO.setDescripcion(this.etiquetaDescripcionMaterial.getText());
+        materialVO.setPrecio(Double.valueOf(this.campoPrecio.getText()));
 
-        partida.setCantidad(Double.valueOf(this.campoCantidad.getText()));
-        partida.setMaterial(material);
-        partida.setSubtotal(material.getPrecio() * partida.getCantidad());
+        partidaVO.setCantidad(Double.valueOf(this.campoCantidad.getText()));
+        partidaVO.setMaterial(materialVO);
+        partidaVO.setSubtotal(materialVO.getPrecio() * partidaVO.getCantidad());
 
-        this.Nota.agregarPartida(partida);
-        this.recargarTablaPartidas();        
-        this.desglosarListaPartidasCLI();
+        this.notaBO.agregarPartida(partidaVO);
+
+        this.recargarTablaPartidas();
         this.limpiarCapturaPartida();
         this.mostrarSubtotal();
         this.mostrarTotales();
@@ -450,6 +484,41 @@ public class VistaNota extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonCancelarMouseClicked
 
+    private void botonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarMouseClicked
+        notaBO.guardarNota(this.campoClaveProveedor.toString(), this.notaBO.obtenerPartidas());
+    }//GEN-LAST:event_botonGuardarMouseClicked
+
+    private void campoClaveProveedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoClaveProveedorFocusLost
+        if (this.campoClaveProveedor.getText().equals("") || this.campoClaveProveedor.getText() == null) {
+            System.out.println("campos clave proveedor vacia");
+            return;
+        }
+        this.cargarProveedor();
+    }//GEN-LAST:event_campoClaveProveedorFocusLost
+
+    private void campoClaveMaterialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoClaveMaterialFocusLost
+        MaterialVO materialVO = new MaterialVO();
+        materialVO = materialBO.obtenerMaterial(this.campoClaveMaterial.getText());
+        this.etiquetaDescripcionMaterial.setText(materialVO.getDescripcion());
+        this.campoPrecio.setText(String.valueOf(materialVO.getPrecio()));
+    }//GEN-LAST:event_campoClaveMaterialFocusLost
+
+    private void botonBuscarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarProveedorMouseClicked
+
+        MiniConsultaProveedores miniConsulta = new MiniConsultaProveedores(this, true);
+        miniConsulta.setVisible(true);
+        while (miniConsulta.isVisible()) {
+
+        }
+        this.campoClaveProveedor.setText(miniConsulta.getClave());
+        this.cargarProveedor();
+    }//GEN-LAST:event_botonBuscarProveedorMouseClicked
+
+    private void botonBuscarMaterialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarMaterialMouseClicked
+
+
+    }//GEN-LAST:event_botonBuscarMaterialMouseClicked
+
     private void limpiarCapturaPartida() {
         this.campoClaveMaterial.setText("");
         this.etiquetaDescripcionMaterial.setText("");
@@ -458,63 +527,48 @@ public class VistaNota extends javax.swing.JFrame {
         this.campoClaveMaterial.requestFocus();
     }
 
+    private void cargarProveedor() {
+        ProveedorVO proveedorVO = new ProveedorVO();
+        proveedorVO = proveedorBO.obtenerProveedor(this.campoClaveProveedor.getText());
+        this.etiquetaProveedorDato.setText(proveedorVO.getNombre());
+    }
+
     private void recargarTablaPartidas() {
 
         tablaModelo.setRowCount(0);
 
-        for (int i = 0; i<Nota.obtenerPartidas().size(); i++ ) {
-            double cantidad = Nota.obtenerPartidas().get(i).getCantidad();
-            String descripcion = Nota.obtenerPartidas().get(i).getMaterial().getDescripcion();
-            double precio = Nota.obtenerPartidas().get(i).getMaterial().getPrecio();
-            double subtotal = Nota.obtenerPartidas().get(i).getSubtotal();
+        for (int i = 0; i < notaBO.obtenerPartidas().size(); i++) {
+            double cantidad = notaBO.obtenerPartidas().get(i).getCantidad();
+            String descripcion = notaBO.obtenerPartidas().get(i).getMaterial().getDescripcion();
+            double precio = notaBO.obtenerPartidas().get(i).getMaterial().getPrecio();
+            double subtotal = notaBO.obtenerPartidas().get(i).getSubtotal();
             Object[] filaPartida = {cantidad, descripcion, precio, subtotal};
             this.tablaModelo.addRow(filaPartida);
         }
     }
-    
-    private void mostrarSubtotal(){
+
+    private void mostrarSubtotal() {
         double subtotal;
         subtotal = Double.valueOf(this.campoCantidad.getText()) * Double.valueOf(this.campoPrecio.getText());
         this.etiquetaSubtotalDato.setText(String.valueOf(subtotal));
     }
-    
-    private void mostrarTotales(){
-        Double total=0.0;
-        Double totalPeso=0.0;
-        
-        for (int i = 0; i<Nota.obtenerPartidas().size(); i++ ) {
-            total+=Nota.obtenerPartidas().get(i).getSubtotal();       
+
+    private void mostrarTotales() {
+        Double total = 0.0;
+        Double totalPeso = 0.0;
+
+        for (int i = 0; i < notaBO.obtenerPartidas().size(); i++) {
+            total += notaBO.obtenerPartidas().get(i).getSubtotal();
         }
-        
-        for (int i = 0; i<Nota.obtenerPartidas().size(); i++ ) {
-            totalPeso+=Nota.obtenerPartidas().get(i).getCantidad();       
+
+        for (int i = 0; i < notaBO.obtenerPartidas().size(); i++) {
+            totalPeso += notaBO.obtenerPartidas().get(i).getCantidad();
         }
-        
+
         this.etiquetaTotalDato.setText(String.valueOf(total));
         this.etiquetaPesoTotalDato.setText(String.valueOf(totalPeso));
     }
-    
-    
-    private void desglosarListaPartidasCLI() {
 
-        for (int i = 0; i<Nota.obtenerPartidas().size(); i++ ){
-            System.out.println(
-                            "Numero de partida: " + (i+1) +
-                            "  Cantidad: " + Nota.obtenerPartidas().get(i).getCantidad() +
-                            "  Descripción: " + Nota.obtenerPartidas().get(i).getMaterial().getDescripcion() +
-                            "  Precio: " + Nota.obtenerPartidas().get(i).getMaterial().getPrecio() +
-                            "  Subtotal: " + Nota.obtenerPartidas().get(i).getSubtotal()
-            );
-     
-        }
-        System.out.println("\n ----------------------------------------------------------------------");
- 
-    }
-    
-    
-    NotaBO Nota = new NotaBO();
-    String columnas[] = {"Cantidad", "Descripción", "Precio", "Subtotal"};
-    DefaultTableModel tablaModelo = new DefaultTableModel(columnas, 0);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregarPartida;

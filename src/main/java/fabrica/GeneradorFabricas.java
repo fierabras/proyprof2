@@ -11,8 +11,8 @@ import material.FabricaVistasMaterial;
  */
 public class GeneradorFabricas {
 
-    // el método getFabrica recibe como parametro un String que indica el tipo de fabrica a generar
-    public static Fabrica getFabrica(String param) {
+    // el método obtenerFabrica recibe como parametro un String que indica el tipo de fabrica a generar
+    public static Fabrica obtenerFabrica(String param) {
         if (param == "proveedores") {
             return new FabricaVistasProveedor();
         }

@@ -1,18 +1,7 @@
-/*
- * Este JFrame muestra el listado de todos los proveedores:
- * Permite la busqueda y filtrado por cualquier indicio en los campos de la tabla proveedores
- * Ofrece la posibilidad de agregar o modificar proveedores en la base de datos
- * Cuenta con la funcion de actualizar la consulta en caso de modificaciones a la base
- */
+
 package proveedor;
 
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.table.DefaultTableModel;
-import utilerias.ConexionSQL;
 import fabrica.VistaConsulta;
 
 /**
@@ -20,7 +9,8 @@ import fabrica.VistaConsulta;
  */
 public class VistaConsultaProveedores extends javax.swing.JFrame implements VistaConsulta {
 
-    // constructor
+    ProveedorBO proveedorBO = new ProveedorBO();
+    
     public VistaConsultaProveedores() {
         initComponents();
     }
@@ -37,7 +27,7 @@ public class VistaConsultaProveedores extends javax.swing.JFrame implements Vist
         botonModificarProveedor = new javax.swing.JButton();
         botonActualizarConsulta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaProveedores = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta de proveedores");
@@ -102,8 +92,8 @@ public class VistaConsultaProveedores extends javax.swing.JFrame implements Vist
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProveedores.setAutoCreateRowSorter(true);
+        tablaProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -119,8 +109,8 @@ public class VistaConsultaProveedores extends javax.swing.JFrame implements Vist
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jTable1);
+        tablaProveedores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(tablaProveedores);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,62 +130,27 @@ public class VistaConsultaProveedores extends javax.swing.JFrame implements Vist
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // Controlador del boton buscar: realiza la búsqueda o filtrado de proveedores
+
     private void botonBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarMouseClicked
-        consultarTabla();
+        proveedorBO.cargarTabla(tablaProveedores, this.txbBuscar.getText());
     }//GEN-LAST:event_botonBuscarMouseClicked
-    // Controlador del cuadro de texto Buscar: realiza la búsqueda o filtrado de proveedores al presionar la tecla enter
+   
     private void txbBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txbBuscarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            consultarTabla();
+            proveedorBO.cargarTabla(tablaProveedores, this.txbBuscar.getText());
         }
     }//GEN-LAST:event_txbBuscarKeyPressed
-    // controlador que actualiza el JTable1 para mostrar los cambios en la base de datos
+
     private void botonActualizarConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarConsultaMouseClicked
-        consultarTabla();
+        proveedorBO.cargarTabla(tablaProveedores, this.txbBuscar.getText());
     }//GEN-LAST:event_botonActualizarConsultaMouseClicked
 
-    // Este método es llamado desde el controlador de la VentanaPrincipal, recibe la ventana de consulta de proveedores
-    // generada en la fabrica abstracta. Adicionalmente inicia un controlador (controladorConsultaProveedores)
-    // para monitorear la accion sobre los botones de agregar y modificar proveedor
     @Override
-    public void iniciar(VistaConsulta consultaP) {
-        VistaConsultaProveedores consultaProveedores = (VistaConsultaProveedores) consultaP;
-        consultaProveedores.setVisible(true);
-        consultaProveedores.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
-        ControladorProveedor controladorConsultaProveedores = new ControladorProveedor(consultaProveedores);
-        consultaProveedores.consultarTabla();
-    }
-
-    // Este método actualiza el Jtable1, se utiliza tambien para la búsqueda y filtrado de registros
-    public void consultarTabla() {
-        //Limpiar la tabla
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-
-        //Conectar a la base
-        String sql = "SELECT * FROM PROVEEDORES WHERE CLAVE_PROVEEDOR LIKE '%" + txbBuscar.getText() + "%' OR NOMBRE LIKE '%" + txbBuscar.getText()
-                + "%' OR TIPOID LIKE '%" + txbBuscar.getText() + "%' OR FOLIOID LIKE '%" + txbBuscar.getText() + "%'";
-
-        try (Connection conn = ConexionSQL.getConexion();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery(sql)) {
-
-            while (rs.next()) {
-                String claveProveedor = String.valueOf(rs.getInt("claveProveedor"));
-                String nombre = rs.getString("nombre");
-                String tipoId = rs.getString("tipoId");
-                String folioId = rs.getString("folioId");
-
-                String tbData[] = {claveProveedor, nombre, tipoId, folioId};
-                DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
-
-                tblModel.addRow(tbData);
-
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+    public void iniciar() {      
+        this.setVisible(true);
+        this.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+        ControladorProveedor controladorConsultaProveedores = new ControladorProveedor(this);
+        proveedorBO.cargarTabla(tablaProveedores, this.txbBuscar.getText());
     }
 
 
@@ -206,7 +161,7 @@ public class VistaConsultaProveedores extends javax.swing.JFrame implements Vist
     public javax.swing.JButton botonNuevoProveedor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable jTable1;
+    public javax.swing.JTable tablaProveedores;
     public javax.swing.JTextField txbBuscar;
     // End of variables declaration//GEN-END:variables
 

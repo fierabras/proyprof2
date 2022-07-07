@@ -9,6 +9,6 @@ package fabrica;
  */
 public interface VistaConsulta {
     
-    public void iniciar(VistaConsulta consulta);
+    public void iniciar();
     
 }
