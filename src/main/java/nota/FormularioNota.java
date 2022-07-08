@@ -175,7 +175,7 @@ public class FormularioNota extends javax.swing.JFrame {
 
         etiquetaProveedorDato.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         etiquetaProveedorDato.setForeground(new java.awt.Color(0, 0, 0));
-        etiquetaProveedorDato.setText(".");
+        etiquetaProveedorDato.setToolTipText("");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -468,6 +468,7 @@ public class FormularioNota extends javax.swing.JFrame {
 
     private void botonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarMouseClicked
         notaBO.guardarNotaBD(this.campoClaveProveedor.getText(), this.notaBO.obtenerPartidas());
+        this.limpiarCapturaNota();
     }//GEN-LAST:event_botonGuardarMouseClicked
 
     private void campoClaveProveedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoClaveProveedorFocusLost
@@ -516,7 +517,7 @@ public class FormularioNota extends javax.swing.JFrame {
         }       
     }//GEN-LAST:event_botonAgregarPartidaKeyPressed
 
-    private void agregarPartida(){
+    public void agregarPartida(){
         if (this.campoClaveMaterial.getText().equals("")) {
             Component frame = new JFrame();
             JOptionPane.showMessageDialog(frame, "Debe capturar la clave del material", "Aviso", JOptionPane.WARNING_MESSAGE);
@@ -542,8 +543,15 @@ public class FormularioNota extends javax.swing.JFrame {
         this.mostrarTotales();
     }
     
+    public void limpiarCapturaNota(){
+        this.campoClaveProveedor.setText("");
+        this.etiquetaProveedorDato.setText("");
+        this.limpiarCapturaPartida();
+        this.tablaModelo.setRowCount(0);
+        this.notaBO.listaPartidas.vaciarLista();
+    }
     
-    private void limpiarCapturaPartida() {
+    public void limpiarCapturaPartida() {
         this.campoClaveMaterial.setText("");
         this.etiquetaDescripcionMaterial.setText("");
         this.campoPrecio.setText("0.00");
@@ -551,20 +559,20 @@ public class FormularioNota extends javax.swing.JFrame {
         this.campoClaveMaterial.requestFocus();
     }
 
-    private void cargarProveedor() {
+    public void cargarProveedor() {
         ProveedorVO proveedorVO = new ProveedorVO();
         proveedorVO = proveedorBO.obtenerProveedor(this.campoClaveProveedor.getText());
         this.etiquetaProveedorDato.setText(proveedorVO.getNombre());
     }
 
-    private void cargarMaterial() {
+    public void cargarMaterial() {
         MaterialVO materialVO = new MaterialVO();
         materialVO = materialBO.obtenerMaterial(this.campoClaveMaterial.getText());
         this.etiquetaDescripcionMaterial.setText(materialVO.getDescripcion());
         this.campoPrecio.setText(String.valueOf(materialVO.getPrecio()));
     }
 
-    private void recargarTablaPartidas() {
+    public void recargarTablaPartidas() {
 
         tablaModelo.setRowCount(0);
 
@@ -578,13 +586,13 @@ public class FormularioNota extends javax.swing.JFrame {
         }
     }
 
-    private void mostrarSubtotal() {
+    public void mostrarSubtotal() {
         double subtotal;
         subtotal = Double.valueOf(this.campoCantidad.getText()) * Double.valueOf(this.campoPrecio.getText());
         this.etiquetaSubtotalDato.setText(String.valueOf(subtotal));
     }
 
-    private void mostrarTotales() {
+    public void mostrarTotales() {
         double total = 0.0;
         double pesoTotal = 0.0;
 

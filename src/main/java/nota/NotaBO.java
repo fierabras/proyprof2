@@ -56,13 +56,12 @@ public class NotaBO {
         for (int i = 0; i < listaPartidas.size(); i++) {
             UUID uuid = UUID.randomUUID();
             String sentenciaSql = "INSERT INTO PARTIDAS (CLAVE_NOTA,CLAVE_PARTIDA,CANTIDAD,CLAVE_MATERIAL,DESCRIPCION,PRECIO,SUBTOTAL,UUID_NOTA,UUID_PARTIDA) "
-                    + "VALUES ('" + claveNota + "','" + i + "','"  + listaPartidas.get(i).getCantidad() + "','" + listaPartidas.get(i).getMaterial().getClaveMaterial()
+                    + "VALUES ('" + claveNota + "','" + (i+1) + "','"  + listaPartidas.get(i).getCantidad() + "','" + listaPartidas.get(i).getMaterial().getClaveMaterial()
                     + "','" + listaPartidas.get(i).getMaterial().getDescripcion()+ "','" + listaPartidas.get(i).getMaterial().getPrecio()
                     + "','" + listaPartidas.get(i).getSubtotal() + "','" + uuidNota  + "','" + uuid.toString() +"')";
             conn.insert(sentenciaSql);
             System.out.println("Sentencia de insert partida: " + sentenciaSql);
-        }
-        
+        }        
     }
     
     public String obtenerClaveNota(String uuidNota){

@@ -20,4 +20,8 @@ public class ListaPartida {
         return lista;
     }
     
+    public void vaciarLista(){
+        lista.removeAll(lista);
+    }
+    
 }
