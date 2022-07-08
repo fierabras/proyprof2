@@ -1,12 +1,12 @@
-
 package nota;
 
 import proveedor.ProveedorVO;
 import java.util.List;
 
-
 public class NotaVO {
+
     private int claveNota;
+    private String uuidNota;
     private String fecha;
     private ProveedorVO proveedor = new ProveedorVO();
     private List<PartidaVO> listaPartidas;
@@ -19,6 +19,14 @@ public class NotaVO {
 
     public void setClaveNota(int claveNota) {
         this.claveNota = claveNota;
+    }
+
+    public String getUuidNota() {
+        return uuidNota;
+    }
+
+    public void setUuidNota(String uuidNota) {
+        this.uuidNota = uuidNota;
     }
 
     public String getFecha() {
@@ -60,10 +68,5 @@ public class NotaVO {
     public void setTotal(double total) {
         this.total = total;
     }
-    
-    
-    
-    
-    
-    
+
 }

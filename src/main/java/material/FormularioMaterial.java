@@ -28,9 +28,9 @@ public class FormularioMaterial extends javax.swing.JFrame implements VistaFormu
         jLabel4 = new javax.swing.JLabel();
         botonGuardar = new javax.swing.JButton();
         botonCancelar = new javax.swing.JButton();
-        txbClaveMaterial = new javax.swing.JTextField();
-        txbDescripcion = new javax.swing.JTextField();
-        txbPrecio = new javax.swing.JTextField();
+        campoClaveMaterial = new javax.swing.JTextField();
+        campoDescripcion = new javax.swing.JTextField();
+        campoPrecio = new javax.swing.JTextField();
         botonGuardarCambio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -83,7 +83,7 @@ public class FormularioMaterial extends javax.swing.JFrame implements VistaFormu
             }
         });
 
-        txbClaveMaterial.setEditable(false);
+        campoClaveMaterial.setEditable(false);
 
         botonGuardarCambio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ok24x24.png"))); // NOI18N
         botonGuardarCambio.setText("Guardar Cambio");
@@ -115,9 +115,9 @@ public class FormularioMaterial extends javax.swing.JFrame implements VistaFormu
                             .addComponent(jLabel2))
                         .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txbPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txbDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txbClaveMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(campoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoClaveMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(110, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -127,15 +127,15 @@ public class FormularioMaterial extends javax.swing.JFrame implements VistaFormu
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txbClaveMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoClaveMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txbDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txbPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonGuardar)
@@ -149,12 +149,12 @@ public class FormularioMaterial extends javax.swing.JFrame implements VistaFormu
 
 
     private void botonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarMouseClicked
-        if ((txbDescripcion.getText().isEmpty()) || (txbPrecio.getText().isEmpty())) {
+        if ((campoDescripcion.getText().isEmpty()) || (campoPrecio.getText().isEmpty())) {
             JFrame frame = null;
             JOptionPane.showMessageDialog(frame, "Debes llenar todos los datos para continuar", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        materialBO.guardarMaterial(txbDescripcion.getText(), txbPrecio.getText());
+        materialBO.guardarMaterial(campoDescripcion.getText(), campoPrecio.getText());
         super.dispose();
     }//GEN-LAST:event_botonGuardarMouseClicked
 
@@ -163,12 +163,12 @@ public class FormularioMaterial extends javax.swing.JFrame implements VistaFormu
     }//GEN-LAST:event_botonCancelarMouseClicked
 
     private void botonGuardarCambioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarCambioMouseClicked
-        if ((this.txbDescripcion.getText().isEmpty()) || (this.txbPrecio.getText().isEmpty())) {
+        if ((this.campoDescripcion.getText().isEmpty()) || (this.campoPrecio.getText().isEmpty())) {
             JFrame frame = null;
             JOptionPane.showMessageDialog(frame, "Debes llenar todos los datos para continuar", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        materialBO.actualizarMaterial(txbClaveMaterial.getText(), txbDescripcion.getText(), txbPrecio.getText());
+        materialBO.actualizarMaterial(campoClaveMaterial.getText(), campoDescripcion.getText(), campoPrecio.getText());
         super.dispose();
     }//GEN-LAST:event_botonGuardarCambioMouseClicked
 
@@ -176,7 +176,7 @@ public class FormularioMaterial extends javax.swing.JFrame implements VistaFormu
     public void iniciar() {
         this.setVisible(true);
         int ClaveSiguienteProveedor = ConexionBD.obtenerClave("SELECT MAX(CLAVE_MATERIAL) FROM MATERIALES") + 1;
-        this.txbClaveMaterial.setText(String.valueOf(ClaveSiguienteProveedor));
+        this.campoClaveMaterial.setText(String.valueOf(ClaveSiguienteProveedor));
         this.botonGuardarCambio.setVisible(false);
     }
 
@@ -198,9 +198,9 @@ public class FormularioMaterial extends javax.swing.JFrame implements VistaFormu
         String descripcion = consultaM.tablaMateriales.getValueAt(row, 1).toString();
         String precio = consultaM.tablaMateriales.getValueAt(row, 2).toString();
 
-        formularioMaterial.txbClaveMaterial.setText(claveMaterial);
-        formularioMaterial.txbDescripcion.setText(descripcion);
-        formularioMaterial.txbPrecio.setText(precio);
+        formularioMaterial.campoClaveMaterial.setText(claveMaterial);
+        formularioMaterial.campoDescripcion.setText(descripcion);
+        formularioMaterial.campoPrecio.setText(precio);
 
         formularioMaterial.botonGuardar.setVisible(false);
 
@@ -212,14 +212,14 @@ public class FormularioMaterial extends javax.swing.JFrame implements VistaFormu
     public javax.swing.JButton botonCancelar;
     public javax.swing.JButton botonGuardar;
     public javax.swing.JButton botonGuardarCambio;
+    public javax.swing.JTextField campoClaveMaterial;
+    public javax.swing.JTextField campoDescripcion;
+    public javax.swing.JTextField campoPrecio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    public javax.swing.JTextField txbClaveMaterial;
-    public javax.swing.JTextField txbDescripcion;
-    public javax.swing.JTextField txbPrecio;
     // End of variables declaration//GEN-END:variables
 
 }

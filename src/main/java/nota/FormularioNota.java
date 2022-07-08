@@ -2,15 +2,15 @@ package nota;
 
 import utilerias.Fecha;
 import java.awt.Component;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import material.MaterialBO;
 import material.MaterialVO;
-import material.VistaConsultaMateriales;
 import proveedor.ProveedorBO;
 import proveedor.ProveedorVO;
-import proveedor.VistaConsultaProveedores;
+
 
 /**
  * @author Jesus Armando Mendoza Romero
@@ -144,12 +144,12 @@ public class FormularioNota extends javax.swing.JFrame {
         etiquetaFechaDato.setForeground(new java.awt.Color(204, 204, 204));
         etiquetaFechaDato.setText(Fecha.obtenerFechaHoy());
 
-        etiquetaFolio.setBackground(new java.awt.Color(204, 204, 204));
-        etiquetaFolio.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        etiquetaFolio.setText("Folio");
+        etiquetaFolio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        etiquetaFolio.setForeground(new java.awt.Color(204, 204, 204));
+        etiquetaFolio.setText("Folio:");
 
         etiquetaFolioDato.setBackground(new java.awt.Color(204, 204, 204));
-        etiquetaFolioDato.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        etiquetaFolioDato.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         etiquetaFolioDato.setForeground(new java.awt.Color(255, 0, 51));
         etiquetaFolioDato.setText("1054");
 
@@ -240,6 +240,11 @@ public class FormularioNota extends javax.swing.JFrame {
         botonAgregarPartida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonAgregarPartidaMouseClicked(evt);
+            }
+        });
+        botonAgregarPartida.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                botonAgregarPartidaKeyPressed(evt);
             }
         });
 
@@ -337,7 +342,7 @@ public class FormularioNota extends javax.swing.JFrame {
         );
         panelPartidasLayout.setVerticalGroup(
             panelPartidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
         );
 
         etiquetaPesoTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -438,30 +443,7 @@ public class FormularioNota extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAgregarPartidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAgregarPartidaMouseClicked
-
-        if (this.campoClaveMaterial.getText().equals("")) {
-            Component frame = new JFrame();
-            JOptionPane.showMessageDialog(frame, "Debe capturar la clave del material", "Aviso", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-        MaterialVO materialVO = new MaterialVO();
-        PartidaVO partidaVO = new PartidaVO();
-
-        materialVO.setClaveMaterial(Integer.parseInt(this.campoClaveMaterial.getText()));
-        materialVO.setDescripcion(this.etiquetaDescripcionMaterial.getText());
-        materialVO.setPrecio(Double.valueOf(this.campoPrecio.getText()));
-
-        partidaVO.setCantidad(Double.valueOf(this.campoCantidad.getText()));
-        partidaVO.setMaterial(materialVO);
-        partidaVO.setSubtotal(materialVO.getPrecio() * partidaVO.getCantidad());
-
-        this.notaBO.agregarPartida(partidaVO);
-
-        this.recargarTablaPartidas();
-        this.limpiarCapturaPartida();
-        this.mostrarSubtotal();
-        this.mostrarTotales();
+        this.agregarPartida();        
     }//GEN-LAST:event_botonAgregarPartidaMouseClicked
 
     private void campoCantidadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoCantidadFocusLost
@@ -485,22 +467,23 @@ public class FormularioNota extends javax.swing.JFrame {
     }//GEN-LAST:event_botonCancelarMouseClicked
 
     private void botonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarMouseClicked
-        notaBO.guardarNota(this.campoClaveProveedor.toString(), this.notaBO.obtenerPartidas());
+        notaBO.guardarNotaBD(this.campoClaveProveedor.getText(), this.notaBO.obtenerPartidas());
     }//GEN-LAST:event_botonGuardarMouseClicked
 
     private void campoClaveProveedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoClaveProveedorFocusLost
         if (this.campoClaveProveedor.getText().equals("") || this.campoClaveProveedor.getText() == null) {
-            System.out.println("campos clave proveedor vacia");
+            System.out.println("campo clave proveedor vacia");
             return;
         }
         this.cargarProveedor();
     }//GEN-LAST:event_campoClaveProveedorFocusLost
 
     private void campoClaveMaterialFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoClaveMaterialFocusLost
-        MaterialVO materialVO = new MaterialVO();
-        materialVO = materialBO.obtenerMaterial(this.campoClaveMaterial.getText());
-        this.etiquetaDescripcionMaterial.setText(materialVO.getDescripcion());
-        this.campoPrecio.setText(String.valueOf(materialVO.getPrecio()));
+        if (this.campoClaveMaterial.getText().equals("") || this.campoClaveMaterial.getText() == null) {
+            System.out.println("campo clave material vacia");
+            return;
+        }
+        this.cargarMaterial();
     }//GEN-LAST:event_campoClaveMaterialFocusLost
 
     private void botonBuscarProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarProveedorMouseClicked
@@ -515,10 +498,51 @@ public class FormularioNota extends javax.swing.JFrame {
     }//GEN-LAST:event_botonBuscarProveedorMouseClicked
 
     private void botonBuscarMaterialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarMaterialMouseClicked
+        MiniConsultaMateriales miniConsulta = new MiniConsultaMateriales(this, true);
+        miniConsulta.setVisible(true);
+        while (miniConsulta.isVisible()) {
 
+        }
+        this.campoClaveMaterial.setText(miniConsulta.getClave());
+        this.cargarMaterial();
+        this.campoCantidad.grabFocus();
+        this.campoCantidad.selectAll();
 
     }//GEN-LAST:event_botonBuscarMaterialMouseClicked
 
+    private void botonAgregarPartidaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_botonAgregarPartidaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.agregarPartida();
+        }       
+    }//GEN-LAST:event_botonAgregarPartidaKeyPressed
+
+    private void agregarPartida(){
+        if (this.campoClaveMaterial.getText().equals("")) {
+            Component frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, "Debe capturar la clave del material", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        MaterialVO materialVO = new MaterialVO();
+        PartidaVO partidaVO = new PartidaVO();
+
+        materialVO.setClaveMaterial(Integer.parseInt(this.campoClaveMaterial.getText()));
+        materialVO.setDescripcion(this.etiquetaDescripcionMaterial.getText());
+        materialVO.setPrecio(Double.valueOf(this.campoPrecio.getText()));
+
+        partidaVO.setCantidad(Double.valueOf(this.campoCantidad.getText()));
+        partidaVO.setMaterial(materialVO);
+        partidaVO.setSubtotal(materialVO.getPrecio() * partidaVO.getCantidad());
+
+        this.notaBO.agregarPartida(partidaVO);
+
+        this.recargarTablaPartidas();
+        this.limpiarCapturaPartida();
+        this.mostrarSubtotal();
+        this.mostrarTotales();
+    }
+    
+    
     private void limpiarCapturaPartida() {
         this.campoClaveMaterial.setText("");
         this.etiquetaDescripcionMaterial.setText("");
@@ -531,6 +555,13 @@ public class FormularioNota extends javax.swing.JFrame {
         ProveedorVO proveedorVO = new ProveedorVO();
         proveedorVO = proveedorBO.obtenerProveedor(this.campoClaveProveedor.getText());
         this.etiquetaProveedorDato.setText(proveedorVO.getNombre());
+    }
+
+    private void cargarMaterial() {
+        MaterialVO materialVO = new MaterialVO();
+        materialVO = materialBO.obtenerMaterial(this.campoClaveMaterial.getText());
+        this.etiquetaDescripcionMaterial.setText(materialVO.getDescripcion());
+        this.campoPrecio.setText(String.valueOf(materialVO.getPrecio()));
     }
 
     private void recargarTablaPartidas() {
@@ -554,19 +585,18 @@ public class FormularioNota extends javax.swing.JFrame {
     }
 
     private void mostrarTotales() {
-        Double total = 0.0;
-        Double totalPeso = 0.0;
+        double total = 0.0;
+        double pesoTotal = 0.0;
 
         for (int i = 0; i < notaBO.obtenerPartidas().size(); i++) {
             total += notaBO.obtenerPartidas().get(i).getSubtotal();
         }
-
         for (int i = 0; i < notaBO.obtenerPartidas().size(); i++) {
-            totalPeso += notaBO.obtenerPartidas().get(i).getCantidad();
+            pesoTotal += notaBO.obtenerPartidas().get(i).getCantidad();
         }
-
+        
         this.etiquetaTotalDato.setText(String.valueOf(total));
-        this.etiquetaPesoTotalDato.setText(String.valueOf(totalPeso));
+        this.etiquetaPesoTotalDato.setText(String.valueOf(pesoTotal));
     }
 
 

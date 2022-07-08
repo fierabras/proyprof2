@@ -7,6 +7,8 @@ import material.MaterialVO;
 public class PartidaVO {
     private int claveNota;
     private int clavePartida;
+    private String uuidNota;
+    private String uuidPartida;
     private double cantidad;
     private MaterialVO material= new MaterialVO();    
     private double subtotal;
@@ -25,6 +27,22 @@ public class PartidaVO {
 
     public void setClavePartida(int clavePartida) {
         this.clavePartida = clavePartida;
+    }
+
+    public String getUuidNota() {
+        return uuidNota;
+    }
+
+    public void setUuidNota(String uuidNota) {
+        this.uuidNota = uuidNota;
+    }
+
+    public String getUuidPartida() {
+        return uuidPartida;
+    }
+
+    public void setUuidPartida(String uuidPartida) {
+        this.uuidPartida = uuidPartida;
     }
 
     public double getCantidad() {
@@ -50,5 +68,6 @@ public class PartidaVO {
     public void setSubtotal(double subtotal) {
         this.subtotal = subtotal;
     }
-    
+
+   
 }

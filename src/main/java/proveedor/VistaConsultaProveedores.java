@@ -22,7 +22,7 @@ public class VistaConsultaProveedores extends javax.swing.JFrame implements Vist
 
         jPanel1 = new javax.swing.JPanel();
         botonNuevoProveedor = new javax.swing.JButton();
-        txbBuscar = new javax.swing.JTextField();
+        campoBuscar = new javax.swing.JTextField();
         botonBuscar = new javax.swing.JButton();
         botonModificarProveedor = new javax.swing.JButton();
         botonActualizarConsulta = new javax.swing.JButton();
@@ -37,9 +37,9 @@ public class VistaConsultaProveedores extends javax.swing.JFrame implements Vist
         botonNuevoProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addUser24x24.png"))); // NOI18N
         botonNuevoProveedor.setText("Nuevo Proveedor");
 
-        txbBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+        campoBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txbBuscarKeyPressed(evt);
+                campoBuscarKeyPressed(evt);
             }
         });
 
@@ -74,7 +74,7 @@ public class VistaConsultaProveedores extends javax.swing.JFrame implements Vist
                 .addGap(40, 40, 40)
                 .addComponent(botonActualizarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
-                .addComponent(txbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonBuscar)
                 .addGap(13, 13, 13))
@@ -85,7 +85,7 @@ public class VistaConsultaProveedores extends javax.swing.JFrame implements Vist
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonNuevoProveedor)
-                    .addComponent(txbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonBuscar)
                     .addComponent(botonModificarProveedor)
                     .addComponent(botonActualizarConsulta))
@@ -132,17 +132,17 @@ public class VistaConsultaProveedores extends javax.swing.JFrame implements Vist
 
 
     private void botonBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarMouseClicked
-        proveedorBO.cargarTabla(tablaProveedores, this.txbBuscar.getText());
+        proveedorBO.cargarTabla(tablaProveedores, this.campoBuscar.getText());
     }//GEN-LAST:event_botonBuscarMouseClicked
    
-    private void txbBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txbBuscarKeyPressed
+    private void campoBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBuscarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            proveedorBO.cargarTabla(tablaProveedores, this.txbBuscar.getText());
+            proveedorBO.cargarTabla(tablaProveedores, this.campoBuscar.getText());
         }
-    }//GEN-LAST:event_txbBuscarKeyPressed
+    }//GEN-LAST:event_campoBuscarKeyPressed
 
     private void botonActualizarConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarConsultaMouseClicked
-        proveedorBO.cargarTabla(tablaProveedores, this.txbBuscar.getText());
+        proveedorBO.cargarTabla(tablaProveedores, this.campoBuscar.getText());
     }//GEN-LAST:event_botonActualizarConsultaMouseClicked
 
     @Override
@@ -150,7 +150,7 @@ public class VistaConsultaProveedores extends javax.swing.JFrame implements Vist
         this.setVisible(true);
         this.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         ControladorProveedor controladorConsultaProveedores = new ControladorProveedor(this);
-        proveedorBO.cargarTabla(tablaProveedores, this.txbBuscar.getText());
+        proveedorBO.cargarTabla(tablaProveedores, this.campoBuscar.getText());
     }
 
 
@@ -159,10 +159,10 @@ public class VistaConsultaProveedores extends javax.swing.JFrame implements Vist
     public javax.swing.JButton botonBuscar;
     public javax.swing.JButton botonModificarProveedor;
     public javax.swing.JButton botonNuevoProveedor;
+    public javax.swing.JTextField campoBuscar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tablaProveedores;
-    public javax.swing.JTextField txbBuscar;
     // End of variables declaration//GEN-END:variables
 
 }

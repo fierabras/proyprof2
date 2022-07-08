@@ -31,9 +31,9 @@ public class FormularioProveedor extends javax.swing.JFrame implements VistaForm
         jLabel5 = new javax.swing.JLabel();
         botonGuardar = new javax.swing.JButton();
         botonCancelar = new javax.swing.JButton();
-        txbClaveProveedor = new javax.swing.JTextField();
-        txbNombre = new javax.swing.JTextField();
-        txbfolioId = new javax.swing.JTextField();
+        campoClaveProveedor = new javax.swing.JTextField();
+        campoNombre = new javax.swing.JTextField();
+        campoFolioId = new javax.swing.JTextField();
         comboTipoId = new javax.swing.JComboBox<>();
         botonGuardarCambio = new javax.swing.JButton();
 
@@ -89,7 +89,7 @@ public class FormularioProveedor extends javax.swing.JFrame implements VistaForm
             }
         });
 
-        txbClaveProveedor.setEditable(false);
+        campoClaveProveedor.setEditable(false);
 
         comboTipoId.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IFE", "LICENCIA", "PASAPORTE" }));
 
@@ -118,9 +118,9 @@ public class FormularioProveedor extends javax.swing.JFrame implements VistaForm
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboTipoId, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txbNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txbClaveProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txbfolioId, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoClaveProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoFolioId, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(botonGuardar)
@@ -137,11 +137,11 @@ public class FormularioProveedor extends javax.swing.JFrame implements VistaForm
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txbClaveProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoClaveProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txbNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
@@ -149,7 +149,7 @@ public class FormularioProveedor extends javax.swing.JFrame implements VistaForm
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txbfolioId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoFolioId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonGuardar)
@@ -168,15 +168,15 @@ public class FormularioProveedor extends javax.swing.JFrame implements VistaForm
     }//GEN-LAST:event_botonGuardarMouseClicked
     
     public void guardar(){
-        if((txbNombre.getText().isEmpty())||(txbfolioId.getText().isEmpty())){
+        if((campoNombre.getText().isEmpty())||(campoFolioId.getText().isEmpty())){
             JFrame frame = null;
             JOptionPane.showMessageDialog(frame, "Debes llenar todos los datos para continuar", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             return;
         } 
         
         ConexionBD conn = ConexionBD.getConexionSQL();
-        String cmd = "INSERT INTO PROVEEDORES (NOMBRE,TIPO_IDENTIFICACION,NUMERO_IDENTIFICACION) VALUES ('" + txbNombre.getText()
-                + "','" + comboTipoId.getSelectedItem() + "','" + txbfolioId.getText() + "')";
+        String cmd = "INSERT INTO PROVEEDORES (NOMBRE,TIPO_IDENTIFICACION,NUMERO_IDENTIFICACION) VALUES ('" + campoNombre.getText()
+                + "','" + comboTipoId.getSelectedItem() + "','" + campoFolioId.getText() + "')";
         conn.insert(cmd);
     }
 
@@ -193,15 +193,15 @@ public class FormularioProveedor extends javax.swing.JFrame implements VistaForm
     }//GEN-LAST:event_botonGuardarCambioMouseClicked
     
     public void guardarCambio(){
-        if((this.txbNombre.getText().isEmpty())||(this.txbfolioId.getText().isEmpty())){
+        if((this.campoNombre.getText().isEmpty())||(this.campoFolioId.getText().isEmpty())){
             JFrame frame = null;
             JOptionPane.showMessageDialog(frame, "Debes llenar todos los datos para continuar", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             return;
         } 
         ConexionBD conn = ConexionBD.getConexionSQL();
-        String cmd = "UPDATE PROVEEDORES SET NOMBRE='" + txbNombre.getText() + "',TIPO_IDENTIFICACION='"
-                + comboTipoId.getSelectedItem() + "', NUMERO_IDENTIFICACION='" + txbfolioId.getText()
-                + "' WHERE CLAVE_PROVEEDOR=" + txbClaveProveedor.getText();
+        String cmd = "UPDATE PROVEEDORES SET NOMBRE='" + campoNombre.getText() + "',TIPO_IDENTIFICACION='"
+                + comboTipoId.getSelectedItem() + "', NUMERO_IDENTIFICACION='" + campoFolioId.getText()
+                + "' WHERE CLAVE_PROVEEDOR=" + campoClaveProveedor.getText();
         conn.update(cmd);
     }
        
@@ -209,7 +209,7 @@ public class FormularioProveedor extends javax.swing.JFrame implements VistaForm
     public void iniciar() {
         this.setVisible(true);
         int ClaveSiguienteProveedor = ConexionBD.obtenerClave("SELECT MAX(CLAVE_PROVEEDOR) FROM PROVEEDORES")+1;
-        this.txbClaveProveedor.setText(String.valueOf(ClaveSiguienteProveedor));        
+        this.campoClaveProveedor.setText(String.valueOf(ClaveSiguienteProveedor));        
         this.botonGuardarCambio.setVisible(false);  
     }    
     
@@ -233,10 +233,10 @@ public class FormularioProveedor extends javax.swing.JFrame implements VistaForm
         String tipoId = consultaP.tablaProveedores.getValueAt(row, 2).toString();
         String folioId = consultaP.tablaProveedores.getValueAt(row, 3).toString();
 
-        vistaProveedor.txbClaveProveedor.setText(claveProveedor);
-        vistaProveedor.txbNombre.setText(nombre);
+        vistaProveedor.campoClaveProveedor.setText(claveProveedor);
+        vistaProveedor.campoNombre.setText(nombre);
         vistaProveedor.comboTipoId.setSelectedItem(tipoId);
-        vistaProveedor.txbfolioId.setText(folioId);
+        vistaProveedor.campoFolioId.setText(folioId);
         vistaProveedor.botonGuardar.setVisible(false);        
         
         consultaP.tablaProveedores.clearSelection();
@@ -246,6 +246,9 @@ public class FormularioProveedor extends javax.swing.JFrame implements VistaForm
     public javax.swing.JButton botonCancelar;
     public javax.swing.JButton botonGuardar;
     private javax.swing.JButton botonGuardarCambio;
+    public javax.swing.JTextField campoClaveProveedor;
+    public javax.swing.JTextField campoFolioId;
+    public javax.swing.JTextField campoNombre;
     public javax.swing.JComboBox<String> comboTipoId;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -253,9 +256,6 @@ public class FormularioProveedor extends javax.swing.JFrame implements VistaForm
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    public javax.swing.JTextField txbClaveProveedor;
-    public javax.swing.JTextField txbNombre;
-    public javax.swing.JTextField txbfolioId;
     // End of variables declaration//GEN-END:variables
    
 }

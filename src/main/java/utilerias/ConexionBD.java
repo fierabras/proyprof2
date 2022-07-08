@@ -65,7 +65,7 @@ public class ConexionBD {
         try ( Connection conn = this.conectar();  PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.executeUpdate();
             JFrame frame = null;
-            JOptionPane.showMessageDialog(frame, "Se ha insertado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(frame, "Se ha guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

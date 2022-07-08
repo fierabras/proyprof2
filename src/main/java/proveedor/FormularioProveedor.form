@@ -39,9 +39,9 @@
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="comboTipoId" alignment="0" min="-2" pref="99" max="-2" attributes="0"/>
-                          <Component id="txbNombre" alignment="0" min="-2" pref="311" max="-2" attributes="0"/>
-                          <Component id="txbClaveProveedor" alignment="0" min="-2" pref="47" max="-2" attributes="0"/>
-                          <Component id="txbfolioId" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                          <Component id="campoNombre" alignment="0" min="-2" pref="311" max="-2" attributes="0"/>
+                          <Component id="campoClaveProveedor" alignment="0" min="-2" pref="47" max="-2" attributes="0"/>
+                          <Component id="campoFolioId" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -64,12 +64,12 @@
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txbClaveProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoClaveProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txbNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoNombre" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -79,7 +79,7 @@
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txbfolioId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoFolioId" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="43" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -185,7 +185,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="txbClaveProveedor">
+    <Component class="javax.swing.JTextField" name="campoClaveProveedor">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
@@ -193,12 +193,12 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="txbNombre">
+    <Component class="javax.swing.JTextField" name="campoNombre">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="txbfolioId">
+    <Component class="javax.swing.JTextField" name="campoFolioId">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>

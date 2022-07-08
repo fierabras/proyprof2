@@ -46,15 +46,15 @@ public class Pruebas {
 
         FormularioProveedor formulario1 = new FormularioProveedor();
         formulario1.iniciar();
-        int clave1 = Integer.parseInt(formulario1.txbClaveProveedor.getText());
-        formulario1.txbNombre.setText("Proveedor Prueba");
-        formulario1.txbfolioId.setText("00000000");
+        int clave1 = Integer.parseInt(formulario1.campoClaveProveedor.getText());
+        formulario1.campoNombre.setText("Proveedor Prueba");
+        formulario1.campoFolioId.setText("00000000");
         formulario1.guardar();
         formulario1.dispose();
 
         FormularioProveedor formulario2 = new FormularioProveedor();
         formulario2.iniciar();
-        int clave2 = Integer.parseInt(formulario2.txbClaveProveedor.getText());
+        int clave2 = Integer.parseInt(formulario2.campoClaveProveedor.getText());
 
         assertTrue((clave1 + 1) == clave2);
 
@@ -65,15 +65,15 @@ public class Pruebas {
 
         FormularioMaterial formulario1 = new FormularioMaterial();
         formulario1.iniciar();
-        int clave1 = Integer.parseInt(formulario1.txbClaveMaterial.getText());
-        formulario1.txbDescripcion.setText("Material Prueba");
-        formulario1.txbPrecio.setText("0.00");
+        int clave1 = Integer.parseInt(formulario1.campoClaveMaterial.getText());
+        formulario1.campoDescripcion.setText("Material Prueba");
+        formulario1.campoPrecio.setText("0.00");
         //formulario1.guardar();        
         formulario1.dispose();
 
         FormularioMaterial formulario2 = new FormularioMaterial();
         formulario2.iniciar();
-        int clave2 = Integer.parseInt(formulario2.txbClaveMaterial.getText());
+        int clave2 = Integer.parseInt(formulario2.campoClaveMaterial.getText());
 
         assertTrue((clave1 + 1) == clave2);
 
@@ -84,9 +84,9 @@ public class Pruebas {
 
         FormularioProveedor formulario1 = new FormularioProveedor();
         formulario1.iniciar();
-        int clave = Integer.parseInt(formulario1.txbClaveProveedor.getText());
-        formulario1.txbNombre.setText("Proveedor Prueba");
-        formulario1.txbfolioId.setText("00000000");
+        int clave = Integer.parseInt(formulario1.campoClaveProveedor.getText());
+        formulario1.campoNombre.setText("Proveedor Prueba");
+        formulario1.campoFolioId.setText("00000000");
         formulario1.guardar();
         formulario1.dispose();
 
@@ -97,10 +97,10 @@ public class Pruebas {
         assertTrue(clave == claveBD);
 
         String nombre = consulta.get(0).get("NOMBRE").toString();
-        assertTrue(formulario1.txbNombre.getText() == nombre);
+        assertTrue(formulario1.campoNombre.getText() == nombre);
 
         String numId = consulta.get(0).get("NUMERO_IDENTIFICACION").toString();
-        assertTrue(formulario1.txbfolioId.getText() == numId);
+        assertTrue(formulario1.campoFolioId.getText() == numId);
     }
 
 }

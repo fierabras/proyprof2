@@ -21,7 +21,7 @@ public class VistaConsultaMateriales extends javax.swing.JFrame implements Vista
 
         jPanel2 = new javax.swing.JPanel();
         botonNuevoMaterial = new javax.swing.JButton();
-        txbBuscar = new javax.swing.JTextField();
+        campoBuscar = new javax.swing.JTextField();
         botonBuscar = new javax.swing.JButton();
         botonModificarMaterial = new javax.swing.JButton();
         botonActualizarConsulta = new javax.swing.JButton();
@@ -36,9 +36,9 @@ public class VistaConsultaMateriales extends javax.swing.JFrame implements Vista
         botonNuevoMaterial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add24x24.png"))); // NOI18N
         botonNuevoMaterial.setText("Nuevo Material");
 
-        txbBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+        campoBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txbBuscarKeyPressed(evt);
+                campoBuscarKeyPressed(evt);
             }
         });
 
@@ -73,7 +73,7 @@ public class VistaConsultaMateriales extends javax.swing.JFrame implements Vista
                 .addGap(34, 34, 34)
                 .addComponent(botonActualizarConsulta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonBuscar)
                 .addGap(23, 23, 23))
@@ -84,7 +84,7 @@ public class VistaConsultaMateriales extends javax.swing.JFrame implements Vista
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonNuevoMaterial)
-                    .addComponent(txbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonBuscar)
                     .addComponent(botonModificarMaterial)
                     .addComponent(botonActualizarConsulta))
@@ -131,17 +131,17 @@ public class VistaConsultaMateriales extends javax.swing.JFrame implements Vista
 
 
     private void botonBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBuscarMouseClicked
-        materialBO.cargarTabla(this.tablaMateriales, this.txbBuscar.getText());
+        materialBO.cargarTabla(this.tablaMateriales, this.campoBuscar.getText());
     }//GEN-LAST:event_botonBuscarMouseClicked
 
-    private void txbBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txbBuscarKeyPressed
+    private void campoBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoBuscarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            materialBO.cargarTabla(this.tablaMateriales, this.txbBuscar.getText());
+            materialBO.cargarTabla(this.tablaMateriales, this.campoBuscar.getText());
         }
-    }//GEN-LAST:event_txbBuscarKeyPressed
+    }//GEN-LAST:event_campoBuscarKeyPressed
 
     private void botonActualizarConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarConsultaMouseClicked
-        materialBO.cargarTabla(this.tablaMateriales, this.txbBuscar.getText());
+        materialBO.cargarTabla(this.tablaMateriales, this.campoBuscar.getText());
     }//GEN-LAST:event_botonActualizarConsultaMouseClicked
 
     @Override
@@ -149,7 +149,7 @@ public class VistaConsultaMateriales extends javax.swing.JFrame implements Vista
         this.setVisible(true);
         this.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         ControladorMaterial controladorMaterial = new ControladorMaterial(this);
-        materialBO.cargarTabla(this.tablaMateriales, this.txbBuscar.getText());  
+        materialBO.cargarTabla(this.tablaMateriales, this.campoBuscar.getText());  
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -157,9 +157,9 @@ public class VistaConsultaMateriales extends javax.swing.JFrame implements Vista
     public javax.swing.JButton botonBuscar;
     public javax.swing.JButton botonModificarMaterial;
     public javax.swing.JButton botonNuevoMaterial;
+    public javax.swing.JTextField campoBuscar;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTable tablaMateriales;
-    public javax.swing.JTextField txbBuscar;
     // End of variables declaration//GEN-END:variables
 }
