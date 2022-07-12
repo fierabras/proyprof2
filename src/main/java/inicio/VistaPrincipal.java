@@ -85,7 +85,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         botonReportes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         botonReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/notas32x32.png"))); // NOI18N
-        botonReportes.setText("Reportes");
+        botonReportes.setText("Reporte");
         botonReportes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botonReportesMouseClicked(evt);
@@ -142,7 +142,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botonNotasMouseClicked
 
     private void botonReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonReportesMouseClicked
-        Reporte.reporteCompraMateriales();     
+        MiniConsultaFechas miniConsulta = new MiniConsultaFechas(this,true);
+        miniConsulta.setVisible(true);
+        while (miniConsulta.isVisible()) {
+
+        }
+        String fechaInicial = miniConsulta.getFechaInicial();
+        String fechaFinal = miniConsulta.getFechaFinal();
+              
+        Reporte.reporteCompraMateriales(fechaInicial,fechaFinal);  
+        
+        miniConsulta.dispose();
     }//GEN-LAST:event_botonReportesMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

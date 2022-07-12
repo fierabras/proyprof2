@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class Fecha {
 
     
-    private static DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+    private static DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("uuuu/MM/dd");
     private static LocalDateTime hoy = LocalDateTime.now();
     private static String fecha;
 

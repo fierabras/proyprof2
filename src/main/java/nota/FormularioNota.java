@@ -9,6 +9,7 @@ import material.MaterialBO;
 import material.MaterialVO;
 import proveedor.ProveedorBO;
 import proveedor.ProveedorVO;
+import reportes.Reporte;
 
 
 /**
@@ -467,9 +468,11 @@ public class FormularioNota extends javax.swing.JFrame {
     }//GEN-LAST:event_botonCancelarMouseClicked
 
     private void botonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarMouseClicked
-        notaBO.guardarNotaBD(this.campoClaveProveedor.getText(), this.notaBO.obtenerPartidas());
+        
+        notaBO.guardarNotaBD(this.campoClaveProveedor.getText(), this.notaBO.obtenerPartidas());      
         JOptionPane.showMessageDialog(frame, "Se ha guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         this.limpiarCapturaNota();
+        Reporte.emitirTicket(this.notaBO.getUuidNota());
     }//GEN-LAST:event_botonGuardarMouseClicked
 
     private void campoClaveProveedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoClaveProveedorFocusLost

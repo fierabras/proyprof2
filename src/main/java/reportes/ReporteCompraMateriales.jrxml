@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteCompraMateriales2" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="968" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4523845d-dead-4f0b-a5a5-7e42540e6384">
-	<property name="com.jaspersoft.studio.data.sql.tables">
-		<![CDATA[IlBST1ZFRURPUkVTIiBBUyAsNTUsMjI3LGM5MjI0MGE4LTBhOWItNDk0Mi1hYjliLWU5ZGQ1ZWMz
-YTNhZDsiTk9UQVMiIEFTICwxNSwxNyw2OGFlMzIyMS1mNjcxLTQxZGMtYTIzNy0yODc4ZjAzMGE2
-NDY7IlBBUlRJREFTIiBBUyAsMjI5LDMzLDQ2ZWIwZjQzLWIwYjItNGVlZS05ZjdjLTg3YWRjOTYx
-ZmZkNDs=]]>
-	</property>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RecicladoraBD"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="COLECTIVO_RECOLECTORES.jrdax"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -17,15 +12,17 @@ ZmZkNDs=]]>
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="FECHA_INICIAL" class="java.lang.String"/>
+	<parameter name="FECHA_FINAL" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT "NOTAS"."FECHA",
 	"NOTAS"."CLAVE_NOTA",
- 	"PARTIDAS"."CLAVE_MATERIAL",
-	"PARTIDAS"."DESCRIPCION",
-    "PARTIDAS"."CANTIDAD",
-    "PARTIDAS"."PRECIO",
-    "PARTIDAS"."SUBTOTAL",
-    "NOTAS"."CLAVE_PROVEEDOR",
+	"PARTIDAS"."CLAVE_MATERIAL",
+	"MATERIALES"."DESCRIPCION",
+	"PARTIDAS"."CANTIDAD",
+	"PARTIDAS"."PRECIO",
+	"PARTIDAS"."SUBTOTAL",
+	"NOTAS"."CLAVE_PROVEEDOR",
 	"PROVEEDORES"."NOMBRE",
 	"PROVEEDORES"."TIPO_IDENTIFICACION",
 	"PROVEEDORES"."NUMERO_IDENTIFICACION",
@@ -34,7 +31,11 @@ FROM "NOTAS"
 	INNER JOIN "PROVEEDORES" ON 
 	 "NOTAS"."CLAVE_PROVEEDOR" = "PROVEEDORES"."CLAVE_PROVEEDOR" 
 	INNER JOIN "PARTIDAS" ON 
-	 "PARTIDAS"."CLAVE_NOTA" = "NOTAS"."CLAVE_NOTA"]]>
+	 "PARTIDAS"."CLAVE_NOTA" = "NOTAS"."CLAVE_NOTA" 
+	INNER JOIN "MATERIALES" ON 
+	 "MATERIALES"."CLAVE_MATERIAL" = "PARTIDAS"."CLAVE_MATERIAL" 
+WHERE 
+	 "NOTAS"."FECHA" BETWEEN $P{FECHA_INICIAL} AND $P{FECHA_FINAL}]]>
 	</queryString>
 	<field name="FECHA" class="java.lang.Object">
 		<property name="com.jaspersoft.studio.field.name" value="FECHA"/>

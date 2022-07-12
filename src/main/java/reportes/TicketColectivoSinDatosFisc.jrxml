@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ticketColectivo" pageWidth="215" pageHeight="595" columnWidth="215" leftMargin="0" rightMargin="0" topMargin="56" bottomMargin="2" uuid="8e034307-d64a-4831-a47d-e14fab048450">
+	<property name="com.jaspersoft.studio.report.description" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="mm"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="COLECTIVO_RECOLECTORES.jrdax"/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[IlBST1ZFRURPUkVTIiAsMTUsMjE0LDU0YTY1ZjkxLTNhMDEtNGNkMy1iNmY5LWIwYjlhMzEyMDNk
+MzsiUEFSVElEQVMiICw0MTUsMTUsMzJjZWI0ZTYtMDUwOC00NmY0LTg0NDktYjE1ZTIxYmI2N2Ez
+OyJNQVRFUklBTEVTIiAsNTg0LDIyNyxhZGM3OTJhMC04NjVlLTRkOWMtODIyOC0yODE4ZWEyODI2
+ZmY7Ik5PVEFTIiAsMjI1LDY3LDY4MTkzYTVkLTU0ODQtNDlkYS1iZjJjLTE2N2Q2MWZmOWMzOTs=]]>
+	</property>
+	<parameter name="UUID_NOTA" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT "NOTAS"."UUID_NOTA",
+	"NOTAS"."TOTAL",
+	"NOTAS"."PESO_TOTAL",
+	"NOTAS"."CLAVE_PROVEEDOR",
+	"NOTAS"."FECHA",
+	"NOTAS"."CLAVE_NOTA",
+	"PARTIDAS"."CLAVE_NOTA",
+	"PARTIDAS"."CLAVE_PARTIDA",
+	"PARTIDAS"."CANTIDAD",
+	"PARTIDAS"."CLAVE_MATERIAL",
+	"PARTIDAS"."PRECIO",
+	"PARTIDAS"."SUBTOTAL",
+	"PARTIDAS"."UUID_NOTA",
+	"PARTIDAS"."UUID_PARTIDA",
+	"PROVEEDORES"."CLAVE_PROVEEDOR",
+	"PROVEEDORES"."NOMBRE",
+	"PROVEEDORES"."TIPO_IDENTIFICACION",
+	"PROVEEDORES"."NUMERO_IDENTIFICACION",
+	"MATERIALES"."CLAVE_MATERIAL",
+	"MATERIALES"."DESCRIPCION"
+FROM "MATERIALES"
+	INNER JOIN "PARTIDAS" ON 
+	 "PARTIDAS"."CLAVE_MATERIAL" = "MATERIALES"."CLAVE_MATERIAL" 
+	INNER JOIN "NOTAS" ON 
+	 "NOTAS"."CLAVE_NOTA" = "PARTIDAS"."CLAVE_NOTA" 
+	INNER JOIN "PROVEEDORES" ON 
+	 "PROVEEDORES"."CLAVE_PROVEEDOR" = "NOTAS"."CLAVE_PROVEEDOR" 
+WHERE 
+	 "NOTAS"."UUID_NOTA" = $P{UUID_NOTA}]]>
+	</queryString>
+	<field name="UUID_NOTA" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="UUID_NOTA"/>
+		<property name="com.jaspersoft.studio.field.label" value="UUID_NOTA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="NOTAS"/>
+	</field>
+	<field name="TOTAL" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="TOTAL"/>
+		<property name="com.jaspersoft.studio.field.label" value="TOTAL"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="NOTAS"/>
+	</field>
+	<field name="PESO_TOTAL" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="PESO_TOTAL"/>
+		<property name="com.jaspersoft.studio.field.label" value="PESO_TOTAL"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="NOTAS"/>
+	</field>
+	<field name="CLAVE_PROVEEDOR" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="CLAVE_PROVEEDOR"/>
+		<property name="com.jaspersoft.studio.field.label" value="CLAVE_PROVEEDOR"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="NOTAS"/>
+	</field>
+	<field name="FECHA" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="FECHA"/>
+		<property name="com.jaspersoft.studio.field.label" value="FECHA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="NOTAS"/>
+	</field>
+	<field name="CLAVE_NOTA" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="CLAVE_NOTA"/>
+		<property name="com.jaspersoft.studio.field.label" value="CLAVE_NOTA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="NOTAS"/>
+	</field>
+	<field name="COLUMN_7" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="CLAVE_NOTA"/>
+		<property name="com.jaspersoft.studio.field.label" value="CLAVE_NOTA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="PARTIDAS"/>
+	</field>
+	<field name="CLAVE_PARTIDA" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="CLAVE_PARTIDA"/>
+		<property name="com.jaspersoft.studio.field.label" value="CLAVE_PARTIDA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="PARTIDAS"/>
+	</field>
+	<field name="CANTIDAD" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="CANTIDAD"/>
+		<property name="com.jaspersoft.studio.field.label" value="CANTIDAD"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="PARTIDAS"/>
+	</field>
+	<field name="CLAVE_MATERIAL" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="CLAVE_MATERIAL"/>
+		<property name="com.jaspersoft.studio.field.label" value="CLAVE_MATERIAL"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="PARTIDAS"/>
+	</field>
+	<field name="DESCRIPCION" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="DESCRIPCION"/>
+		<property name="com.jaspersoft.studio.field.label" value="DESCRIPCION"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="PARTIDAS"/>
+	</field>
+	<field name="PRECIO" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="PRECIO"/>
+		<property name="com.jaspersoft.studio.field.label" value="PRECIO"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="PARTIDAS"/>
+	</field>
+	<field name="SUBTOTAL" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="SUBTOTAL"/>
+		<property name="com.jaspersoft.studio.field.label" value="SUBTOTAL"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="PARTIDAS"/>
+	</field>
+	<field name="COLUMN_14" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="UUID_NOTA"/>
+		<property name="com.jaspersoft.studio.field.label" value="UUID_NOTA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="PARTIDAS"/>
+	</field>
+	<field name="UUID_PARTIDA" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="UUID_PARTIDA"/>
+		<property name="com.jaspersoft.studio.field.label" value="UUID_PARTIDA"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="PARTIDAS"/>
+	</field>
+	<field name="COLUMN_16" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="CLAVE_PROVEEDOR"/>
+		<property name="com.jaspersoft.studio.field.label" value="CLAVE_PROVEEDOR"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="PROVEEDORES"/>
+	</field>
+	<field name="NOMBRE" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="NOMBRE"/>
+		<property name="com.jaspersoft.studio.field.label" value="NOMBRE"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="PROVEEDORES"/>
+	</field>
+	<field name="TIPO_IDENTIFICACION" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="TIPO_IDENTIFICACION"/>
+		<property name="com.jaspersoft.studio.field.label" value="TIPO_IDENTIFICACION"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="PROVEEDORES"/>
+	</field>
+	<field name="NUMERO_IDENTIFICACION" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.name" value="NUMERO_IDENTIFICACION"/>
+		<property name="com.jaspersoft.studio.field.label" value="NUMERO_IDENTIFICACION"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="PROVEEDORES"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="0" width="38" height="14" uuid="ad0d57f7-948e-4b14-9136-4b57560275e1"/>
+				<textElement>
+					<font fontName="Calibri Light" size="9"/>
+				</textElement>
+				<text><![CDATA[#Prov:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="48" y="1" width="40" height="12" uuid="d40d8eb3-574c-4585-8963-18346dd5abda"/>
+				<textElement>
+					<font fontName="Calibri Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CLAVE_PROVEEDOR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="106" y="1" width="24" height="12" uuid="a5582ec5-7acb-4fef-ac81-a503b38fb39d"/>
+				<textElement>
+					<font fontName="Calibri Light" size="9"/>
+				</textElement>
+				<text><![CDATA[T#:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="131" y="1" width="74" height="12" uuid="1c9cadac-568e-4362-a6ae-2dfea154d6fd"/>
+				<textElement>
+					<font fontName="Calibri Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CLAVE_NOTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="14" width="62" height="16" uuid="99b3db92-5676-4f00-9bdc-11845f9a1661"/>
+				<textElement>
+					<font fontName="Calibri Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FECHA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="31" width="200" height="14" uuid="9a2bc93e-07bd-4c52-8fd9-a32b0f848301"/>
+				<textElement>
+					<font fontName="Calibri Light" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOMBRE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="1" width="200" height="16" uuid="0def9a97-5d26-46a2-b532-b440a179bb48"/>
+				<textElement>
+					<font fontName="Calibri Light" size="9"/>
+				</textElement>
+				<text><![CDATA[ MATERIAL:  BRUTO:  TARA:  NETO:  PRECIO: SUBTOTAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="5" y="17" width="45" height="30" uuid="6321ca05-d0af-4186-88e9-904e0045e115"/>
+				<textElement>
+					<font fontName="Calibri Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESCRIPCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="18" width="32" height="10" uuid="5baf6356-25a2-48c4-b6ce-175bc37d4ce8"/>
+				<textElement>
+					<font fontName="Calibri Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CANTIDAD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="18" width="15" height="10" uuid="8b8297af-45f4-4ad9-acdf-42ff1b364dfb"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="18" width="32" height="10" uuid="3dca5db6-4af3-44df-a174-3f3a411e5ab2"/>
+				<textElement>
+					<font fontName="Calibri Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CANTIDAD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="18" width="41" height="10" uuid="8d623fa9-314d-42c0-b625-abecf9def582"/>
+				<textElement>
+					<font fontName="Calibri Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SUBTOTAL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="51" y="31" width="154" height="1" uuid="b8802ec1-85c0-4346-815b-8d47bdda259f"/>
+			</line>
+			<textField>
+				<reportElement x="133" y="18" width="30" height="10" uuid="d8c17b95-522d-48a2-803a-9d378cc55d81"/>
+				<textElement>
+					<font fontName="Calibri Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRECIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="35" width="41" height="10" uuid="2fb19017-f688-4ca4-a5e4-0b2a7cd69918"/>
+				<textElement>
+					<font fontName="Calibri Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SUBTOTAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="35" width="32" height="10" uuid="999efbea-71b4-4467-8850-d1b9946bf2bf"/>
+				<textElement>
+					<font fontName="Calibri Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CANTIDAD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="35" width="30" height="10" uuid="b13af3cd-3068-4ac5-bf9f-2edb0a1da639"/>
+				<textElement>
+					<font fontName="Calibri Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRECIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="84" y="35" width="15" height="10" uuid="b15d41a2-7d58-401e-b08d-d22d2e4df644"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[0]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="35" width="32" height="10" uuid="08dbbbcd-37fa-44e2-8938-560401e74180"/>
+				<textElement>
+					<font fontName="Calibri Light" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CANTIDAD}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="195" splitType="Stretch">
+			<staticText>
+				<reportElement x="50" y="0" width="153" height="17" uuid="7ea94ce9-7ddb-4570-a7cb-602dfaf5af96"/>
+				<textElement>
+					<font fontName="Calibri Light" size="9"/>
+				</textElement>
+				<text><![CDATA[BRUTO:           TARA:   MERMA:     NETO:]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="4" y="17" width="200" height="1" uuid="97fd1af3-2658-4ebe-8528-4b2586da124b"/>
+			</line>
+			<staticText>
+				<reportElement x="13" y="20" width="36" height="12" uuid="eb3f21b4-08ce-4ff3-9809-f00bd0b2ad79"/>
+				<textElement>
+					<font fontName="Lucida Sans Unicode" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PESAJES:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="20" width="49" height="12" uuid="2a5d3805-4761-45e7-8e72-bb726c39ecac"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PESO_TOTAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="20" width="40" height="12" uuid="ce211dde-a87a-4328-ab79-6185730f85b0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PESO_TOTAL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="4" y="34" width="200" height="1" uuid="b766a9f9-211a-4cd7-b1ea-06dd4a5cbf31"/>
+			</line>
+			<staticText>
+				<reportElement x="100" y="37" width="27" height="11" uuid="200e4506-ae58-444d-8cef-3e0efde76cb1"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri Light" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="37" width="68" height="11" uuid="c5205fc0-d318-484c-8395-1b286ee34e5f"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri Light" size="9" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="4" y="50" width="200" height="1" uuid="f196a9dc-4ce2-4af3-9d08-8901930bab4c"/>
+			</line>
+			<staticText>
+				<reportElement x="5" y="54" width="27" height="11" uuid="76401705-4468-4cad-ab05-2fab705303cf"/>
+				<textElement textAlignment="Right">
+					<font fontName="Calibri Light" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Notas:]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="Float" x="4" y="68" width="200" height="1" uuid="feccf7ef-7607-4bfb-aea5-fbc416e54df3"/>
+			</line>
+			<staticText>
+				<reportElement x="6" y="71" width="197" height="30" uuid="ce9af717-46f0-4b03-b39d-17d7e66faa6d"/>
+				<textElement>
+					<font fontName="Calibri" size="9"/>
+				</textElement>
+				<text><![CDATA[Declaro que los articulos vendidos son de mi
+propiedad  y he recibido en compensación el monto
+descrito.
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="88" y="152" width="32" height="11" uuid="f4ec6a94-3cf9-47fd-9e58-c124ba9c589b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri Light" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[FIRMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="20" width="63" height="11" uuid="2c5387dd-4061-4a73-ab37-98989bae1930"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri Light" size="9" isBold="false"/>
+				</textElement>
+				<text><![CDATA[  0.0           0.0]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="180" width="197" height="15" uuid="a9d8e483-80d1-4f44-bf91-6dd6edae2672"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri Light" size="8"/>
+				</textElement>
+				<text><![CDATA[-                          -                                -
+]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
