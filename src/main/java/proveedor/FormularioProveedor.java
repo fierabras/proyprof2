@@ -12,7 +12,8 @@ import fabrica.VistaFormulario;
  */
 
 public class FormularioProveedor extends javax.swing.JFrame implements VistaFormulario {
-
+    
+    JFrame frame = null;
 
     public FormularioProveedor() {
         initComponents();
@@ -164,12 +165,12 @@ public class FormularioProveedor extends javax.swing.JFrame implements VistaForm
 
     private void botonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarMouseClicked
         this.guardar();
+        JOptionPane.showMessageDialog(frame, "Se ha guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         super.dispose();        
     }//GEN-LAST:event_botonGuardarMouseClicked
     
     public void guardar(){
-        if((campoNombre.getText().isEmpty())||(campoFolioId.getText().isEmpty())){
-            JFrame frame = null;
+        if((campoNombre.getText().isEmpty())||(campoFolioId.getText().isEmpty())){            
             JOptionPane.showMessageDialog(frame, "Debes llenar todos los datos para continuar", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             return;
         } 
@@ -193,8 +194,7 @@ public class FormularioProveedor extends javax.swing.JFrame implements VistaForm
     }//GEN-LAST:event_botonGuardarCambioMouseClicked
     
     public void guardarCambio(){
-        if((this.campoNombre.getText().isEmpty())||(this.campoFolioId.getText().isEmpty())){
-            JFrame frame = null;
+        if((this.campoNombre.getText().isEmpty())||(this.campoFolioId.getText().isEmpty())){            
             JOptionPane.showMessageDialog(frame, "Debes llenar todos los datos para continuar", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             return;
         } 
@@ -219,8 +219,7 @@ public class FormularioProveedor extends javax.swing.JFrame implements VistaForm
         FormularioProveedor vistaProveedor = (FormularioProveedor)vProveedor;        
         VistaConsultaProveedores consultaP = (VistaConsultaProveedores) consultaProveedores;
         
-        if (consultaP.tablaProveedores.getSelectedRow()<0){
-            JFrame frame=null;
+        if (consultaP.tablaProveedores.getSelectedRow()<0){            
             JOptionPane.showMessageDialog(frame, "Debes seleccionar un proveedor de la lista para modificarlo", "Mensaje", JOptionPane.INFORMATION_MESSAGE);            
             vistaProveedor.dispose();
             return;            

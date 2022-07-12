@@ -12,6 +12,7 @@ import fabrica.VistaFormulario;
 public class FormularioMaterial extends javax.swing.JFrame implements VistaFormulario {
 
     MaterialBO materialBO = new MaterialBO();
+    JFrame frame = null;
 
     public FormularioMaterial() {
         initComponents();
@@ -150,11 +151,11 @@ public class FormularioMaterial extends javax.swing.JFrame implements VistaFormu
 
     private void botonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarMouseClicked
         if ((campoDescripcion.getText().isEmpty()) || (campoPrecio.getText().isEmpty())) {
-            JFrame frame = null;
             JOptionPane.showMessageDialog(frame, "Debes llenar todos los datos para continuar", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         materialBO.guardarMaterial(campoDescripcion.getText(), campoPrecio.getText());
+        JOptionPane.showMessageDialog(frame, "Se ha guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         super.dispose();
     }//GEN-LAST:event_botonGuardarMouseClicked
 

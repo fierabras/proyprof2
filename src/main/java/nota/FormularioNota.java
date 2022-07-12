@@ -1,7 +1,6 @@
 package nota;
 
 import utilerias.Fecha;
-import java.awt.Component;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -23,6 +22,7 @@ public class FormularioNota extends javax.swing.JFrame {
     MaterialBO materialBO = new MaterialBO();
     String columnas[] = {"Cantidad", "Descripción", "Precio", "Subtotal"};
     DefaultTableModel tablaModelo = new DefaultTableModel(columnas, 0);
+    JFrame frame = null;
 
     public FormularioNota() {
         initComponents();
@@ -468,6 +468,7 @@ public class FormularioNota extends javax.swing.JFrame {
 
     private void botonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonGuardarMouseClicked
         notaBO.guardarNotaBD(this.campoClaveProveedor.getText(), this.notaBO.obtenerPartidas());
+        JOptionPane.showMessageDialog(frame, "Se ha guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         this.limpiarCapturaNota();
     }//GEN-LAST:event_botonGuardarMouseClicked
 
@@ -518,8 +519,7 @@ public class FormularioNota extends javax.swing.JFrame {
     }//GEN-LAST:event_botonAgregarPartidaKeyPressed
 
     public void agregarPartida(){
-        if (this.campoClaveMaterial.getText().equals("")) {
-            Component frame = new JFrame();
+        if (this.campoClaveMaterial.getText().equals("")) {            
             JOptionPane.showMessageDialog(frame, "Debe capturar la clave del material", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }

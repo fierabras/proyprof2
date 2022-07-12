@@ -5,6 +5,7 @@
 package inicio;
 
 import nota.VistaConsultaNotas;
+import reportes.Reporte;
 
 /**
  * Autor: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
@@ -27,6 +28,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         botonMateriales = new javax.swing.JButton();
         botonSalir = new javax.swing.JButton();
         botonNotas = new javax.swing.JButton();
+        botonReportes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -45,7 +47,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(jLabel1)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,6 +83,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        botonReportes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        botonReportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/notas32x32.png"))); // NOI18N
+        botonReportes.setText("Reportes");
+        botonReportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonReportesMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,11 +104,13 @@ public class VistaPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(botonNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addComponent(botonProveedores)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(28, 28, 28)
                 .addComponent(botonMateriales, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
+                .addGap(33, 33, 33)
+                .addComponent(botonReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +120,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonMateriales, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
@@ -127,10 +141,15 @@ public class VistaPrincipal extends javax.swing.JFrame {
         consultaNotas.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_botonNotasMouseClicked
 
+    private void botonReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonReportesMouseClicked
+        Reporte.reporteCompraMateriales();     
+    }//GEN-LAST:event_botonReportesMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton botonMateriales;
     private javax.swing.JButton botonNotas;
     public javax.swing.JButton botonProveedores;
+    public javax.swing.JButton botonReportes;
     private javax.swing.JButton botonSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

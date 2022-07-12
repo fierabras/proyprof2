@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 
+
 /**
  * @author: Jesus Armando Mendoza Romero a171117 Ingenieria en Software Virtual
  */
@@ -47,7 +48,7 @@ public class ConexionBD {
     }
 
     private static Connection conectar() {
-        String url = "jdbc:sqlite:database/DATOS_RECICLADORA.db";
+        String url = "jdbc:sqlite:C:/COLECTIVO/DATABASE/DATOS_RECICLADORA.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);
@@ -63,9 +64,7 @@ public class ConexionBD {
         String sql = sentencia;
 
         try ( Connection conn = this.conectar();  PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.executeUpdate();
-            JFrame frame = null;
-            JOptionPane.showMessageDialog(frame, "Se ha guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            pstmt.executeUpdate();            
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
