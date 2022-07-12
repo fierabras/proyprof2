@@ -12,6 +12,11 @@ import utilerias.Fecha;
  */
 public class MiniConsultaFechas extends javax.swing.JDialog {
 
+    Boolean cancelado=false;
+
+    public Boolean getCancelado() {
+        return cancelado;
+    }
     
     public MiniConsultaFechas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -54,6 +59,7 @@ public class MiniConsultaFechas extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setText("Fecha final");
 
+        botonAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ok24x24.png"))); // NOI18N
         botonAceptar.setText("Aceptar");
         botonAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -61,7 +67,13 @@ public class MiniConsultaFechas extends javax.swing.JDialog {
             }
         });
 
+        botonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/close32x32.png"))); // NOI18N
         botonCancelar.setText("Cancelar");
+        botonCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonCancelarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,7 +111,7 @@ public class MiniConsultaFechas extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonAceptar)
                     .addComponent(botonCancelar))
@@ -117,6 +129,11 @@ public class MiniConsultaFechas extends javax.swing.JDialog {
     private void botonAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAceptarMouseClicked
         this.setVisible(false);
     }//GEN-LAST:event_botonAceptarMouseClicked
+
+    private void botonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCancelarMouseClicked
+        this.cancelado=true;
+        this.dispose();
+    }//GEN-LAST:event_botonCancelarMouseClicked
 
    
 

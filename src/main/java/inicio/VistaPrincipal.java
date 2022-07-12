@@ -1,7 +1,3 @@
-/*
- * Esta es la ventana Principal de la aplicacion representada en un JFrame, 
- * las acciones sobre los botones son manejados por el controlador.ControladorVentanaPrincipal
- */
 package inicio;
 
 import nota.VistaConsultaNotas;
@@ -142,17 +138,21 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botonNotasMouseClicked
 
     private void botonReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonReportesMouseClicked
-        MiniConsultaFechas miniConsulta = new MiniConsultaFechas(this,true);
+        MiniConsultaFechas miniConsulta = new MiniConsultaFechas(this, true);
         miniConsulta.setVisible(true);
         while (miniConsulta.isVisible()) {
 
         }
+        if (miniConsulta.getCancelado()) {
+            return;
+        }
         String fechaInicial = miniConsulta.getFechaInicial();
         String fechaFinal = miniConsulta.getFechaFinal();
-              
-        Reporte.reporteCompraMateriales(fechaInicial,fechaFinal);  
-        
+
+        Reporte.reporteCompraMateriales(fechaInicial, fechaFinal);
+
         miniConsulta.dispose();
+
     }//GEN-LAST:event_botonReportesMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
