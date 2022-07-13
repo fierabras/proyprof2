@@ -30,6 +30,7 @@ public class FormularioNota extends javax.swing.JFrame {
         this.setTitle("CAPTURA DE NOTAS DE VENTA");
         tablaPartidas.setModel(tablaModelo);
         this.mostrarSubtotal();
+        this.etiquetaFolioDato.setText(NotaBO.obtenerFolioSiguiente());
     }
 
     @SuppressWarnings("unchecked")
@@ -473,6 +474,7 @@ public class FormularioNota extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(frame, "Se ha guardado correctamente", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         this.limpiarCapturaNota();
         Reporte.emitirTicket(this.notaBO.getUuidNota());
+        this.etiquetaFolioDato.setText(NotaBO.obtenerFolioSiguiente());
     }//GEN-LAST:event_botonGuardarMouseClicked
 
     private void campoClaveProveedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoClaveProveedorFocusLost

@@ -46,7 +46,7 @@ public class Reporte {
             parametros.put("UUID_NOTA", uuidNota);
             
 
-            jasperPrintWindow = JasperFillManager.fillReport(rutaLocal + "/reportes/TicketColectivoSinDatosFisc.jasper", parametros, ConexionBD.getConexion());
+            jasperPrintWindow = JasperFillManager.fillReport(rutaLocal + "/src/main/java/reportes/TicketColectivoSinDatosFisc.jasper", parametros, ConexionBD.getConexion());
 
             JasperViewer jasperViewer = new JasperViewer(jasperPrintWindow,false);
             jasperViewer.setVisible(true);

@@ -138,7 +138,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botonNotasMouseClicked
 
     private void botonReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonReportesMouseClicked
-        MiniConsultaFechas miniConsulta = new MiniConsultaFechas(this, true);
+        VentanaIndicaFechas miniConsulta = new VentanaIndicaFechas(this, true);
         miniConsulta.setVisible(true);
         while (miniConsulta.isVisible()) {
 

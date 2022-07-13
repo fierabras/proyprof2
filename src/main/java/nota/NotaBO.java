@@ -22,8 +22,15 @@ public class NotaBO {
         this.listaPartidas.agregarPartida(partida);
     }
 
-    public void obtenerPartida() {
+    public static String obtenerFolioSiguiente() {
 
+        String clave;
+        String consultaSql = "SELECT MAX(CLAVE_NOTA) FROM NOTAS";
+
+        List<Map<String, Object>> consulta = ConexionBD.consultaSql(consultaSql);
+        int folio = 1 + ((int) consulta.get(0).get("MAX(CLAVE_NOTA)"));
+        clave = String.valueOf(folio);
+        return clave;
     }
 
     public List<PartidaVO> obtenerPartidas() {
@@ -33,7 +40,7 @@ public class NotaBO {
     public void guardarNotaBD(String claveProveedor, List<PartidaVO> listaPartidas) {
 
         UUID uuid = UUID.randomUUID();
-        uuidNota=uuid.toString();
+        uuidNota = uuid.toString();
         String fecha = Fecha.obtenerFechaHoy();
         double total = 0.0;
         double pesoTotal = 0.0;
@@ -49,7 +56,7 @@ public class NotaBO {
         String sentenciaSql = "INSERT INTO NOTAS (FECHA, CLAVE_PROVEEDOR, PESO_TOTAL, TOTAL, UUID_NOTA) "
                 + "VALUES ('" + fecha + "','" + claveProveedor + "','" + pesoTotal + "','" + total + "','" + uuid.toString() + "')";
         conn.insert(sentenciaSql);
-        
+
         System.out.println("guardarNotaBD uuidNota: " + uuid.toString());
         this.guardarPartidasBD(listaPartidas, uuid.toString());
 
@@ -64,51 +71,46 @@ public class NotaBO {
     }
 
     public void guardarPartidasBD(List<PartidaVO> listaPartidas, String uuidNota) {
-        
-        System.out.println("guardarPartidasBD uuidNota: "+ uuidNota);
-        String claveNota= this.obtenerClaveNota(uuidNota);
-        
+
+        System.out.println("guardarPartidasBD uuidNota: " + uuidNota);
+        String claveNota = this.obtenerClaveNota(uuidNota);
+
         ConexionBD conn = ConexionBD.getConexionSQL();
         for (int i = 0; i < listaPartidas.size(); i++) {
             UUID uuid = UUID.randomUUID();
             String sentenciaSql = "INSERT INTO PARTIDAS (CLAVE_NOTA,CLAVE_PARTIDA,CANTIDAD,CLAVE_MATERIAL,PRECIO,SUBTOTAL,UUID_NOTA,UUID_PARTIDA) "
-                    + "VALUES ('" + claveNota + "','" + (i+1) + "','"  + listaPartidas.get(i).getCantidad() + "','" + listaPartidas.get(i).getMaterial().getClaveMaterial()
-                    + "','" + listaPartidas.get(i).getMaterial().getPrecio() + "','" + listaPartidas.get(i).getSubtotal() + "','" + uuidNota  + "','" + uuid.toString() +"')";
+                    + "VALUES ('" + claveNota + "','" + (i + 1) + "','" + listaPartidas.get(i).getCantidad() + "','" + listaPartidas.get(i).getMaterial().getClaveMaterial()
+                    + "','" + listaPartidas.get(i).getMaterial().getPrecio() + "','" + listaPartidas.get(i).getSubtotal() + "','" + uuidNota + "','" + uuid.toString() + "')";
             conn.insert(sentenciaSql);
             System.out.println("Sentencia de insert partida: " + sentenciaSql);
-        }        
+        }
     }
-    
-    public String obtenerClaveNota(String uuidNota){
-        
-        String clave;        
+
+    public String obtenerClaveNota(String uuidNota) {
+
+        String clave;
         String consultaSql = "SELECT * FROM NOTAS WHERE UUID_NOTA = '" + uuidNota + "'";
         System.out.println(consultaSql);
-        System.out.println("obtenerClaveNota uuidNota: "+ uuidNota);
+        System.out.println("obtenerClaveNota uuidNota: " + uuidNota);
 
-        List<Map<String, Object>> consulta = ConexionBD.consultaSql(consultaSql);        
-        clave =consulta.get(0).get("CLAVE_NOTA").toString();
+        List<Map<String, Object>> consulta = ConexionBD.consultaSql(consultaSql);
+        clave = consulta.get(0).get("CLAVE_NOTA").toString();
 
         return clave;
     }
-    
 
     public void eliminarPartida(int numeroPartida) {
         this.listaPartidas.eliminarPartida(numeroPartida);
     }
 
-    public void cancelarCaptura() {
-
-    }
-    
     public void cargarTabla(JTable tablaNotas, String txbBuscar) {
 
         DefaultTableModel model = (DefaultTableModel) tablaNotas.getModel();
         model.setRowCount(0);
-       
-        String sql = "SELECT * FROM NOTAS N INNER JOIN PROVEEDORES P ON P.CLAVE_PROVEEDOR = N.CLAVE_PROVEEDOR WHERE CLAVE_NOTA LIKE '%" 
-                + txbBuscar + "%' OR FECHA LIKE '%" + txbBuscar + "%' OR P.NOMBRE LIKE '%" + txbBuscar + "%' OR PESO_TOTAL LIKE '%" 
-                + txbBuscar + "%' OR TOTAL LIKE '%" + txbBuscar + "%'" ;
+
+        String sql = "SELECT * FROM NOTAS N INNER JOIN PROVEEDORES P ON P.CLAVE_PROVEEDOR = N.CLAVE_PROVEEDOR WHERE CLAVE_NOTA LIKE '%"
+                + txbBuscar + "%' OR FECHA LIKE '%" + txbBuscar + "%' OR P.NOMBRE LIKE '%" + txbBuscar + "%' OR PESO_TOTAL LIKE '%"
+                + txbBuscar + "%' OR TOTAL LIKE '%" + txbBuscar + "%'";
 
         try ( Connection conn = ConexionBD.getConexion();  Statement stmt = conn.createStatement();  ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -119,7 +121,7 @@ public class NotaBO {
                 String pesoTotal = rs.getString("PESO_TOTAL");
                 String total = rs.getString("TOTAL");
 
-                String tbData[] = {claveNota, fecha, nombre, pesoTotal,total};
+                String tbData[] = {claveNota, fecha, nombre, pesoTotal, total};
                 DefaultTableModel tblModel = (DefaultTableModel) tablaNotas.getModel();
 
                 tblModel.addRow(tbData);
@@ -130,5 +132,4 @@ public class NotaBO {
 
     }
 
-    
 }

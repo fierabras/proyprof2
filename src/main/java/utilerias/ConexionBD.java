@@ -48,7 +48,10 @@ public class ConexionBD {
     }
 
     private static Connection conectar() {
-        String url = "jdbc:sqlite:C:/COLECTIVO/DATABASE/DATOS_RECICLADORA.db";
+        
+        String rutaLocal = System.getProperty("user.dir"); // se usa para obtener la ruta de trabajo y no depender de una ruta fija
+        
+        String url = "jdbc:sqlite:"+rutaLocal+"/database/datos_recicladora.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);

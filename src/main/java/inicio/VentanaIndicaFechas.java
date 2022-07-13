@@ -10,7 +10,7 @@ import utilerias.Fecha;
  *
  * @author paco
  */
-public class MiniConsultaFechas extends javax.swing.JDialog {
+public class VentanaIndicaFechas extends javax.swing.JDialog {
 
     Boolean cancelado=false;
 
@@ -18,7 +18,7 @@ public class MiniConsultaFechas extends javax.swing.JDialog {
         return cancelado;
     }
     
-    public MiniConsultaFechas(java.awt.Frame parent, boolean modal) {
+    public VentanaIndicaFechas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.campoFechaInicial.setText(Fecha.obtenerFechaHoy());
