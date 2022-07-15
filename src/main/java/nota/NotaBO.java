@@ -90,13 +90,24 @@ public class NotaBO {
 
         String clave;
         String consultaSql = "SELECT * FROM NOTAS WHERE UUID_NOTA = '" + uuidNota + "'";
-        System.out.println(consultaSql);
-        System.out.println("obtenerClaveNota uuidNota: " + uuidNota);
+      
 
         List<Map<String, Object>> consulta = ConexionBD.consultaSql(consultaSql);
         clave = consulta.get(0).get("CLAVE_NOTA").toString();
 
         return clave;
+    }
+    
+    public String obtenerUuidNota(String claveNota) {
+
+        String uuidNota;
+        String consultaSql = "SELECT * FROM NOTAS WHERE CLAVE_NOTA = '" + claveNota + "'";
+        
+
+        List<Map<String, Object>> consulta = ConexionBD.consultaSql(consultaSql);
+        uuidNota = consulta.get(0).get("UUID_NOTA").toString();
+
+        return uuidNota;
     }
 
     public void eliminarPartida(int numeroPartida) {

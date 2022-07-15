@@ -2,6 +2,7 @@
 package nota;
 
 import java.awt.event.KeyEvent;
+import reportes.Reporte;
 
 /**
  *
@@ -32,7 +33,7 @@ public class VistaConsultaNotas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaNotas = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -71,6 +72,11 @@ public class VistaConsultaNotas extends javax.swing.JFrame {
 
         botonConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/notas32x32.png"))); // NOI18N
         botonConsultar.setText("Consultar Nota");
+        botonConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonConsultarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,6 +168,12 @@ public class VistaConsultaNotas extends javax.swing.JFrame {
         formularioNota.setVisible(true);
         formularioNota.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
     }//GEN-LAST:event_botonNuevaNotaMouseClicked
+
+    private void botonConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonConsultarMouseClicked
+        String claveNota = this.tablaNotas.getValueAt(this.tablaNotas.getSelectedRow(),0).toString();
+        String uuidNota=notaBO.obtenerUuidNota(claveNota);
+        Reporte.emitirTicket(uuidNota);        
+    }//GEN-LAST:event_botonConsultarMouseClicked
 
     
 

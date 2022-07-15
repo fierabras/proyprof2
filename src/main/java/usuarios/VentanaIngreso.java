@@ -122,7 +122,7 @@ public class VentanaIngreso extends javax.swing.JFrame {
 
 
     private void botonCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonCancelarMouseClicked
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_botonCancelarMouseClicked
 
 
